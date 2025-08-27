@@ -1,486 +1,455 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Attributs de type liste &#8212; MongoDB : notes de cours</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    <title>2. Attributs de type liste &#8212; MongoDB</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-      
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/02_listes';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. Attributs de type date" href="03_dates.html" />
     <link rel="prev" title="1. Premières requêtes en MongoDB" href="01_find.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">MongoDB : notes de cours</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="00_intro.html">
-   MongoDB : Notes de cours
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Chapitres
- </span>
-</p>
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">MongoDB</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_intro.html">
+                    MongoDB : Notes de cours
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_find.html">
-   1. Premières requêtes en MongoDB
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   2. Attributs de type liste
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_dates.html">
-   3. Attributs de type date
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_index.html">
-   4. Les index
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_agreg.html">
-   5. Les requêtes d’agrégation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_modif.html">
-   6. Les requêtes de modification
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="07_scripts.html">
-   7. Effectuer des requêtes depuis des programmes Python ou R
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="07_scripts_py.html">
-     7.1. Requêtes depuis Python :
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       pymongo
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="07_scripts_R.html">
-     7.2. Requêtes depuis R :
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       mongolite
-      </span>
-     </code>
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Premières requêtes en MongoDB</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Attributs de type liste</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_dates.html">3. Attributs de type date</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_index.html">4. Les index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">5. Les requêtes d’agrégation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modif.html">6. Les requêtes de modification</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">7. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">7.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">7.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/content/02_listes.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/02_listes.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/rtavenar/mongo_book"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/rtavenar/mongo_book/issues/new?title=Issue%20on%20page%20%2Fcontent/02_listes.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/elenaberhoco/mongodb-trash" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/elenaberhoco/mongodb-trash/issues/new?title=Issue%20on%20page%20%2Fcontent/02_listes.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/rtavenar/mongo_book/main?urlpath=tree/docs/content/02_listes.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/02_listes.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Attributs de type liste</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   2.1. Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fonctionnement-des-listes-en-mongodb">
-   2.2. Fonctionnement des listes en MongoDB
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operateur-size">
-     2.2.1. Opérateur $size
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#particularite-du-travail-sur-des-listes">
-   2.3. Particularité du travail sur des listes
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#au-moins-un-element-ou-tous-les-elements">
-     2.3.1. “au moins un élément” ou “tous les éléments” ?
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cas-des-conditions-multiples">
-     2.3.2. Cas des conditions multiples
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operateur-elemmatch">
-     2.3.3. Opérateur
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       $elemMatch
-      </span>
-     </code>
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#cas-de-conditions-simultanement-non-realisables">
-       2.3.3.1. Cas de conditions simultanement non réalisables
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#cas-de-conditions-simultanement-realisables">
-       2.3.3.2. Cas de conditions simultanement réalisables
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#recapitulatif">
-   2.4. Récapitulatif
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">2.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnement-des-listes-en-mongodb">2.2. Fonctionnement des listes en MongoDB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateur-size">2.2.1. Opérateur $size</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particularite-du-travail-sur-des-listes">2.3. Particularité du travail sur des listes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#au-moins-un-element-ou-tous-les-elements">2.3.1. “au moins un élément” ou “tous les éléments” ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cas-des-conditions-multiples">2.3.2. Cas des conditions multiples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateur-elemmatch">2.3.3. Opérateur <code class="docutils literal notranslate"><span class="pre">$elemMatch</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cas-de-conditions-simultanement-non-realisables">2.3.3.1. Cas de conditions simultanement non réalisables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cas-de-conditions-simultanement-realisables">2.3.3.2. Cas de conditions simultanement réalisables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recapitulatif">2.4. Récapitulatif</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Attributs de type liste</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   2.1. Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fonctionnement-des-listes-en-mongodb">
-   2.2. Fonctionnement des listes en MongoDB
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operateur-size">
-     2.2.1. Opérateur $size
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#particularite-du-travail-sur-des-listes">
-   2.3. Particularité du travail sur des listes
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#au-moins-un-element-ou-tous-les-elements">
-     2.3.1. “au moins un élément” ou “tous les éléments” ?
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cas-des-conditions-multiples">
-     2.3.2. Cas des conditions multiples
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operateur-elemmatch">
-     2.3.3. Opérateur
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       $elemMatch
-      </span>
-     </code>
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#cas-de-conditions-simultanement-non-realisables">
-       2.3.3.1. Cas de conditions simultanement non réalisables
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#cas-de-conditions-simultanement-realisables">
-       2.3.3.2. Cas de conditions simultanement réalisables
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#recapitulatif">
-   2.4. Récapitulatif
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="attributs-de-type-liste">
-<h1><span class="section-number">2. </span>Attributs de type liste<a class="headerlink" href="#attributs-de-type-liste" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="attributs-de-type-liste">
+<h1><span class="section-number">2. </span>Attributs de type liste<a class="headerlink" href="#attributs-de-type-liste" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Auteurs/trices : <strong>Malo REYNES, Lucas ROBIN, Fiona TUFFIN</strong></p></li>
 </ul>
 <p>Ce chapitre traite des attributs de type liste et des différents types de requêtes que l’on peut vouloir faire sur de tels attributs</p>
-<div class="section" id="introduction">
-<h2><span class="section-number">2.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<section id="introduction">
+<h2><span class="section-number">2.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>En MongoDB, un document est composé de couples clé/valeur. Une clé peut être considérée comme le nom d’une variable (attribut) à laquelle correspond une valeur pour un individu. L’attribut peut être de plusieurs types : chaîne de caractères, booléen, nombre, liste ou date. C’est aux attributs de type <em>liste</em> que nous nous intéressons ici. En MongoDB comme en python, une liste est, comme son nom l’indique, une série de valeurs, ces valeurs pouvant être de tous types. Une liste peut également contenir des sous-listes. Il est possible de réaliser plusieurs opérations sur une liste telles qu’obtenir sa taille, récupérer son minimum, son maximum, sa moyenne et autres. Il faut toutefois faire attention à certains “pièges” que nous exposerons.</p>
 <p>Les exemples pour cette partie concernent les listes de notes des élèves de la collection <code class="docutils literal notranslate"><span class="pre">notes</span></code> de la base de données <code class="docutils literal notranslate"><span class="pre">etudiants</span></code>. On notera aussi que certains types de requêtes comme les <code class="docutils literal notranslate"><span class="pre">sum()</span></code> ou les <code class="docutils literal notranslate"><span class="pre">avg()</span></code> nécessitent des requêtes d’agrégation qui seront évoquées dans un chapitre suivant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">use</span> <span class="nx">etudiants</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">etudiants</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>switched to db etudiants
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">use</span> <span class="n">etudiants</span>
+        <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="fonctionnement-des-listes-en-mongodb">
-<h2><span class="section-number">2.2. </span>Fonctionnement des listes en MongoDB<a class="headerlink" href="#fonctionnement-des-listes-en-mongodb" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="fonctionnement-des-listes-en-mongodb">
+<h2><span class="section-number">2.2. </span>Fonctionnement des listes en MongoDB<a class="headerlink" href="#fonctionnement-des-listes-en-mongodb" title="Link to this heading">#</a></h2>
 <p>Afin de mieux appréhender les listes en MongoDB, nous allons suivre un exemple au cours du quel, étape par étape, nous expliquerons notre démarche. Nous souhaitons connaître les étudiants ayant toutes leurs notes supérieures ou égales à 12.</p>
 <blockquote>
 <div><p>Remarque : les notes sont implémentées sous forme de liste dans la base de données (attribut <code class="docutils literal notranslate"><span class="pre">notes</span></code>). Parmi les 7 étudiants, un ne possède pas d’attribut <code class="docutils literal notranslate"><span class="pre">notes</span></code> et un autre à ce même attribut vide (liste contenant 0 élément). Nous allons donc traiter ces cas particuliers.</p>
 </div></blockquote>
-<div class="section" id="operateur-size">
-<h3><span class="section-number">2.2.1. </span>Opérateur $size<a class="headerlink" href="#operateur-size" title="Permalink to this headline">¶</a></h3>
+<section id="operateur-size">
+<h3><span class="section-number">2.2.1. </span>Opérateur $size<a class="headerlink" href="#operateur-size" title="Link to this heading">#</a></h3>
 <p>Introduisons tout d’abord un élément utile pour comprendre le fonctionnement des listes : l’opérateur <code class="docutils literal notranslate"><span class="pre">$size</span></code>. Il renvoie les documents dont la taille (nombre d’éléments de la liste) vérifie la condition donnée.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$size</span><span class="o">:</span> <span class="mf">2</span><span class="p">}}</span>                     <span class="cm">/*Listes de 2 éléments*/</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}</span>                     <span class="o">/*</span><span class="n">Listes</span> <span class="n">de</span> <span class="mi">2</span> <span class="n">éléments</span><span class="o">*/</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773d&quot;),
-	&quot;nom&quot; : &quot;Paul&quot;,
-	&quot;notes&quot; : [
-		10,
-		12
-	],
-	&quot;sexe&quot; : &quot;M&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d7741&quot;),
-	&quot;nom&quot; : &quot;Marc&quot;,
-	&quot;notes&quot; : [
-		1,
-		5
-	],
-	&quot;ddn&quot; : ISODate(&quot;1993-01-01T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
 </pre></div>
 </div>
 </div>
@@ -488,19 +457,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Attention, cet opérateur n’est pas compatible avec les intervalles de valeurs. On ne peut pas écrire le code suivant (qui renvoie une erreur) :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$size</span><span class="o">:</span> <span class="p">{</span><span class="nx">$lte</span><span class="o">:</span> <span class="mf">2</span><span class="p">}}}</span>             <span class="cm">/*Ne fonctionne pas, la taille doit être une valeur précise !!!*/</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">lte</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}}</span>             <span class="o">/*</span><span class="n">Ne</span> <span class="n">fonctionne</span> <span class="n">pas</span><span class="p">,</span> <span class="n">la</span> <span class="n">taille</span> <span class="n">doit</span> <span class="n">être</span> <span class="n">une</span> <span class="n">valeur</span> <span class="n">précise</span> <span class="o">!</span>!!*/
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: error: {
-	&quot;ok&quot; : 0,
-	&quot;errmsg&quot; : &quot;$size needs a number&quot;,
-	&quot;code&quot; : 2,
-	&quot;codeName&quot; : &quot;BadValue&quot;
-}
 </pre></div>
 </div>
 </div>
@@ -508,61 +467,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Il faudra plutôt écrire :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="nx">$or</span> <span class="o">:</span> 
-        <span class="p">[{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$size</span><span class="o">:</span> <span class="mf">2</span><span class="p">}},</span>
-        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$size</span><span class="o">:</span> <span class="mf">1</span><span class="p">}},</span>
-        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$size</span><span class="o">:</span> <span class="mf">0</span><span class="p">}}]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="err">$</span><span class="ow">or</span> <span class="p">:</span> 
+        <span class="p">[{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span><span class="p">:</span> <span class="mi">2</span><span class="p">}},</span>
+        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span><span class="p">:</span> <span class="mi">1</span><span class="p">}},</span>
+        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span><span class="p">:</span> <span class="mi">0</span><span class="p">}}]</span>
     <span class="p">}</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773d&quot;),
-	&quot;nom&quot; : &quot;Paul&quot;,
-	&quot;notes&quot; : [
-		10,
-		12
-	],
-	&quot;sexe&quot; : &quot;M&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773f&quot;),
-	&quot;nom&quot; : &quot;Hélène&quot;,
-	&quot;notes&quot; : [
-		13
-	],
-	&quot;ddn&quot; : ISODate(&quot;1995-03-05T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;F&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d7741&quot;),
-	&quot;nom&quot; : &quot;Marc&quot;,
-	&quot;notes&quot; : [
-		1,
-		5
-	],
-	&quot;ddn&quot; : ISODate(&quot;1993-01-01T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d7740&quot;),
-	&quot;nom&quot; : &quot;Sophie&quot;,
-	&quot;notes&quot; : [ ],
-	&quot;ddn&quot; : ISODate(&quot;1996-09-12T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;F&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d7742&quot;),
-	&quot;nom&quot; : &quot;Marc&quot;,
-	&quot;notes&quot; : [
-		15
-	],
-	&quot;ddn&quot; : ISODate(&quot;1993-03-06T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
 </pre></div>
 </div>
 </div>
@@ -570,47 +481,29 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Exemple : on veut connaitre les notes de l’étudiant nommé Paul.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span> <span class="s2">&quot;Paul&quot;</span><span class="p">},</span> 
-    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span> <span class="s2">&quot;Paul&quot;</span><span class="p">},</span> 
+    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">}</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{ &quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773d&quot;), &quot;notes&quot; : [ 10, 12 ] }
 </pre></div>
 </div>
 </div>
 </div>
 <p>Une liste de 2 notes est retournée. Plus précisement, c’est le contenu de l’attribut <code class="docutils literal notranslate"><span class="pre">notes</span></code> qui est donné.</p>
-</div>
-</div>
-<div class="section" id="particularite-du-travail-sur-des-listes">
-<h2><span class="section-number">2.3. </span>Particularité du travail sur des listes<a class="headerlink" href="#particularite-du-travail-sur-des-listes" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="particularite-du-travail-sur-des-listes">
+<h2><span class="section-number">2.3. </span>Particularité du travail sur des listes<a class="headerlink" href="#particularite-du-travail-sur-des-listes" title="Link to this heading">#</a></h2>
 <p>Les listes sont des objets particuliers pour lesquels des questions particulières se posent.
 Nous nous penchons ici sur deux de ces questions spécifiques aux listes.</p>
-<div class="section" id="au-moins-un-element-ou-tous-les-elements">
-<h3><span class="section-number">2.3.1. </span>“au moins un élément” ou “tous les éléments” ?<a class="headerlink" href="#au-moins-un-element-ou-tous-les-elements" title="Permalink to this headline">¶</a></h3>
+<section id="au-moins-un-element-ou-tous-les-elements">
+<h3><span class="section-number">2.3.1. </span>“au moins un élément” ou “tous les éléments” ?<a class="headerlink" href="#au-moins-un-element-ou-tous-les-elements" title="Link to this heading">#</a></h3>
 <p>Exemple : on veut savoir si l’étudiant Paul a eu au moins une note égale à 12. Pour ce faire, on ajoute une condition sur les notes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span> <span class="s2">&quot;Paul&quot;</span><span class="p">,</span> <span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="mf">12</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span> <span class="s2">&quot;Paul&quot;</span><span class="p">,</span> <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">}</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773d&quot;),
-	&quot;nom&quot; : &quot;Paul&quot;,
-	&quot;notes&quot; : [
-		10,
-		12
-	],
-	&quot;sexe&quot; : &quot;M&quot;
-}
 </pre></div>
 </div>
 </div>
@@ -620,55 +513,9 @@ Néanmoins, l’objet retourné par la requête est l’ensemble du document. To
 <p>Voyons maintenant ce qui se passe lorsqu’on recherche les notes supérieures ou égales à 12.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$gte</span><span class="o">:</span> <span class="mf">12</span><span class="p">}}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">gte</span><span class="p">:</span> <span class="mi">12</span><span class="p">}}</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773d&quot;),
-	&quot;nom&quot; : &quot;Paul&quot;,
-	&quot;notes&quot; : [
-		10,
-		12
-	],
-	&quot;sexe&quot; : &quot;M&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773f&quot;),
-	&quot;nom&quot; : &quot;Hélène&quot;,
-	&quot;notes&quot; : [
-		13
-	],
-	&quot;ddn&quot; : ISODate(&quot;1995-03-05T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;F&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773c&quot;),
-	&quot;nom&quot; : &quot;Jean&quot;,
-	&quot;notes&quot; : [
-		1,
-		5,
-		7,
-		10,
-		12,
-		14,
-		3
-	],
-	&quot;ddn&quot; : ISODate(&quot;1995-05-25T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d7742&quot;),
-	&quot;nom&quot; : &quot;Marc&quot;,
-	&quot;notes&quot; : [
-		15
-	],
-	&quot;ddn&quot; : ISODate(&quot;1993-03-06T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
 </pre></div>
 </div>
 </div>
@@ -677,44 +524,9 @@ Néanmoins, l’objet retourné par la requête est l’ensemble du document. To
 <p>Nous voudrions maintenant ressortir les individus qui n’ont <strong>que</strong> des notes supérieures ou égales à 12. Pour cela, nous pouvons retirer tous les étudiants ayant eu des notes en dessous de 12. Pour ce faire, nous utilisons l’opérateur logique <code class="docutils literal notranslate"><span class="pre">$not</span></code> qui retire les documents ne réalisant pas la condition demandée.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span><span class="p">{</span><span class="nx">$not</span><span class="o">:</span> <span class="p">{</span><span class="nx">$lt</span><span class="o">:</span> <span class="mf">12</span><span class="p">}}}</span>              <span class="cm">/*Une condition : on enlève les étudiants qui ont au moins une note plus petite que 12*/</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:{</span><span class="err">$</span><span class="ow">not</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">lt</span><span class="p">:</span> <span class="mi">12</span><span class="p">}}}</span>              <span class="o">/*</span><span class="n">Une</span> <span class="n">condition</span> <span class="p">:</span> <span class="n">on</span> <span class="n">enlève</span> <span class="n">les</span> <span class="n">étudiants</span> <span class="n">qui</span> <span class="n">ont</span> <span class="n">au</span> <span class="n">moins</span> <span class="n">une</span> <span class="n">note</span> <span class="n">plus</span> <span class="n">petite</span> <span class="n">que</span> <span class="mi">12</span><span class="o">*/</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773e&quot;),
-	&quot;nom&quot; : &quot;Michel&quot;,
-	&quot;ddn&quot; : ISODate(&quot;1995-02-13T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773f&quot;),
-	&quot;nom&quot; : &quot;Hélène&quot;,
-	&quot;notes&quot; : [
-		13
-	],
-	&quot;ddn&quot; : ISODate(&quot;1995-03-05T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;F&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d7740&quot;),
-	&quot;nom&quot; : &quot;Sophie&quot;,
-	&quot;notes&quot; : [ ],
-	&quot;ddn&quot; : ISODate(&quot;1996-09-12T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;F&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d7742&quot;),
-	&quot;nom&quot; : &quot;Marc&quot;,
-	&quot;notes&quot; : [
-		15
-	],
-	&quot;ddn&quot; : ISODate(&quot;1993-03-06T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
 </pre></div>
 </div>
 </div>
@@ -723,40 +535,12 @@ Néanmoins, l’objet retourné par la requête est l’ensemble du document. To
 <p>Pour se faire, nous utilisons l’opérateur logique <code class="docutils literal notranslate"><span class="pre">$nor</span></code> en listant les éléments à ne pas prendre en compte. Nous ne voulons pas que la liste <code class="docutils literal notranslate"><span class="pre">notes</span></code> soit vide ou qu’elle comporte ne serait-ce qu’une note inférieure à 12.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="nx">$nor</span><span class="o">:</span> 
-        <span class="p">[{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$lt</span><span class="o">:</span> <span class="mf">12</span><span class="p">}},</span>               <span class="cm">/*1ère condition : on retire ceux qui ont des notes en dessous de 12*/</span>
-        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$size</span><span class="o">:</span> <span class="mf">0</span><span class="p">}}]</span>               <span class="cm">/*2nde condition : on retire ceux qui n&#39;ont pas de notes*/</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="err">$</span><span class="n">nor</span><span class="p">:</span> 
+        <span class="p">[{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">lt</span><span class="p">:</span> <span class="mi">12</span><span class="p">}},</span>               <span class="o">/*</span><span class="mi">1</span><span class="n">ère</span> <span class="n">condition</span> <span class="p">:</span> <span class="n">on</span> <span class="n">retire</span> <span class="n">ceux</span> <span class="n">qui</span> <span class="n">ont</span> <span class="n">des</span> <span class="n">notes</span> <span class="n">en</span> <span class="n">dessous</span> <span class="n">de</span> <span class="mi">12</span><span class="o">*/</span>
+        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span><span class="p">:</span> <span class="mi">0</span><span class="p">}}]</span>               <span class="o">/*</span><span class="mi">2</span><span class="n">nde</span> <span class="n">condition</span> <span class="p">:</span> <span class="n">on</span> <span class="n">retire</span> <span class="n">ceux</span> <span class="n">qui</span> <span class="n">n</span><span class="s1">&#39;ont pas de notes*/</span>
     <span class="p">}</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773e&quot;),
-	&quot;nom&quot; : &quot;Michel&quot;,
-	&quot;ddn&quot; : ISODate(&quot;1995-02-13T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773f&quot;),
-	&quot;nom&quot; : &quot;Hélène&quot;,
-	&quot;notes&quot; : [
-		13
-	],
-	&quot;ddn&quot; : ISODate(&quot;1995-03-05T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;F&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d7742&quot;),
-	&quot;nom&quot; : &quot;Marc&quot;,
-	&quot;notes&quot; : [
-		15
-	],
-	&quot;ddn&quot; : ISODate(&quot;1993-03-06T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
 </pre></div>
 </div>
 </div>
@@ -765,81 +549,30 @@ Néanmoins, l’objet retourné par la requête est l’ensemble du document. To
 <p>Il faut donc retirer les étudiants qui ont une liste <code class="docutils literal notranslate"><span class="pre">notes</span></code> vide mais aussi ceux qui n’ont pas de liste du tout.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="nx">$nor</span><span class="o">:</span> 
-        <span class="p">[{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$exists</span><span class="o">:</span> <span class="kc">false</span><span class="p">}},</span>         <span class="cm">/*1ère condition : on retire les documents ne possédant pas de liste &quot;notes&quot;*/</span>
-        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$lt</span><span class="o">:</span> <span class="mf">12</span><span class="p">}},</span>                 <span class="cm">/*2ème condition : on retire ceux qui ont des notes en dessous de 12*/</span>
-        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$size</span><span class="o">:</span> <span class="mf">0</span><span class="p">}}]</span>                <span class="cm">/*3ème condition : on retire ceux qui n&#39;ont pas de notes*/</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="err">$</span><span class="n">nor</span><span class="p">:</span> 
+        <span class="p">[{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">exists</span><span class="p">:</span> <span class="n">false</span><span class="p">}},</span>         <span class="o">/*</span><span class="mi">1</span><span class="n">ère</span> <span class="n">condition</span> <span class="p">:</span> <span class="n">on</span> <span class="n">retire</span> <span class="n">les</span> <span class="n">documents</span> <span class="n">ne</span> <span class="n">possédant</span> <span class="n">pas</span> <span class="n">de</span> <span class="n">liste</span> <span class="s2">&quot;notes&quot;</span><span class="o">*/</span>
+        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">lt</span><span class="p">:</span> <span class="mi">12</span><span class="p">}},</span>                 <span class="o">/*</span><span class="mi">2</span><span class="n">ème</span> <span class="n">condition</span> <span class="p">:</span> <span class="n">on</span> <span class="n">retire</span> <span class="n">ceux</span> <span class="n">qui</span> <span class="n">ont</span> <span class="n">des</span> <span class="n">notes</span> <span class="n">en</span> <span class="n">dessous</span> <span class="n">de</span> <span class="mi">12</span><span class="o">*/</span>
+        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span><span class="p">:</span> <span class="mi">0</span><span class="p">}}]</span>                <span class="o">/*</span><span class="mi">3</span><span class="n">ème</span> <span class="n">condition</span> <span class="p">:</span> <span class="n">on</span> <span class="n">retire</span> <span class="n">ceux</span> <span class="n">qui</span> <span class="n">n</span><span class="s1">&#39;ont pas de notes*/</span>
     <span class="p">}</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773f&quot;),
-	&quot;nom&quot; : &quot;Hélène&quot;,
-	&quot;notes&quot; : [
-		13
-	],
-	&quot;ddn&quot; : ISODate(&quot;1995-03-05T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;F&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d7742&quot;),
-	&quot;nom&quot; : &quot;Marc&quot;,
-	&quot;notes&quot; : [
-		15
-	],
-	&quot;ddn&quot; : ISODate(&quot;1993-03-06T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
 </pre></div>
 </div>
 </div>
 </div>
 <p>Cette fois, on ne retourne plus que 2 étudiants qui n’ont que des notes au-dessus de 12.</p>
-</div>
-<div class="section" id="cas-des-conditions-multiples">
-<h3><span class="section-number">2.3.2. </span>Cas des conditions multiples<a class="headerlink" href="#cas-des-conditions-multiples" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="cas-des-conditions-multiples">
+<h3><span class="section-number">2.3.2. </span>Cas des conditions multiples<a class="headerlink" href="#cas-des-conditions-multiples" title="Link to this heading">#</a></h3>
 <p>Lorsque nous faisons des requêtes sur un attribut d’un autre type qu’une liste, un seul élement est soumis à l’ensemble de nos conditions.
 Dans l’exemple ci-dessous, la clé <code class="docutils literal notranslate"><span class="pre">nom</span></code> renvoie une chaine de caractères, qui est un élément unique. Cet élément est soumis à deux conditions afin d’obtenir les noms qui commencent par la lettre M.</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>                                <span class="cm">/*Cette requête nous renvoie les noms dont la première lettre est comprise &gt;= à M et &lt; à N, donc M*/</span>
-    <span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span> 
-        <span class="p">{</span><span class="nx">$gte</span><span class="o">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="nx">$lt</span><span class="o">:</span> <span class="s2">&quot;N&quot;</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>                                <span class="o">/*</span><span class="n">Cette</span> <span class="n">requête</span> <span class="n">nous</span> <span class="n">renvoie</span> <span class="n">les</span> <span class="n">noms</span> <span class="n">dont</span> <span class="n">la</span> <span class="n">première</span> <span class="n">lettre</span> <span class="n">est</span> <span class="n">comprise</span> <span class="o">&gt;=</span> <span class="n">à</span> <span class="n">M</span> <span class="n">et</span> <span class="o">&lt;</span> <span class="n">à</span> <span class="n">N</span><span class="p">,</span> <span class="n">donc</span> <span class="n">M</span><span class="o">*/</span>
+    <span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span> 
+        <span class="p">{</span><span class="err">$</span><span class="n">gte</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="err">$</span><span class="n">lt</span><span class="p">:</span> <span class="s2">&quot;N&quot;</span><span class="p">}</span>
     <span class="p">}</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773e&quot;),
-	&quot;nom&quot; : &quot;Michel&quot;,
-	&quot;ddn&quot; : ISODate(&quot;1995-02-13T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d7741&quot;),
-	&quot;nom&quot; : &quot;Marc&quot;,
-	&quot;notes&quot; : [
-		1,
-		5
-	],
-	&quot;ddn&quot; : ISODate(&quot;1993-01-01T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d7742&quot;),
-	&quot;nom&quot; : &quot;Marc&quot;,
-	&quot;notes&quot; : [
-		15
-	],
-	&quot;ddn&quot; : ISODate(&quot;1993-03-06T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
 </pre></div>
 </div>
 </div>
@@ -847,30 +580,11 @@ Dans l’exemple ci-dessous, la clé <code class="docutils literal notranslate">
 <p>Avec les listes, c’est différent. Chaque élément contenu dans la liste est testé par les conditions. Voyons le fonctionnement d’une requête sur une liste avec plusieurs conditions :</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> 
-        <span class="p">{</span><span class="nx">$gt</span><span class="o">:</span> <span class="mf">13</span><span class="p">,</span> <span class="nx">$lte</span><span class="o">:</span> <span class="mf">10</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> 
+        <span class="p">{</span><span class="err">$</span><span class="n">gt</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span> <span class="err">$</span><span class="n">lte</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
     <span class="p">}</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773c&quot;),
-	&quot;nom&quot; : &quot;Jean&quot;,
-	&quot;notes&quot; : [
-		1,
-		5,
-		7,
-		10,
-		12,
-		14,
-		3
-	],
-	&quot;ddn&quot; : ISODate(&quot;1995-05-25T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
 </pre></div>
 </div>
 </div>
@@ -889,19 +603,19 @@ Les conditions sont toutes respectées au moins une fois, la liste complète est
 </ul>
 <p>Ainsi, nous ne testons pas simultanément les deux conditions sur chaque nombre. Aucun nombre x ne vérifie x <span class="math notranslate nohighlight">\(&gt; 13\)</span> et x <span class="math notranslate nohighlight">\(\le 10\)</span>. Cela est contre-intuitif, il faut faire attention.</p>
 <p>Mais alors, comment pouvons-nous justement tester une double condition sur chaque élement de la liste ? Pour cela, nous allons faire appel à l’opérateur <code class="docutils literal notranslate"><span class="pre">$elemMatch</span></code>.</p>
-</div>
-<div class="section" id="operateur-elemmatch">
-<h3><span class="section-number">2.3.3. </span>Opérateur <code class="docutils literal notranslate"><span class="pre">$elemMatch</span></code><a class="headerlink" href="#operateur-elemmatch" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="operateur-elemmatch">
+<h3><span class="section-number">2.3.3. </span>Opérateur <code class="docutils literal notranslate"><span class="pre">$elemMatch</span></code><a class="headerlink" href="#operateur-elemmatch" title="Link to this heading">#</a></h3>
 <p>Avec <code class="docutils literal notranslate"><span class="pre">$elemMatch</span></code>, on retourne les documents dont au moins un élément de la liste vérifie toutes les conditions.</p>
-<div class="section" id="cas-de-conditions-simultanement-non-realisables">
-<h4><span class="section-number">2.3.3.1. </span>Cas de conditions simultanement non réalisables<a class="headerlink" href="#cas-de-conditions-simultanement-non-realisables" title="Permalink to this headline">¶</a></h4>
+<section id="cas-de-conditions-simultanement-non-realisables">
+<h4><span class="section-number">2.3.3.1. </span>Cas de conditions simultanement non réalisables<a class="headerlink" href="#cas-de-conditions-simultanement-non-realisables" title="Link to this heading">#</a></h4>
 <p>Testez votre intuition ! D’après vous, que ressortira cette requête ?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> 
-        <span class="p">{</span><span class="nx">$elemMatch</span><span class="o">:</span> 
-            <span class="p">{</span><span class="nx">$gt</span><span class="o">:</span> <span class="mf">13</span><span class="p">,</span> <span class="nx">$lte</span><span class="o">:</span> <span class="mf">10</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> 
+        <span class="p">{</span><span class="err">$</span><span class="n">elemMatch</span><span class="p">:</span> 
+            <span class="p">{</span><span class="err">$</span><span class="n">gt</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span> <span class="err">$</span><span class="n">lte</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">)</span>
@@ -910,47 +624,19 @@ Les conditions sont toutes respectées au moins une fois, la liste complète est
 </div>
 </div>
 <p>Contrairement à la requête précedente, cette requête teste les élements de la liste un à un. Ainsi, aucun élement ne vérifie ces deux conditions simultanement. Aucun élément n’est donc retourné par cette requête.</p>
-</div>
-<div class="section" id="cas-de-conditions-simultanement-realisables">
-<h4><span class="section-number">2.3.3.2. </span>Cas de conditions simultanement réalisables<a class="headerlink" href="#cas-de-conditions-simultanement-realisables" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="cas-de-conditions-simultanement-realisables">
+<h4><span class="section-number">2.3.3.2. </span>Cas de conditions simultanement réalisables<a class="headerlink" href="#cas-de-conditions-simultanement-realisables" title="Link to this heading">#</a></h4>
 <p>Avec la requête suivante, nous cherchons à savoir quels étudiants ont au moins une note comprise entre 9 et 13.</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> 
-        <span class="p">{</span><span class="nx">$elemMatch</span><span class="o">:</span> 
-            <span class="p">{</span><span class="nx">$gt</span><span class="o">:</span> <span class="mf">9</span><span class="p">,</span> <span class="nx">$lt</span><span class="o">:</span> <span class="mf">13</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> 
+        <span class="p">{</span><span class="err">$</span><span class="n">elemMatch</span><span class="p">:</span> 
+            <span class="p">{</span><span class="err">$</span><span class="n">gt</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="err">$</span><span class="n">lt</span><span class="p">:</span> <span class="mi">13</span><span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773d&quot;),
-	&quot;nom&quot; : &quot;Paul&quot;,
-	&quot;notes&quot; : [
-		10,
-		12
-	],
-	&quot;sexe&quot; : &quot;M&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773c&quot;),
-	&quot;nom&quot; : &quot;Jean&quot;,
-	&quot;notes&quot; : [
-		1,
-		5,
-		7,
-		10,
-		12,
-		14,
-		3
-	],
-	&quot;ddn&quot; : ISODate(&quot;1995-05-25T00:00:00Z&quot;),
-	&quot;sexe&quot; : &quot;M&quot;
-}
 </pre></div>
 </div>
 </div>
@@ -959,36 +645,23 @@ Les conditions sont toutes respectées au moins une fois, la liste complète est
 <p>Comment obtenir les étudiants dont <strong>toutes</strong> les notes vérifient les conditions simultanement ? Cela est réalisable grâce à l’opérateur <code class="docutils literal notranslate"><span class="pre">$nor</span></code> vu plus tôt :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="nx">$nor</span><span class="o">:</span> 
-        <span class="p">[{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$exists</span><span class="o">:</span> <span class="kc">false</span><span class="p">}},</span>         <span class="cm">/*1ère condition : on retire les documents ne possédant pas de liste &quot;notes&quot;*/</span>
-        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$size</span><span class="o">:</span> <span class="mf">0</span><span class="p">}},</span>                <span class="cm">/*2ème condition : on retire ceux qui n&#39;ont pas de notes*/</span>
-        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$lte</span><span class="o">:</span> <span class="mf">9</span><span class="p">}},</span>                 <span class="cm">/*3ème condition : on retire les étudiants qui ont des notes en dessous de 10*/</span>
-        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$gte</span><span class="o">:</span> <span class="mf">13</span><span class="p">}}]</span>                <span class="cm">/*4ème condition : on retire ceux qui ont des notes au dessus de 12*/</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="err">$</span><span class="n">nor</span><span class="p">:</span> 
+        <span class="p">[{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">exists</span><span class="p">:</span> <span class="n">false</span><span class="p">}},</span>         <span class="o">/*</span><span class="mi">1</span><span class="n">ère</span> <span class="n">condition</span> <span class="p">:</span> <span class="n">on</span> <span class="n">retire</span> <span class="n">les</span> <span class="n">documents</span> <span class="n">ne</span> <span class="n">possédant</span> <span class="n">pas</span> <span class="n">de</span> <span class="n">liste</span> <span class="s2">&quot;notes&quot;</span><span class="o">*/</span>
+        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span><span class="p">:</span> <span class="mi">0</span><span class="p">}},</span>                <span class="o">/*</span><span class="mi">2</span><span class="n">ème</span> <span class="n">condition</span> <span class="p">:</span> <span class="n">on</span> <span class="n">retire</span> <span class="n">ceux</span> <span class="n">qui</span> <span class="n">n</span><span class="s1">&#39;ont pas de notes*/</span>
+        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">lte</span><span class="p">:</span> <span class="mi">9</span><span class="p">}},</span>                 <span class="o">/*</span><span class="mi">3</span><span class="n">ème</span> <span class="n">condition</span> <span class="p">:</span> <span class="n">on</span> <span class="n">retire</span> <span class="n">les</span> <span class="n">étudiants</span> <span class="n">qui</span> <span class="n">ont</span> <span class="n">des</span> <span class="n">notes</span> <span class="n">en</span> <span class="n">dessous</span> <span class="n">de</span> <span class="mi">10</span><span class="o">*/</span>
+        <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">gte</span><span class="p">:</span> <span class="mi">13</span><span class="p">}}]</span>                <span class="o">/*</span><span class="mi">4</span><span class="n">ème</span> <span class="n">condition</span> <span class="p">:</span> <span class="n">on</span> <span class="n">retire</span> <span class="n">ceux</span> <span class="n">qui</span> <span class="n">ont</span> <span class="n">des</span> <span class="n">notes</span> <span class="n">au</span> <span class="n">dessus</span> <span class="n">de</span> <span class="mi">12</span><span class="o">*/</span>
     <span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;56011920de43611b917d773d&quot;),
-	&quot;nom&quot; : &quot;Paul&quot;,
-	&quot;notes&quot; : [
-		10,
-		12
-	],
-	&quot;sexe&quot; : &quot;M&quot;
-}
-</pre></div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="recapitulatif">
-<h2><span class="section-number">2.4. </span>Récapitulatif<a class="headerlink" href="#recapitulatif" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+</section>
+<section id="recapitulatif">
+<h2><span class="section-number">2.4. </span>Récapitulatif<a class="headerlink" href="#recapitulatif" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><em>Je souhaite que <strong>toutes les conditions</strong> soient vérifiées <strong>au moins une fois</strong> par les éléments de ma liste, comment faire ?</em></p></li>
 </ul>
@@ -1010,8 +683,8 @@ Les conditions sont toutes respectées au moins une fois, la liste complète est
 <div><p>Utilisation de l’opérateur <code class="docutils literal notranslate"><span class="pre">$nor</span></code>.</p>
 </div></blockquote>
 <p>Avec <code class="docutils literal notranslate"><span class="pre">$nor</span></code>, on liste les conditions que nous ne souhaitons pas retourner. Ainsi, on ne récupère pas les éléments qui valident des conditions. Il faut notamment penser à retirer les éléments vides avec <code class="docutils literal notranslate"><span class="pre">{$size:</span> <span class="pre">0}</span></code> et les éléments inexistants avec <code class="docutils literal notranslate"><span class="pre">{$exists:</span> <span class="pre">false}</span></code>.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1022,55 +695,129 @@ Les conditions sont toutes respectées au moins une fois, la liste complète est
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "imongo"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "imongo",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'imongo'</script>
+    <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="01_find.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">1. </span>Premières requêtes en MongoDB</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_find.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Premières requêtes en MongoDB</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="03_dates.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="03_dates.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">3. </span>Attributs de type date</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Ouvrage collectif<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">2.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnement-des-listes-en-mongodb">2.2. Fonctionnement des listes en MongoDB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateur-size">2.2.1. Opérateur $size</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particularite-du-travail-sur-des-listes">2.3. Particularité du travail sur des listes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#au-moins-un-element-ou-tous-les-elements">2.3.1. “au moins un élément” ou “tous les éléments” ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cas-des-conditions-multiples">2.3.2. Cas des conditions multiples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateur-elemmatch">2.3.3. Opérateur <code class="docutils literal notranslate"><span class="pre">$elemMatch</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cas-de-conditions-simultanement-non-realisables">2.3.3.1. Cas de conditions simultanement non réalisables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cas-de-conditions-simultanement-realisables">2.3.3.2. Cas de conditions simultanement réalisables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recapitulatif">2.4. Récapitulatif</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Unknown
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

@@ -1,364 +1,405 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4. Les index &#8212; MongoDB : notes de cours</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    <title>4. Les index &#8212; MongoDB</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-      
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/04_index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="5. Les requêtes d’agrégation" href="05_agreg.html" />
     <link rel="prev" title="3. Attributs de type date" href="03_dates.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">MongoDB : notes de cours</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="00_intro.html">
-   MongoDB : Notes de cours
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Chapitres
- </span>
-</p>
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">MongoDB</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_intro.html">
+                    MongoDB : Notes de cours
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_find.html">
-   1. Premières requêtes en MongoDB
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_listes.html">
-   2. Attributs de type liste
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_dates.html">
-   3. Attributs de type date
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   4. Les index
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_agreg.html">
-   5. Les requêtes d’agrégation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_modif.html">
-   6. Les requêtes de modification
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="07_scripts.html">
-   7. Effectuer des requêtes depuis des programmes Python ou R
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="07_scripts_py.html">
-     7.1. Requêtes depuis Python :
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       pymongo
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="07_scripts_R.html">
-     7.2. Requêtes depuis R :
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       mongolite
-      </span>
-     </code>
-    </a>
-   </li>
+<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Premières requêtes en MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Attributs de type liste</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_dates.html">3. Attributs de type date</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Les index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">5. Les requêtes d’agrégation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modif.html">6. Les requêtes de modification</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">7. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">7.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">7.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/elenaberhoco/mongodb-trash" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/elenaberhoco/mongodb-trash/issues/new?title=Issue%20on%20page%20%2Fcontent/04_index.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
   </ul>
- </li>
-</ul>
+</div>
 
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/04_index.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+  
 </div>
-
 </div>
+              
+              
 
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Les index</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/content/04_index.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/04_index.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/rtavenar/mongo_book"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/rtavenar/mongo_book/issues/new?title=Issue%20on%20page%20%2Fcontent/04_index.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/rtavenar/mongo_book/main?urlpath=tree/docs/content/04_index.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-quoi-servent-ils">
-   4.1. À quoi servent-ils ?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quand-les-utiliser">
-   4.2. Quand les utiliser ?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#syntaxe-adaptee">
-   4.3. Syntaxe adaptée
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#index-composes">
-   4.4. Index composés
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#requetes-et-index-textuels">
-   4.5. Requêtes et Index textuels
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#index-geo-spatiaux">
-   4.6. Index géo-spatiaux
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quoi-servent-ils">4.1. À quoi servent-ils ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quand-les-utiliser">4.2. Quand les utiliser ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntaxe-adaptee">4.3. Syntaxe adaptée</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-composes">4.4. Index composés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-et-index-textuels">4.5. Requêtes et Index textuels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-geo-spatiaux">4.6. Index géo-spatiaux</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Les index</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-quoi-servent-ils">
-   4.1. À quoi servent-ils ?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quand-les-utiliser">
-   4.2. Quand les utiliser ?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#syntaxe-adaptee">
-   4.3. Syntaxe adaptée
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#index-composes">
-   4.4. Index composés
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#requetes-et-index-textuels">
-   4.5. Requêtes et Index textuels
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#index-geo-spatiaux">
-   4.6. Index géo-spatiaux
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="les-index">
-<h1><span class="section-number">4. </span>Les index<a class="headerlink" href="#les-index" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="les-index">
+<h1><span class="section-number">4. </span>Les index<a class="headerlink" href="#les-index" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Auteurs/trices : Adrien VIGUE, Etienne BARON, Camille MONOT</p></li>
 </ul>
@@ -366,13 +407,13 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="simple">
 <li><p>Index + requêtes textuelles + requêtes géographiques</p></li>
 </ul>
-<div class="section" id="a-quoi-servent-ils">
-<h2><span class="section-number">4.1. </span>À quoi servent-ils ?<a class="headerlink" href="#a-quoi-servent-ils" title="Permalink to this headline">¶</a></h2>
+<section id="a-quoi-servent-ils">
+<h2><span class="section-number">4.1. </span>À quoi servent-ils ?<a class="headerlink" href="#a-quoi-servent-ils" title="Link to this heading">#</a></h2>
 <p>Les index prennent en charge l’exécution efficace des requêtes dans MongoDB. Sans index, MongoDB doit effectuer une analyse de collection , c’est-à-dire analyser chaque document d’une collection, pour sélectionner les documents qui correspondent à l’instruction de requête. Si un index approprié existe pour une requête, MongoDB peut utiliser l’index pour limiter le nombre de documents qu’il doit inspecter. Les index de MongoDB sont similaires aux index d’autres systèmes de base de données. MongoDB définit les index au niveau de la collection et prend en charge les index sur n’importe quel champ ou sous-champ des documents dans une collection MongoDB.</p>
 <p>En bref, les index sont un moyen de trouver rapidement et efficacement du contenu dans une base de données.</p>
-</div>
-<div class="section" id="quand-les-utiliser">
-<h2><span class="section-number">4.2. </span>Quand les utiliser ?<a class="headerlink" href="#quand-les-utiliser" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="quand-les-utiliser">
+<h2><span class="section-number">4.2. </span>Quand les utiliser ?<a class="headerlink" href="#quand-les-utiliser" title="Link to this heading">#</a></h2>
 <p>On met en place des index à chaque fois qu’on s’attend à avoir beaucoup de requêtes sur une clé (resp. un ensemble de clés).
 Par exemple, on souhaite récupérer les notes d’un étudiant à l’aide de son numéro étudiant. Il faudra alors mettre un index sur la clé “numéro étudiant” afin de réaliser des requêtes efficaces pour retrouver toutes les informations de l’étudiant en fonction de son numéro.</p>
 <div class="tip admonition">
@@ -381,9 +422,9 @@ Par exemple, on souhaite récupérer les notes d’un étudiant à l’aide de s
 vous rajoutez de nouvelles données, vous devez redéfinir vos index. Il est donc nécessaire d’utiliser avec parcimonie des index sur une base
 où vous vous attendez à devoir faire des mises à jour régulières.</p>
 </div>
-</div>
-<div class="section" id="syntaxe-adaptee">
-<h2><span class="section-number">4.3. </span>Syntaxe adaptée<a class="headerlink" href="#syntaxe-adaptee" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="syntaxe-adaptee">
+<h2><span class="section-number">4.3. </span>Syntaxe adaptée<a class="headerlink" href="#syntaxe-adaptee" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Création d’un index</p></li>
 </ul>
@@ -394,29 +435,22 @@ où vous vous attendez à devoir faire des mises à jour régulières.</p>
 <p><em>Exemple :</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">use</span> <span class="nx">food</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">food</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>switched to db food
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">use</span> <span class="n">food</span>
+        <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;borough&quot;</span> <span class="o">:</span> <span class="mf">1</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;numIndexesBefore&quot; : 3,
-	&quot;numIndexesAfter&quot; : 4,
-	&quot;createdCollectionAutomatically&quot; : false,
-	&quot;ok&quot; : 1
-}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">createIndex</span><span class="p">({</span><span class="s2">&quot;borough&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -437,49 +471,7 @@ Le tri n’a cependant pas d’importance sur l’efficacité de la requête.</p
 <p>La syntaxe est très simple et limpide, et donc si l’on applique cette dernière à notre exemple :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">getIndexes</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[
-	{
-		&quot;v&quot; : 2,
-		&quot;key&quot; : {
-			&quot;_id&quot; : 1
-		},
-		&quot;name&quot; : &quot;_id_&quot;
-	},
-	{
-		&quot;v&quot; : 2,
-		&quot;key&quot; : {
-			&quot;address.loc&quot; : &quot;2dsphere&quot;
-		},
-		&quot;name&quot; : &quot;address.loc_2dsphere&quot;,
-		&quot;2dsphereIndexVersion&quot; : 3
-	},
-	{
-		&quot;v&quot; : 2,
-		&quot;key&quot; : {
-			&quot;_fts&quot; : &quot;text&quot;,
-			&quot;_ftsx&quot; : 1
-		},
-		&quot;name&quot; : &quot;$**_text&quot;,
-		&quot;weights&quot; : {
-			&quot;$**&quot; : 1
-		},
-		&quot;default_language&quot; : &quot;english&quot;,
-		&quot;language_override&quot; : &quot;language&quot;,
-		&quot;textIndexVersion&quot; : 3
-	},
-	{
-		&quot;v&quot; : 2,
-		&quot;key&quot; : {
-			&quot;borough&quot; : 1
-		},
-		&quot;name&quot; : &quot;borough_1&quot;
-	}
-]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">getIndexes</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -491,442 +483,7 @@ Le tri n’a cependant pas d’importance sur l’efficacité de la requête.</p
 <p><em>Exemple 1 : Opérateur égal (:, <code class="docutils literal notranslate"><span class="pre">$eq</span></code>)</em></p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="o">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="o">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4efd8&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;1269&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.871194,
-				40.6730975
-			]
-		},
-		&quot;street&quot; : &quot;Sutter Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11208&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-09-16T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 21
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-08-28T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 7
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-04-02T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;C&quot;,
-			&quot;score&quot; : 56
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-08-15T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 27
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-03-28T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 27
-		}
-	],
-	&quot;name&quot; : &quot;May May Kitchen&quot;,
-	&quot;restaurant_id&quot; : &quot;40358429&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4effa&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;976&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.92701509999999,
-				40.6620192
-			]
-		},
-		&quot;street&quot; : &quot;Rutland Road&quot;,
-		&quot;zipcode&quot; : &quot;11212&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-04-23T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-03-26T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-03-13T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 4
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-11-16T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		}
-	],
-	&quot;name&quot; : &quot;Golden Pavillion&quot;,
-	&quot;restaurant_id&quot; : &quot;40363920&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f27f&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;152&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.986446,
-				40.6915505
-			]
-		},
-		&quot;street&quot; : &quot;Lawrence Street&quot;,
-		&quot;zipcode&quot; : &quot;11201&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-10-27T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 5
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-04-22T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-08-22T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;C&quot;,
-			&quot;score&quot; : 52
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-12-27T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-12-23T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		}
-	],
-	&quot;name&quot; : &quot;Lee&#39;S Villa Chinese Restaurant&quot;,
-	&quot;restaurant_id&quot; : &quot;40388386&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f2c5&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;463&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9667463,
-				40.6935651
-			]
-		},
-		&quot;street&quot; : &quot;Myrtle Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11205&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-10-02T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-10-08T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-09-24T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		}
-	],
-	&quot;name&quot; : &quot;Kum Kau Kitchen&quot;,
-	&quot;restaurant_id&quot; : &quot;40390653&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f2ec&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;152&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9771312,
-				40.67257840000001
-			]
-		},
-		&quot;street&quot; : &quot;7 Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11215&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-10-01T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-03-11T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-02-06T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-01-26T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		}
-	],
-	&quot;name&quot; : &quot;Szechuan Delight Restaurant&quot;,
-	&quot;restaurant_id&quot; : &quot;40391528&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f324&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;404&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.97635439999999,
-				40.6438997
-			]
-		},
-		&quot;street&quot; : &quot;Church Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11218&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-10-29T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-03-24T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-10-25T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;C&quot;,
-			&quot;score&quot; : 3
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-10-01T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-05-09T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;C&quot;,
-			&quot;score&quot; : 2
-		}
-	],
-	&quot;name&quot; : &quot;Yen Yen Restaurant&quot;,
-	&quot;restaurant_id&quot; : &quot;40393181&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f421&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;5100&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				80.361767,
-				26.4669033
-			]
-		},
-		&quot;street&quot; : &quot;Kings Plaza Shopping Ct&quot;,
-		&quot;zipcode&quot; : &quot;11234&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-04-09T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-04-04T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-10-10T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 17
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-05-10T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-10-20T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 22
-		}
-	],
-	&quot;name&quot; : &quot;Master Wok&quot;,
-	&quot;restaurant_id&quot; : &quot;40398688&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f42b&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;425&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.96837599999999,
-				40.59775399999999
-			]
-		},
-		&quot;street&quot; : &quot;Avenue U&quot;,
-		&quot;zipcode&quot; : &quot;11223&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-10-09T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-10-10T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-10-01T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 8
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-10-25T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		}
-	],
-	&quot;name&quot; : &quot;Choy Le Chinese Restaurant&quot;,
-	&quot;restaurant_id&quot; : &quot;40398904&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f63f&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;1955&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9988983,
-				40.6052988
-			]
-		},
-		&quot;street&quot; : &quot;86 Street&quot;,
-		&quot;zipcode&quot; : &quot;11214&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-10-31T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 17
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-09-17T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-04-30T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-09-05T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 27
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-02-07T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 20
-		}
-	],
-	&quot;name&quot; : &quot;New Ruan&#39;S Restaurant&quot;,
-	&quot;restaurant_id&quot; : &quot;40537963&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f762&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;6820&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-74.0122391,
-				40.6289332
-			]
-		},
-		&quot;street&quot; : &quot;Fort Hamilton Parkway&quot;,
-		&quot;zipcode&quot; : &quot;11219&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-11-19T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 4
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-12-09T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-12-05T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-05-22T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		}
-	],
-	&quot;name&quot; : &quot;Great Wall Restaurant&quot;,
-	&quot;restaurant_id&quot; : &quot;40574067&quot;
-}
-Type &quot;it&quot; for more
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -935,432 +492,7 @@ Type &quot;it&quot; for more
 <p><em>Exemple 2 : Opérateur infériorité/supériorité (<code class="docutils literal notranslate"><span class="pre">$lt</span></code>, <code class="docutils literal notranslate"><span class="pre">$lte</span></code>, <code class="docutils literal notranslate"><span class="pre">$gt</span></code>, <code class="docutils literal notranslate"><span class="pre">$gte</span></code>)</em></p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$gte</span><span class="o">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="nx">$lt</span><span class="o">:</span> <span class="s2">&quot;D&quot;</span><span class="p">}})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4efd6&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;7715&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9973325,
-				40.61174889999999
-			]
-		},
-		&quot;street&quot; : &quot;18 Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11214&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-04-16T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 5
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-04-23T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-04-24T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 5
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-12-16T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		}
-	],
-	&quot;name&quot; : &quot;C &amp; C Catering Service&quot;,
-	&quot;restaurant_id&quot; : &quot;40357437&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4efdb&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;265-15&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.7032601,
-				40.7386417
-			]
-		},
-		&quot;street&quot; : &quot;Hillside Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11004&quot;
-	},
-	&quot;borough&quot; : &quot;Queens&quot;,
-	&quot;cuisine&quot; : &quot;Ice Cream, Gelato, Yogurt, Ices&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-10-28T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-09-18T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-09-20T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		}
-	],
-	&quot;name&quot; : &quot;Carvel Ice Cream&quot;,
-	&quot;restaurant_id&quot; : &quot;40361322&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4efdc&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;203&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.97822040000001,
-				40.6435254
-			]
-		},
-		&quot;street&quot; : &quot;Church Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11218&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Ice Cream, Gelato, Yogurt, Ices&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-02-10T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-01-02T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-01-09T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 3
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-11-07T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;P&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-07-21T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		}
-	],
-	&quot;name&quot; : &quot;Carvel Ice Cream&quot;,
-	&quot;restaurant_id&quot; : &quot;40360076&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4efec&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;1006&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.84856870000002,
-				40.8903781
-			]
-		},
-		&quot;street&quot; : &quot;East 233 Street&quot;,
-		&quot;zipcode&quot; : &quot;10466&quot;
-	},
-	&quot;borough&quot; : &quot;Bronx&quot;,
-	&quot;cuisine&quot; : &quot;Ice Cream, Gelato, Yogurt, Ices&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-04-24T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-09-05T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-02-21T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-07-03T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-07-11T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 5
-		}
-	],
-	&quot;name&quot; : &quot;Carvel Ice Cream&quot;,
-	&quot;restaurant_id&quot; : &quot;40363093&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4eff0&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;625&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.990494,
-				40.7569545
-			]
-		},
-		&quot;street&quot; : &quot;8 Avenue&quot;,
-		&quot;zipcode&quot; : &quot;10018&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-06-09T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-01-10T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-12-07T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 4
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-12-13T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-09-09T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		}
-	],
-	&quot;name&quot; : &quot;Cafe Metro&quot;,
-	&quot;restaurant_id&quot; : &quot;40363298&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4effb&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;1111&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-74.0796436,
-				40.59878339999999
-			]
-		},
-		&quot;street&quot; : &quot;Hylan Boulevard&quot;,
-		&quot;zipcode&quot; : &quot;10305&quot;
-	},
-	&quot;borough&quot; : &quot;Staten Island&quot;,
-	&quot;cuisine&quot; : &quot;Ice Cream, Gelato, Yogurt, Ices&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-04-24T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-02-26T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 5
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-02-02T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		}
-	],
-	&quot;name&quot; : &quot;Carvel Ice Cream&quot;,
-	&quot;restaurant_id&quot; : &quot;40363834&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f00d&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;100&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-74.0010484,
-				40.71599000000001
-			]
-		},
-		&quot;street&quot; : &quot;Centre Street&quot;,
-		&quot;zipcode&quot; : &quot;10013&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-03-03T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 8
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-03-08T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-03-09T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-03-31T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		}
-	],
-	&quot;name&quot; : &quot;Criminal Court Bldg Cafeteria&quot;,
-	&quot;restaurant_id&quot; : &quot;40364443&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f013&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;215&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9805679,
-				40.7659436
-			]
-		},
-		&quot;street&quot; : &quot;West 57 Street&quot;,
-		&quot;zipcode&quot; : &quot;10019&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-09-25T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-02-14T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-08-09T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-02-22T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 20
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-02-16T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 8
-		}
-	],
-	&quot;name&quot; : &quot;Cafe Atelier (Art Students League)&quot;,
-	&quot;restaurant_id&quot; : &quot;40364531&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f023&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;67&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-74.0707363,
-				40.59321569999999
-			]
-		},
-		&quot;street&quot; : &quot;Olympia Boulevard&quot;,
-		&quot;zipcode&quot; : &quot;10305&quot;
-	},
-	&quot;borough&quot; : &quot;Staten Island&quot;,
-	&quot;cuisine&quot; : &quot;Italian&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-04-24T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-04-04T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-02-02T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 5
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-07-23T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		}
-	],
-	&quot;name&quot; : &quot;Crystal Room&quot;,
-	&quot;restaurant_id&quot; : &quot;40365013&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f029&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;331&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-74.0037823,
-				40.7380122
-			]
-		},
-		&quot;street&quot; : &quot;West    4 Street&quot;,
-		&quot;zipcode&quot; : &quot;10014&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-11-17T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-06-27T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 5
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-05-15T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 4
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-05-09T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		}
-	],
-	&quot;name&quot; : &quot;Corner Bistro&quot;,
-	&quot;restaurant_id&quot; : &quot;40365166&quot;
-}
-Type &quot;it&quot; for more
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">gte</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="err">$</span><span class="n">lt</span><span class="p">:</span> <span class="s2">&quot;D&quot;</span><span class="p">}})</span>
 </pre></div>
 </div>
 </div>
@@ -1370,150 +502,7 @@ Type &quot;it&quot; for more
 <p>Reprenons la requête vue à l’exemple 1, mais cette fois affichons son temps d’exécution :</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="o">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="o">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">}).</span><span class="nx">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;explainVersion&quot; : &quot;1&quot;,
-	&quot;queryPlanner&quot; : {
-		&quot;namespace&quot; : &quot;food.NYfood&quot;,
-		&quot;indexFilterSet&quot; : false,
-		&quot;parsedQuery&quot; : {
-			&quot;$and&quot; : [
-				{
-					&quot;borough&quot; : {
-						&quot;$eq&quot; : &quot;Brooklyn&quot;
-					}
-				},
-				{
-					&quot;cuisine&quot; : {
-						&quot;$eq&quot; : &quot;Chinese&quot;
-					}
-				}
-			]
-		},
-		&quot;maxIndexedOrSolutionsReached&quot; : false,
-		&quot;maxIndexedAndSolutionsReached&quot; : false,
-		&quot;maxScansToExplodeReached&quot; : false,
-		&quot;winningPlan&quot; : {
-			&quot;stage&quot; : &quot;FETCH&quot;,
-			&quot;filter&quot; : {
-				&quot;cuisine&quot; : {
-					&quot;$eq&quot; : &quot;Chinese&quot;
-				}
-			},
-			&quot;inputStage&quot; : {
-				&quot;stage&quot; : &quot;IXSCAN&quot;,
-				&quot;keyPattern&quot; : {
-					&quot;borough&quot; : 1
-				},
-				&quot;indexName&quot; : &quot;borough_1&quot;,
-				&quot;isMultiKey&quot; : false,
-				&quot;multiKeyPaths&quot; : {
-					&quot;borough&quot; : [ ]
-				},
-				&quot;isUnique&quot; : false,
-				&quot;isSparse&quot; : false,
-				&quot;isPartial&quot; : false,
-				&quot;indexVersion&quot; : 2,
-				&quot;direction&quot; : &quot;forward&quot;,
-				&quot;indexBounds&quot; : {
-					&quot;borough&quot; : [
-						&quot;[\&quot;Brooklyn\&quot;, \&quot;Brooklyn\&quot;]&quot;
-					]
-				}
-			}
-		},
-		&quot;rejectedPlans&quot; : [ ]
-	},
-	&quot;executionStats&quot; : {
-		&quot;executionSuccess&quot; : true,
-		&quot;nReturned&quot; : 763,
-		&quot;executionTimeMillis&quot; : 9,
-		&quot;totalKeysExamined&quot; : 6085,
-		&quot;totalDocsExamined&quot; : 6085,
-		&quot;executionStages&quot; : {
-			&quot;stage&quot; : &quot;FETCH&quot;,
-			&quot;filter&quot; : {
-				&quot;cuisine&quot; : {
-					&quot;$eq&quot; : &quot;Chinese&quot;
-				}
-			},
-			&quot;nReturned&quot; : 763,
-			&quot;executionTimeMillisEstimate&quot; : 0,
-			&quot;works&quot; : 6086,
-			&quot;advanced&quot; : 763,
-			&quot;needTime&quot; : 5322,
-			&quot;needYield&quot; : 0,
-			&quot;saveState&quot; : 6,
-			&quot;restoreState&quot; : 6,
-			&quot;isEOF&quot; : 1,
-			&quot;docsExamined&quot; : 6085,
-			&quot;alreadyHasObj&quot; : 0,
-			&quot;inputStage&quot; : {
-				&quot;stage&quot; : &quot;IXSCAN&quot;,
-				&quot;nReturned&quot; : 6085,
-				&quot;executionTimeMillisEstimate&quot; : 0,
-				&quot;works&quot; : 6086,
-				&quot;advanced&quot; : 6085,
-				&quot;needTime&quot; : 0,
-				&quot;needYield&quot; : 0,
-				&quot;saveState&quot; : 6,
-				&quot;restoreState&quot; : 6,
-				&quot;isEOF&quot; : 1,
-				&quot;keyPattern&quot; : {
-					&quot;borough&quot; : 1
-				},
-				&quot;indexName&quot; : &quot;borough_1&quot;,
-				&quot;isMultiKey&quot; : false,
-				&quot;multiKeyPaths&quot; : {
-					&quot;borough&quot; : [ ]
-				},
-				&quot;isUnique&quot; : false,
-				&quot;isSparse&quot; : false,
-				&quot;isPartial&quot; : false,
-				&quot;indexVersion&quot; : 2,
-				&quot;direction&quot; : &quot;forward&quot;,
-				&quot;indexBounds&quot; : {
-					&quot;borough&quot; : [
-						&quot;[\&quot;Brooklyn\&quot;, \&quot;Brooklyn\&quot;]&quot;
-					]
-				},
-				&quot;keysExamined&quot; : 6085,
-				&quot;seeks&quot; : 1,
-				&quot;dupsTested&quot; : 0,
-				&quot;dupsDropped&quot; : 0
-			}
-		}
-	},
-	&quot;command&quot; : {
-		&quot;find&quot; : &quot;NYfood&quot;,
-		&quot;filter&quot; : {
-			&quot;cuisine&quot; : &quot;Chinese&quot;,
-			&quot;borough&quot; : &quot;Brooklyn&quot;
-		},
-		&quot;$db&quot; : &quot;food&quot;
-	},
-	&quot;serverInfo&quot; : {
-		&quot;host&quot; : &quot;6d4c71b2bc66&quot;,
-		&quot;port&quot; : 27017,
-		&quot;version&quot; : &quot;5.0.6&quot;,
-		&quot;gitVersion&quot; : &quot;212a8dbb47f07427dae194a9c75baec1d81d9259&quot;
-	},
-	&quot;serverParameters&quot; : {
-		&quot;internalQueryFacetBufferSizeBytes&quot; : 104857600,
-		&quot;internalQueryFacetMaxOutputDocSizeBytes&quot; : 104857600,
-		&quot;internalLookupStageIntermediateDocumentMaxSizeBytes&quot; : 104857600,
-		&quot;internalDocumentSourceGroupMaxMemoryBytes&quot; : 104857600,
-		&quot;internalQueryMaxBlockingSortMemoryUsageBytes&quot; : 104857600,
-		&quot;internalQueryProhibitBlockingMergeOnMongoS&quot; : 0,
-		&quot;internalQueryMaxAddToSetBytes&quot; : 104857600,
-		&quot;internalDocumentSourceSetWindowFieldsMaxMemoryBytes&quot; : 104857600
-	},
-	&quot;ok&quot; : 1
-}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1521,17 +510,7 @@ Type &quot;it&quot; for more
 <p>Rajoutons maintenant l’index “cuisine” (l’index quartier ayant déjà été créé plus haut) :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="o">:</span> <span class="mf">1</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;numIndexesBefore&quot; : 4,
-	&quot;numIndexesAfter&quot; : 5,
-	&quot;createdCollectionAutomatically&quot; : false,
-	&quot;ok&quot; : 1
-}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">createIndex</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -1539,256 +518,19 @@ Type &quot;it&quot; for more
 <p>On peut maintenant relancer la requête et observer la différence :</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="o">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="o">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">}).</span><span class="nx">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;explainVersion&quot; : &quot;1&quot;,
-	&quot;queryPlanner&quot; : {
-		&quot;namespace&quot; : &quot;food.NYfood&quot;,
-		&quot;indexFilterSet&quot; : false,
-		&quot;parsedQuery&quot; : {
-			&quot;$and&quot; : [
-				{
-					&quot;borough&quot; : {
-						&quot;$eq&quot; : &quot;Brooklyn&quot;
-					}
-				},
-				{
-					&quot;cuisine&quot; : {
-						&quot;$eq&quot; : &quot;Chinese&quot;
-					}
-				}
-			]
-		},
-		&quot;maxIndexedOrSolutionsReached&quot; : false,
-		&quot;maxIndexedAndSolutionsReached&quot; : false,
-		&quot;maxScansToExplodeReached&quot; : false,
-		&quot;winningPlan&quot; : {
-			&quot;stage&quot; : &quot;FETCH&quot;,
-			&quot;filter&quot; : {
-				&quot;borough&quot; : {
-					&quot;$eq&quot; : &quot;Brooklyn&quot;
-				}
-			},
-			&quot;inputStage&quot; : {
-				&quot;stage&quot; : &quot;IXSCAN&quot;,
-				&quot;keyPattern&quot; : {
-					&quot;cuisine&quot; : 1
-				},
-				&quot;indexName&quot; : &quot;cuisine_1&quot;,
-				&quot;isMultiKey&quot; : false,
-				&quot;multiKeyPaths&quot; : {
-					&quot;cuisine&quot; : [ ]
-				},
-				&quot;isUnique&quot; : false,
-				&quot;isSparse&quot; : false,
-				&quot;isPartial&quot; : false,
-				&quot;indexVersion&quot; : 2,
-				&quot;direction&quot; : &quot;forward&quot;,
-				&quot;indexBounds&quot; : {
-					&quot;cuisine&quot; : [
-						&quot;[\&quot;Chinese\&quot;, \&quot;Chinese\&quot;]&quot;
-					]
-				}
-			}
-		},
-		&quot;rejectedPlans&quot; : [
-			{
-				&quot;stage&quot; : &quot;FETCH&quot;,
-				&quot;filter&quot; : {
-					&quot;cuisine&quot; : {
-						&quot;$eq&quot; : &quot;Chinese&quot;
-					}
-				},
-				&quot;inputStage&quot; : {
-					&quot;stage&quot; : &quot;IXSCAN&quot;,
-					&quot;keyPattern&quot; : {
-						&quot;borough&quot; : 1
-					},
-					&quot;indexName&quot; : &quot;borough_1&quot;,
-					&quot;isMultiKey&quot; : false,
-					&quot;multiKeyPaths&quot; : {
-						&quot;borough&quot; : [ ]
-					},
-					&quot;isUnique&quot; : false,
-					&quot;isSparse&quot; : false,
-					&quot;isPartial&quot; : false,
-					&quot;indexVersion&quot; : 2,
-					&quot;direction&quot; : &quot;forward&quot;,
-					&quot;indexBounds&quot; : {
-						&quot;borough&quot; : [
-							&quot;[\&quot;Brooklyn\&quot;, \&quot;Brooklyn\&quot;]&quot;
-						]
-					}
-				}
-			},
-			{
-				&quot;stage&quot; : &quot;FETCH&quot;,
-				&quot;filter&quot; : {
-					&quot;$and&quot; : [
-						{
-							&quot;borough&quot; : {
-								&quot;$eq&quot; : &quot;Brooklyn&quot;
-							}
-						},
-						{
-							&quot;cuisine&quot; : {
-								&quot;$eq&quot; : &quot;Chinese&quot;
-							}
-						}
-					]
-				},
-				&quot;inputStage&quot; : {
-					&quot;stage&quot; : &quot;AND_SORTED&quot;,
-					&quot;inputStages&quot; : [
-						{
-							&quot;stage&quot; : &quot;IXSCAN&quot;,
-							&quot;keyPattern&quot; : {
-								&quot;borough&quot; : 1
-							},
-							&quot;indexName&quot; : &quot;borough_1&quot;,
-							&quot;isMultiKey&quot; : false,
-							&quot;multiKeyPaths&quot; : {
-								&quot;borough&quot; : [ ]
-							},
-							&quot;isUnique&quot; : false,
-							&quot;isSparse&quot; : false,
-							&quot;isPartial&quot; : false,
-							&quot;indexVersion&quot; : 2,
-							&quot;direction&quot; : &quot;forward&quot;,
-							&quot;indexBounds&quot; : {
-								&quot;borough&quot; : [
-									&quot;[\&quot;Brooklyn\&quot;, \&quot;Brooklyn\&quot;]&quot;
-								]
-							}
-						},
-						{
-							&quot;stage&quot; : &quot;IXSCAN&quot;,
-							&quot;keyPattern&quot; : {
-								&quot;cuisine&quot; : 1
-							},
-							&quot;indexName&quot; : &quot;cuisine_1&quot;,
-							&quot;isMultiKey&quot; : false,
-							&quot;multiKeyPaths&quot; : {
-								&quot;cuisine&quot; : [ ]
-							},
-							&quot;isUnique&quot; : false,
-							&quot;isSparse&quot; : false,
-							&quot;isPartial&quot; : false,
-							&quot;indexVersion&quot; : 2,
-							&quot;direction&quot; : &quot;forward&quot;,
-							&quot;indexBounds&quot; : {
-								&quot;cuisine&quot; : [
-									&quot;[\&quot;Chinese\&quot;, \&quot;Chinese\&quot;]&quot;
-								]
-							}
-						}
-					]
-				}
-			}
-		]
-	},
-	&quot;executionStats&quot; : {
-		&quot;executionSuccess&quot; : true,
-		&quot;nReturned&quot; : 763,
-		&quot;executionTimeMillis&quot; : 5,
-		&quot;totalKeysExamined&quot; : 2418,
-		&quot;totalDocsExamined&quot; : 2418,
-		&quot;executionStages&quot; : {
-			&quot;stage&quot; : &quot;FETCH&quot;,
-			&quot;filter&quot; : {
-				&quot;borough&quot; : {
-					&quot;$eq&quot; : &quot;Brooklyn&quot;
-				}
-			},
-			&quot;nReturned&quot; : 763,
-			&quot;executionTimeMillisEstimate&quot; : 0,
-			&quot;works&quot; : 2419,
-			&quot;advanced&quot; : 763,
-			&quot;needTime&quot; : 1655,
-			&quot;needYield&quot; : 0,
-			&quot;saveState&quot; : 3,
-			&quot;restoreState&quot; : 3,
-			&quot;isEOF&quot; : 1,
-			&quot;docsExamined&quot; : 2418,
-			&quot;alreadyHasObj&quot; : 0,
-			&quot;inputStage&quot; : {
-				&quot;stage&quot; : &quot;IXSCAN&quot;,
-				&quot;nReturned&quot; : 2418,
-				&quot;executionTimeMillisEstimate&quot; : 0,
-				&quot;works&quot; : 2419,
-				&quot;advanced&quot; : 2418,
-				&quot;needTime&quot; : 0,
-				&quot;needYield&quot; : 0,
-				&quot;saveState&quot; : 3,
-				&quot;restoreState&quot; : 3,
-				&quot;isEOF&quot; : 1,
-				&quot;keyPattern&quot; : {
-					&quot;cuisine&quot; : 1
-				},
-				&quot;indexName&quot; : &quot;cuisine_1&quot;,
-				&quot;isMultiKey&quot; : false,
-				&quot;multiKeyPaths&quot; : {
-					&quot;cuisine&quot; : [ ]
-				},
-				&quot;isUnique&quot; : false,
-				&quot;isSparse&quot; : false,
-				&quot;isPartial&quot; : false,
-				&quot;indexVersion&quot; : 2,
-				&quot;direction&quot; : &quot;forward&quot;,
-				&quot;indexBounds&quot; : {
-					&quot;cuisine&quot; : [
-						&quot;[\&quot;Chinese\&quot;, \&quot;Chinese\&quot;]&quot;
-					]
-				},
-				&quot;keysExamined&quot; : 2418,
-				&quot;seeks&quot; : 1,
-				&quot;dupsTested&quot; : 0,
-				&quot;dupsDropped&quot; : 0
-			}
-		}
-	},
-	&quot;command&quot; : {
-		&quot;find&quot; : &quot;NYfood&quot;,
-		&quot;filter&quot; : {
-			&quot;cuisine&quot; : &quot;Chinese&quot;,
-			&quot;borough&quot; : &quot;Brooklyn&quot;
-		},
-		&quot;$db&quot; : &quot;food&quot;
-	},
-	&quot;serverInfo&quot; : {
-		&quot;host&quot; : &quot;6d4c71b2bc66&quot;,
-		&quot;port&quot; : 27017,
-		&quot;version&quot; : &quot;5.0.6&quot;,
-		&quot;gitVersion&quot; : &quot;212a8dbb47f07427dae194a9c75baec1d81d9259&quot;
-	},
-	&quot;serverParameters&quot; : {
-		&quot;internalQueryFacetBufferSizeBytes&quot; : 104857600,
-		&quot;internalQueryFacetMaxOutputDocSizeBytes&quot; : 104857600,
-		&quot;internalLookupStageIntermediateDocumentMaxSizeBytes&quot; : 104857600,
-		&quot;internalDocumentSourceGroupMaxMemoryBytes&quot; : 104857600,
-		&quot;internalQueryMaxBlockingSortMemoryUsageBytes&quot; : 104857600,
-		&quot;internalQueryProhibitBlockingMergeOnMongoS&quot; : 0,
-		&quot;internalQueryMaxAddToSetBytes&quot; : 104857600,
-		&quot;internalDocumentSourceSetWindowFieldsMaxMemoryBytes&quot; : 104857600
-	},
-	&quot;ok&quot; : 1
-}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="index-composes">
-<h2><span class="section-number">4.4. </span>Index composés<a class="headerlink" href="#index-composes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="index-composes">
+<h2><span class="section-number">4.4. </span>Index composés<a class="headerlink" href="#index-composes" title="Link to this heading">#</a></h2>
 <p>Il est également possible de créer des index non pas sur un mais sur plusieurs champs de la base de données, on appelle alors un tel index un “index composé”. L’intérêt d’une telle pratique est de lier des champs entre eux et d’optimiser grandement des requêtes portant sur ces derniers. Si l’on s’attend à effectuer de telles requêtes, alors créer un index composé devient judicieux.</p>
 <ul class="simple">
 <li><p>Création d’un index composé</p></li>
 </ul>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;cle1&quot;</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="s2">&quot;cle2&quot;</span><span class="o">:</span> <span class="mf">1</span><span class="p">}</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;cle1&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;cle2&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">}</span>
 </pre></div>
 </div>
 <div class="tip admonition">
@@ -1804,244 +546,7 @@ Certaines requêtes pourront ainsi être accélérées par l’un ou l’autre d
 <p>Nous avons déjà vu un tel exemple, en effet si nous revenons un peu plus haut, nous avons déjà donné une requête de ce type :</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="o">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="o">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">}).</span><span class="nx">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;explainVersion&quot; : &quot;1&quot;,
-	&quot;queryPlanner&quot; : {
-		&quot;namespace&quot; : &quot;food.NYfood&quot;,
-		&quot;indexFilterSet&quot; : false,
-		&quot;parsedQuery&quot; : {
-			&quot;$and&quot; : [
-				{
-					&quot;borough&quot; : {
-						&quot;$eq&quot; : &quot;Brooklyn&quot;
-					}
-				},
-				{
-					&quot;cuisine&quot; : {
-						&quot;$eq&quot; : &quot;Chinese&quot;
-					}
-				}
-			]
-		},
-		&quot;maxIndexedOrSolutionsReached&quot; : false,
-		&quot;maxIndexedAndSolutionsReached&quot; : false,
-		&quot;maxScansToExplodeReached&quot; : false,
-		&quot;winningPlan&quot; : {
-			&quot;stage&quot; : &quot;FETCH&quot;,
-			&quot;filter&quot; : {
-				&quot;borough&quot; : {
-					&quot;$eq&quot; : &quot;Brooklyn&quot;
-				}
-			},
-			&quot;inputStage&quot; : {
-				&quot;stage&quot; : &quot;IXSCAN&quot;,
-				&quot;keyPattern&quot; : {
-					&quot;cuisine&quot; : 1
-				},
-				&quot;indexName&quot; : &quot;cuisine_1&quot;,
-				&quot;isMultiKey&quot; : false,
-				&quot;multiKeyPaths&quot; : {
-					&quot;cuisine&quot; : [ ]
-				},
-				&quot;isUnique&quot; : false,
-				&quot;isSparse&quot; : false,
-				&quot;isPartial&quot; : false,
-				&quot;indexVersion&quot; : 2,
-				&quot;direction&quot; : &quot;forward&quot;,
-				&quot;indexBounds&quot; : {
-					&quot;cuisine&quot; : [
-						&quot;[\&quot;Chinese\&quot;, \&quot;Chinese\&quot;]&quot;
-					]
-				}
-			}
-		},
-		&quot;rejectedPlans&quot; : [
-			{
-				&quot;stage&quot; : &quot;FETCH&quot;,
-				&quot;filter&quot; : {
-					&quot;cuisine&quot; : {
-						&quot;$eq&quot; : &quot;Chinese&quot;
-					}
-				},
-				&quot;inputStage&quot; : {
-					&quot;stage&quot; : &quot;IXSCAN&quot;,
-					&quot;keyPattern&quot; : {
-						&quot;borough&quot; : 1
-					},
-					&quot;indexName&quot; : &quot;borough_1&quot;,
-					&quot;isMultiKey&quot; : false,
-					&quot;multiKeyPaths&quot; : {
-						&quot;borough&quot; : [ ]
-					},
-					&quot;isUnique&quot; : false,
-					&quot;isSparse&quot; : false,
-					&quot;isPartial&quot; : false,
-					&quot;indexVersion&quot; : 2,
-					&quot;direction&quot; : &quot;forward&quot;,
-					&quot;indexBounds&quot; : {
-						&quot;borough&quot; : [
-							&quot;[\&quot;Brooklyn\&quot;, \&quot;Brooklyn\&quot;]&quot;
-						]
-					}
-				}
-			},
-			{
-				&quot;stage&quot; : &quot;FETCH&quot;,
-				&quot;filter&quot; : {
-					&quot;$and&quot; : [
-						{
-							&quot;borough&quot; : {
-								&quot;$eq&quot; : &quot;Brooklyn&quot;
-							}
-						},
-						{
-							&quot;cuisine&quot; : {
-								&quot;$eq&quot; : &quot;Chinese&quot;
-							}
-						}
-					]
-				},
-				&quot;inputStage&quot; : {
-					&quot;stage&quot; : &quot;AND_SORTED&quot;,
-					&quot;inputStages&quot; : [
-						{
-							&quot;stage&quot; : &quot;IXSCAN&quot;,
-							&quot;keyPattern&quot; : {
-								&quot;borough&quot; : 1
-							},
-							&quot;indexName&quot; : &quot;borough_1&quot;,
-							&quot;isMultiKey&quot; : false,
-							&quot;multiKeyPaths&quot; : {
-								&quot;borough&quot; : [ ]
-							},
-							&quot;isUnique&quot; : false,
-							&quot;isSparse&quot; : false,
-							&quot;isPartial&quot; : false,
-							&quot;indexVersion&quot; : 2,
-							&quot;direction&quot; : &quot;forward&quot;,
-							&quot;indexBounds&quot; : {
-								&quot;borough&quot; : [
-									&quot;[\&quot;Brooklyn\&quot;, \&quot;Brooklyn\&quot;]&quot;
-								]
-							}
-						},
-						{
-							&quot;stage&quot; : &quot;IXSCAN&quot;,
-							&quot;keyPattern&quot; : {
-								&quot;cuisine&quot; : 1
-							},
-							&quot;indexName&quot; : &quot;cuisine_1&quot;,
-							&quot;isMultiKey&quot; : false,
-							&quot;multiKeyPaths&quot; : {
-								&quot;cuisine&quot; : [ ]
-							},
-							&quot;isUnique&quot; : false,
-							&quot;isSparse&quot; : false,
-							&quot;isPartial&quot; : false,
-							&quot;indexVersion&quot; : 2,
-							&quot;direction&quot; : &quot;forward&quot;,
-							&quot;indexBounds&quot; : {
-								&quot;cuisine&quot; : [
-									&quot;[\&quot;Chinese\&quot;, \&quot;Chinese\&quot;]&quot;
-								]
-							}
-						}
-					]
-				}
-			}
-		]
-	},
-	&quot;executionStats&quot; : {
-		&quot;executionSuccess&quot; : true,
-		&quot;nReturned&quot; : 763,
-		&quot;executionTimeMillis&quot; : 5,
-		&quot;totalKeysExamined&quot; : 2418,
-		&quot;totalDocsExamined&quot; : 2418,
-		&quot;executionStages&quot; : {
-			&quot;stage&quot; : &quot;FETCH&quot;,
-			&quot;filter&quot; : {
-				&quot;borough&quot; : {
-					&quot;$eq&quot; : &quot;Brooklyn&quot;
-				}
-			},
-			&quot;nReturned&quot; : 763,
-			&quot;executionTimeMillisEstimate&quot; : 0,
-			&quot;works&quot; : 2419,
-			&quot;advanced&quot; : 763,
-			&quot;needTime&quot; : 1655,
-			&quot;needYield&quot; : 0,
-			&quot;saveState&quot; : 3,
-			&quot;restoreState&quot; : 3,
-			&quot;isEOF&quot; : 1,
-			&quot;docsExamined&quot; : 2418,
-			&quot;alreadyHasObj&quot; : 0,
-			&quot;inputStage&quot; : {
-				&quot;stage&quot; : &quot;IXSCAN&quot;,
-				&quot;nReturned&quot; : 2418,
-				&quot;executionTimeMillisEstimate&quot; : 0,
-				&quot;works&quot; : 2419,
-				&quot;advanced&quot; : 2418,
-				&quot;needTime&quot; : 0,
-				&quot;needYield&quot; : 0,
-				&quot;saveState&quot; : 3,
-				&quot;restoreState&quot; : 3,
-				&quot;isEOF&quot; : 1,
-				&quot;keyPattern&quot; : {
-					&quot;cuisine&quot; : 1
-				},
-				&quot;indexName&quot; : &quot;cuisine_1&quot;,
-				&quot;isMultiKey&quot; : false,
-				&quot;multiKeyPaths&quot; : {
-					&quot;cuisine&quot; : [ ]
-				},
-				&quot;isUnique&quot; : false,
-				&quot;isSparse&quot; : false,
-				&quot;isPartial&quot; : false,
-				&quot;indexVersion&quot; : 2,
-				&quot;direction&quot; : &quot;forward&quot;,
-				&quot;indexBounds&quot; : {
-					&quot;cuisine&quot; : [
-						&quot;[\&quot;Chinese\&quot;, \&quot;Chinese\&quot;]&quot;
-					]
-				},
-				&quot;keysExamined&quot; : 2418,
-				&quot;seeks&quot; : 1,
-				&quot;dupsTested&quot; : 0,
-				&quot;dupsDropped&quot; : 0
-			}
-		}
-	},
-	&quot;command&quot; : {
-		&quot;find&quot; : &quot;NYfood&quot;,
-		&quot;filter&quot; : {
-			&quot;cuisine&quot; : &quot;Chinese&quot;,
-			&quot;borough&quot; : &quot;Brooklyn&quot;
-		},
-		&quot;$db&quot; : &quot;food&quot;
-	},
-	&quot;serverInfo&quot; : {
-		&quot;host&quot; : &quot;6d4c71b2bc66&quot;,
-		&quot;port&quot; : 27017,
-		&quot;version&quot; : &quot;5.0.6&quot;,
-		&quot;gitVersion&quot; : &quot;212a8dbb47f07427dae194a9c75baec1d81d9259&quot;
-	},
-	&quot;serverParameters&quot; : {
-		&quot;internalQueryFacetBufferSizeBytes&quot; : 104857600,
-		&quot;internalQueryFacetMaxOutputDocSizeBytes&quot; : 104857600,
-		&quot;internalLookupStageIntermediateDocumentMaxSizeBytes&quot; : 104857600,
-		&quot;internalDocumentSourceGroupMaxMemoryBytes&quot; : 104857600,
-		&quot;internalQueryMaxBlockingSortMemoryUsageBytes&quot; : 104857600,
-		&quot;internalQueryProhibitBlockingMergeOnMongoS&quot; : 0,
-		&quot;internalQueryMaxAddToSetBytes&quot; : 104857600,
-		&quot;internalDocumentSourceSetWindowFieldsMaxMemoryBytes&quot; : 104857600
-	},
-	&quot;ok&quot; : 1
-}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2049,17 +554,7 @@ Certaines requêtes pourront ainsi être accélérées par l’un ou l’autre d
 <p>Ici, on pourrait profiter  d’un index composé sur les attributs “cuisine” et “borough” :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="o">:</span> <span class="mf">1</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;numIndexesBefore&quot; : 5,
-	&quot;numIndexesAfter&quot; : 6,
-	&quot;createdCollectionAutomatically&quot; : false,
-	&quot;ok&quot; : 1
-}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">createIndex</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -2067,247 +562,45 @@ Certaines requêtes pourront ainsi être accélérées par l’un ou l’autre d
 <p>Répétons notre requête pour voir l’intérêt de notre nouvel index :</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="o">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="o">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">}).</span><span class="nx">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;explainVersion&quot; : &quot;1&quot;,
-	&quot;queryPlanner&quot; : {
-		&quot;namespace&quot; : &quot;food.NYfood&quot;,
-		&quot;indexFilterSet&quot; : false,
-		&quot;parsedQuery&quot; : {
-			&quot;$and&quot; : [
-				{
-					&quot;borough&quot; : {
-						&quot;$eq&quot; : &quot;Brooklyn&quot;
-					}
-				},
-				{
-					&quot;cuisine&quot; : {
-						&quot;$eq&quot; : &quot;Chinese&quot;
-					}
-				}
-			]
-		},
-		&quot;maxIndexedOrSolutionsReached&quot; : false,
-		&quot;maxIndexedAndSolutionsReached&quot; : false,
-		&quot;maxScansToExplodeReached&quot; : false,
-		&quot;winningPlan&quot; : {
-			&quot;stage&quot; : &quot;FETCH&quot;,
-			&quot;inputStage&quot; : {
-				&quot;stage&quot; : &quot;IXSCAN&quot;,
-				&quot;keyPattern&quot; : {
-					&quot;cuisine&quot; : 1,
-					&quot;borough&quot; : 1
-				},
-				&quot;indexName&quot; : &quot;cuisine_1_borough_1&quot;,
-				&quot;isMultiKey&quot; : false,
-				&quot;multiKeyPaths&quot; : {
-					&quot;cuisine&quot; : [ ],
-					&quot;borough&quot; : [ ]
-				},
-				&quot;isUnique&quot; : false,
-				&quot;isSparse&quot; : false,
-				&quot;isPartial&quot; : false,
-				&quot;indexVersion&quot; : 2,
-				&quot;direction&quot; : &quot;forward&quot;,
-				&quot;indexBounds&quot; : {
-					&quot;cuisine&quot; : [
-						&quot;[\&quot;Chinese\&quot;, \&quot;Chinese\&quot;]&quot;
-					],
-					&quot;borough&quot; : [
-						&quot;[\&quot;Brooklyn\&quot;, \&quot;Brooklyn\&quot;]&quot;
-					]
-				}
-			}
-		},
-		&quot;rejectedPlans&quot; : [
-			{
-				&quot;stage&quot; : &quot;FETCH&quot;,
-				&quot;filter&quot; : {
-					&quot;cuisine&quot; : {
-						&quot;$eq&quot; : &quot;Chinese&quot;
-					}
-				},
-				&quot;inputStage&quot; : {
-					&quot;stage&quot; : &quot;IXSCAN&quot;,
-					&quot;keyPattern&quot; : {
-						&quot;borough&quot; : 1
-					},
-					&quot;indexName&quot; : &quot;borough_1&quot;,
-					&quot;isMultiKey&quot; : false,
-					&quot;multiKeyPaths&quot; : {
-						&quot;borough&quot; : [ ]
-					},
-					&quot;isUnique&quot; : false,
-					&quot;isSparse&quot; : false,
-					&quot;isPartial&quot; : false,
-					&quot;indexVersion&quot; : 2,
-					&quot;direction&quot; : &quot;forward&quot;,
-					&quot;indexBounds&quot; : {
-						&quot;borough&quot; : [
-							&quot;[\&quot;Brooklyn\&quot;, \&quot;Brooklyn\&quot;]&quot;
-						]
-					}
-				}
-			},
-			{
-				&quot;stage&quot; : &quot;FETCH&quot;,
-				&quot;filter&quot; : {
-					&quot;borough&quot; : {
-						&quot;$eq&quot; : &quot;Brooklyn&quot;
-					}
-				},
-				&quot;inputStage&quot; : {
-					&quot;stage&quot; : &quot;IXSCAN&quot;,
-					&quot;keyPattern&quot; : {
-						&quot;cuisine&quot; : 1
-					},
-					&quot;indexName&quot; : &quot;cuisine_1&quot;,
-					&quot;isMultiKey&quot; : false,
-					&quot;multiKeyPaths&quot; : {
-						&quot;cuisine&quot; : [ ]
-					},
-					&quot;isUnique&quot; : false,
-					&quot;isSparse&quot; : false,
-					&quot;isPartial&quot; : false,
-					&quot;indexVersion&quot; : 2,
-					&quot;direction&quot; : &quot;forward&quot;,
-					&quot;indexBounds&quot; : {
-						&quot;cuisine&quot; : [
-							&quot;[\&quot;Chinese\&quot;, \&quot;Chinese\&quot;]&quot;
-						]
-					}
-				}
-			}
-		]
-	},
-	&quot;executionStats&quot; : {
-		&quot;executionSuccess&quot; : true,
-		&quot;nReturned&quot; : 763,
-		&quot;executionTimeMillis&quot; : 2,
-		&quot;totalKeysExamined&quot; : 763,
-		&quot;totalDocsExamined&quot; : 763,
-		&quot;executionStages&quot; : {
-			&quot;stage&quot; : &quot;FETCH&quot;,
-			&quot;nReturned&quot; : 763,
-			&quot;executionTimeMillisEstimate&quot; : 0,
-			&quot;works&quot; : 764,
-			&quot;advanced&quot; : 763,
-			&quot;needTime&quot; : 0,
-			&quot;needYield&quot; : 0,
-			&quot;saveState&quot; : 1,
-			&quot;restoreState&quot; : 1,
-			&quot;isEOF&quot; : 1,
-			&quot;docsExamined&quot; : 763,
-			&quot;alreadyHasObj&quot; : 0,
-			&quot;inputStage&quot; : {
-				&quot;stage&quot; : &quot;IXSCAN&quot;,
-				&quot;nReturned&quot; : 763,
-				&quot;executionTimeMillisEstimate&quot; : 0,
-				&quot;works&quot; : 764,
-				&quot;advanced&quot; : 763,
-				&quot;needTime&quot; : 0,
-				&quot;needYield&quot; : 0,
-				&quot;saveState&quot; : 1,
-				&quot;restoreState&quot; : 1,
-				&quot;isEOF&quot; : 1,
-				&quot;keyPattern&quot; : {
-					&quot;cuisine&quot; : 1,
-					&quot;borough&quot; : 1
-				},
-				&quot;indexName&quot; : &quot;cuisine_1_borough_1&quot;,
-				&quot;isMultiKey&quot; : false,
-				&quot;multiKeyPaths&quot; : {
-					&quot;cuisine&quot; : [ ],
-					&quot;borough&quot; : [ ]
-				},
-				&quot;isUnique&quot; : false,
-				&quot;isSparse&quot; : false,
-				&quot;isPartial&quot; : false,
-				&quot;indexVersion&quot; : 2,
-				&quot;direction&quot; : &quot;forward&quot;,
-				&quot;indexBounds&quot; : {
-					&quot;cuisine&quot; : [
-						&quot;[\&quot;Chinese\&quot;, \&quot;Chinese\&quot;]&quot;
-					],
-					&quot;borough&quot; : [
-						&quot;[\&quot;Brooklyn\&quot;, \&quot;Brooklyn\&quot;]&quot;
-					]
-				},
-				&quot;keysExamined&quot; : 763,
-				&quot;seeks&quot; : 1,
-				&quot;dupsTested&quot; : 0,
-				&quot;dupsDropped&quot; : 0
-			}
-		}
-	},
-	&quot;command&quot; : {
-		&quot;find&quot; : &quot;NYfood&quot;,
-		&quot;filter&quot; : {
-			&quot;cuisine&quot; : &quot;Chinese&quot;,
-			&quot;borough&quot; : &quot;Brooklyn&quot;
-		},
-		&quot;$db&quot; : &quot;food&quot;
-	},
-	&quot;serverInfo&quot; : {
-		&quot;host&quot; : &quot;6d4c71b2bc66&quot;,
-		&quot;port&quot; : 27017,
-		&quot;version&quot; : &quot;5.0.6&quot;,
-		&quot;gitVersion&quot; : &quot;212a8dbb47f07427dae194a9c75baec1d81d9259&quot;
-	},
-	&quot;serverParameters&quot; : {
-		&quot;internalQueryFacetBufferSizeBytes&quot; : 104857600,
-		&quot;internalQueryFacetMaxOutputDocSizeBytes&quot; : 104857600,
-		&quot;internalLookupStageIntermediateDocumentMaxSizeBytes&quot; : 104857600,
-		&quot;internalDocumentSourceGroupMaxMemoryBytes&quot; : 104857600,
-		&quot;internalQueryMaxBlockingSortMemoryUsageBytes&quot; : 104857600,
-		&quot;internalQueryProhibitBlockingMergeOnMongoS&quot; : 0,
-		&quot;internalQueryMaxAddToSetBytes&quot; : 104857600,
-		&quot;internalDocumentSourceSetWindowFieldsMaxMemoryBytes&quot; : 104857600
-	},
-	&quot;ok&quot; : 1
-}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="requetes-et-index-textuels">
-<h2><span class="section-number">4.5. </span>Requêtes et Index textuels<a class="headerlink" href="#requetes-et-index-textuels" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="requetes-et-index-textuels">
+<h2><span class="section-number">4.5. </span>Requêtes et Index textuels<a class="headerlink" href="#requetes-et-index-textuels" title="Link to this heading">#</a></h2>
 <p>Lorsque l’on veut interroger notre base de données sur un champ de type “chaîne de caractères”, deux méthodes s’offrent à nous : on peut utiliser soit des requêtes régulières, soit un index textuel qui a été créé sur-le-champ. L’avantage de la première méthode est une très grande précision, et on l’utilisera donc lorsque l’on recherchera du texte très précis, tandis que la seconde méthode utilise la puissance de l’index pour effectuer une recherche de type “moteur de recherche”, renvoyant des résultats proches de ce qui a été demandé. Ici, comme on s’intéresse uniquement au index, nous ne développerons que la seconde méthode.</p>
 <ul class="simple">
 <li><p>Création d’un index textuel</p></li>
 </ul>
 <p>Il existe deux manières de créer un index textuel, sur un attribut précis ou alors sur l’ensemble des attributs :</p>
 <p><em>Pour un attribut précis, ici “cle” :</em></p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">coll</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;cle&quot;</span> <span class="o">:</span> <span class="s2">&quot;text&quot;</span><span class="p">})</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">coll</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;cle&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 <p><em>Pour tous les attributs :</em></p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;$**&quot;</span> <span class="o">:</span> <span class="s2">&quot;text&quot;</span><span class="p">})</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;$**&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Requêtes avancées utilisant un index textuel</p></li>
 </ul>
 <p>Pour effectuer un requête de type “moteur de recherche”, on utilise la forme suivante :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$text</span> <span class="o">:</span> <span class="p">{</span><span class="nx">$search</span> <span class="o">:</span> <span class="s2">&quot;ma requête&quot;</span><span class="p">}})</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$text</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$search</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ma requête&quot;</span><span class="p">}})</span>
 </pre></div>
 </div>
 <p>On remarque plusieurs choses : tout d’abord, il n’est pas nécessaire de préciser le ou les champ sur lequel on veut effectuer la recherche. Ce type de requête n’était possible que sur les champs avec un index textuel, c’est sur ces derniers que le langage va requêter (c’est le sens du <code class="docutils literal notranslate"><span class="pre">&quot;$text&quot;</span></code>). Ensuite, on remarque la présence de <code class="docutils literal notranslate"><span class="pre">&quot;$search&quot;</span></code>, nécessaire pour ce type de requête.</p>
 <p>Par défaut, lorsque l’on effectue une requête contenant plusieurs termes, un OU logique est effectué : les résultats retournés sont ceux qui contiennent au moins l’un des termes. On peut également effectuer une requête impliquant une expression exacte, qui sera encadrée de guillemets échappés par un caractère “” :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$text</span> <span class="o">:</span> <span class="p">{</span><span class="nx">$search</span> <span class="o">:</span> <span class="s2">&quot;\&quot;ma requête\&quot;&quot;</span><span class="p">}})</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$text</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$search</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;\&quot;ma requête\&quot;&quot;</span><span class="p">}})</span>
 </pre></div>
 </div>
-<p>De plus, il est possible d’exclure des termes des résultats en utilisant “-“, dans ce cas, un ET logique est effectué. Par exemple, dans la requête suivante, on souhaite les documents contenant “ma requête” et ne contenant pas “exemple” en même temps :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$text</span> <span class="o">:</span> <span class="p">{</span><span class="nx">$search</span> <span class="o">:</span> <span class="s2">&quot;ma requête -exemple&quot;</span><span class="p">}})</span>
+<p>De plus, il est possible d’exclure des termes des résultats en utilisant “-”, dans ce cas, un ET logique est effectué. Par exemple, dans la requête suivante, on souhaite les documents contenant “ma requête” et ne contenant pas “exemple” en même temps :</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$text</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$search</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ma requête -exemple&quot;</span><span class="p">}})</span>
 </pre></div>
 </div>
 <p>Enfin, on peut classer les documents par pertinence par rapport à notre requête, en utilisant le score td-idf (plus d’informations disponibles <a class="reference external" href="https://fr.wikipedia.org/wiki/TF-IDF">ici</a> :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$text</span><span class="o">:</span> <span class="p">{</span><span class="nx">$search</span><span class="o">:</span> <span class="s2">&quot;ma requête&quot;</span><span class="p">}},{</span><span class="s2">&quot;score&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$meta</span><span class="o">:</span> <span class="s2">&quot;textScore&quot;</span><span class="p">}}).</span><span class="nx">sort</span><span class="p">({</span><span class="nx">score</span><span class="o">:</span> <span class="p">{</span><span class="nx">$meta</span><span class="o">:</span> <span class="s2">&quot;textScore&quot;</span><span class="p">}})</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$text</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$search</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ma requête&quot;</span><span class="p">}},{</span><span class="s2">&quot;score&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$meta</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;textScore&quot;</span><span class="p">}}).</span><span class="nx">sort</span><span class="p">({</span><span class="nx">score</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$meta</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;textScore&quot;</span><span class="p">}})</span>
 </pre></div>
 </div>
 <p>Cette requête renvoie une liste des documents ordonnée par pertinence, si vous souhaitez juste afficher le score de chaque document, il suffit d’enlever <code class="docutils literal notranslate"><span class="pre">.sort({score:</span> <span class="pre">{$meta:</span> <span class="pre">&quot;textScore&quot;}})</span></code>.</p>
@@ -2315,17 +608,7 @@ Certaines requêtes pourront ainsi être accélérées par l’un ou l’autre d
 <p><code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">discours</span></code></p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">discours</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$text</span> <span class="o">:</span> <span class="p">{</span><span class="nx">$search</span> <span class="o">:</span> <span class="s2">&quot;famille -politique&quot;</span><span class="p">}})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: error: {
-	&quot;ok&quot; : 0,
-	&quot;errmsg&quot; : &quot;text index required for $text query (no such collection &#39;food.discours&#39;)&quot;,
-	&quot;code&quot; : 27,
-	&quot;codeName&quot; : &quot;IndexNotFound&quot;
-}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">discours</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="err">$</span><span class="n">text</span> <span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">search</span> <span class="p">:</span> <span class="s2">&quot;famille -politique&quot;</span><span class="p">}})</span>
 </pre></div>
 </div>
 </div>
@@ -2333,31 +616,21 @@ Certaines requêtes pourront ainsi être accélérées par l’un ou l’autre d
 <p><em>Exemple 2 : Liste ordonnée par pertinence des documents par rapport au terme “écologie”</em> :</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">discours</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$text</span><span class="o">:</span> <span class="p">{</span><span class="nx">$search</span><span class="o">:</span> <span class="s2">&quot;écologie&quot;</span><span class="p">}},{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$meta</span><span class="o">:</span> <span class="s2">&quot;textScore&quot;</span><span class="p">}}).</span><span class="nx">sort</span><span class="p">({</span><span class="nx">score</span><span class="o">:</span> <span class="p">{</span><span class="nx">$meta</span><span class="o">:</span> <span class="s2">&quot;textScore&quot;</span><span class="p">}})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: error: {
-	&quot;ok&quot; : 0,
-	&quot;errmsg&quot; : &quot;text index required for $text query (no such collection &#39;food.discours&#39;)&quot;,
-	&quot;code&quot; : 27,
-	&quot;codeName&quot; : &quot;IndexNotFound&quot;
-}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">discours</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="err">$</span><span class="n">text</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">search</span><span class="p">:</span> <span class="s2">&quot;écologie&quot;</span><span class="p">}},{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">meta</span><span class="p">:</span> <span class="s2">&quot;textScore&quot;</span><span class="p">}})</span><span class="o">.</span><span class="n">sort</span><span class="p">({</span><span class="n">score</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">meta</span><span class="p">:</span> <span class="s2">&quot;textScore&quot;</span><span class="p">}})</span>
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="index-geo-spatiaux">
-<h2><span class="section-number">4.6. </span>Index géo-spatiaux<a class="headerlink" href="#index-geo-spatiaux" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="index-geo-spatiaux">
+<h2><span class="section-number">4.6. </span>Index géo-spatiaux<a class="headerlink" href="#index-geo-spatiaux" title="Link to this heading">#</a></h2>
 <p>Avec des données géo-spatiales (longitude, latitude), il est possible de créer un index géo-spatial.
 En plus d’une meilleure efficacité, cet index va permettre de trouver des éléments proches d’un point donné ou bien trouver des éléments inclus dans un polygone.</p>
 <ul class="simple">
 <li><p>Création d’un index</p></li>
 </ul>
 <p>Pour créer un index géo-spatial il faut lui donner le type “2dsphere” :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">coll</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;att&quot;</span> <span class="o">:</span> <span class="s2">&quot;2dsphere&quot;</span><span class="p">})</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">coll</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;att&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2dsphere&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -2365,392 +638,28 @@ En plus d’une meilleure efficacité, cet index va permettre de trouver des él
 </ul>
 <p>Pour obtenir les éléments les plus proches d’un point on définit d’abord une variable de type “Point” avec ses coordonnées.</p>
 <p>Le mot-clé <code class="docutils literal notranslate"><span class="pre">$near</span></code> est nécessaire:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">ref</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span><span class="o">:</span> <span class="p">[</span><span class="nx">longitude</span><span class="p">,</span> <span class="nx">latitude</span><span class="p">]}</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;clé&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$near</span> <span class="o">:</span> <span class="p">{</span><span class="nx">$geometry</span> <span class="o">:</span> <span class="nx">ref</span><span class="p">}}})</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Point&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;coordinates&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">longitude</span><span class="p">,</span><span class="w"> </span><span class="nx">latitude</span><span class="p">]}</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;clé&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$near</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$geometry</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ref</span><span class="p">}}})</span>
 </pre></div>
 </div>
 <p><em>Exemple 1 :</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">use</span> <span class="nx">food</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>switched to db food
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">food</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">CrownHeights</span><span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span><span class="o">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">73.923</span><span class="p">,</span> <span class="mf">40.676</span><span class="p">]}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">CrownHeights</span><span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">73.923</span><span class="p">,</span> <span class="mf">40.676</span><span class="p">]}</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;address.loc&quot;</span> <span class="o">:</span> <span class="p">{</span><span class="nx">$near</span><span class="o">:</span> <span class="p">{</span><span class="nx">$geometry</span><span class="o">:</span> <span class="nx">CrownHeights</span><span class="p">}}})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b55208&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;372&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9220296,
-				40.6762625
-			]
-		},
-		&quot;street&quot; : &quot;Ralph Ave&quot;,
-		&quot;zipcode&quot; : &quot;11233&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Other&quot;,
-	&quot;grades&quot; : [ ],
-	&quot;name&quot; : &quot;Xcellent Soul Food&quot;,
-	&quot;restaurant_id&quot; : &quot;50018528&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b52e1c&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;1994&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.92211809999999,
-				40.6766672
-			]
-		},
-		&quot;street&quot; : &quot;Atlantic Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11233&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-05-16T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 3
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-06-03T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-06-16T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 7
-		}
-	],
-	&quot;name&quot; : &quot;Popeyes&quot;,
-	&quot;restaurant_id&quot; : &quot;41657236&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4ffe5&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;1883&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9225428,
-				40.6773249
-			]
-		},
-		&quot;street&quot; : &quot;Atlantic Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11233&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Hamburgers&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-10-09T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-09-17T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-04-22T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-11-29T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-11-10T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 0
-		}
-	],
-	&quot;name&quot; : &quot;Mcdonald&#39;S&quot;,
-	&quot;restaurant_id&quot; : &quot;40946431&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b537f5&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;433A&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.92194060000001,
-				40.6743341
-			]
-		},
-		&quot;street&quot; : &quot;Ralph Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11233&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-06-02T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 0
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-05-14T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		}
-	],
-	&quot;name&quot; : &quot;Dong Fang Chinese Food&quot;,
-	&quot;restaurant_id&quot; : &quot;41720441&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b52dad&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;431&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.921791,
-				40.674391
-			]
-		},
-		&quot;street&quot; : &quot;Ralph Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11233&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Other&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-06-03T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-05-31T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-05-30T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		}
-	],
-	&quot;name&quot; : &quot;Crown Fried Chicken&quot;,
-	&quot;restaurant_id&quot; : &quot;41653409&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b5166a&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;1928&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.922004,
-				40.678618
-			]
-		},
-		&quot;street&quot; : &quot;Fulton Street&quot;,
-		&quot;zipcode&quot; : &quot;11233&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Caribbean&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-12-15T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;Z&quot;,
-			&quot;score&quot; : 17
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-07-29T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 8
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-12-11T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-07-01T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 23
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-11-27T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 23
-		}
-	],
-	&quot;name&quot; : &quot;Trini Home Restaurant&quot;,
-	&quot;restaurant_id&quot; : &quot;41408013&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b51a85&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;1884&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.923975,
-				40.678735
-			]
-		},
-		&quot;street&quot; : &quot;Fulton Street&quot;,
-		&quot;zipcode&quot; : &quot;11233&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-04-23T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 6
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-11-19T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-05-21T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 17
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-11-27T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 23
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-09-17T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-09-07T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		}
-	],
-	&quot;name&quot; : &quot;Lee&#39;S Kitchen&quot;,
-	&quot;restaurant_id&quot; : &quot;41462031&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b538ad&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;391&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.91948359999999,
-				40.674246
-			]
-		},
-		&quot;street&quot; : &quot;Howard Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11233&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Other&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-04-18T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 5
-		}
-	],
-	&quot;name&quot; : &quot;The Ooh Lala  Lounge&quot;,
-	&quot;restaurant_id&quot; : &quot;50000096&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b53f3c&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;479&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9219035,
-				40.6729038
-			]
-		},
-		&quot;street&quot; : &quot;Ralph Avenue&quot;,
-		&quot;zipcode&quot; : &quot;11233&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;Chinese&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-09-02T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 18
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-12-11T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 27
-		}
-	],
-	&quot;name&quot; : &quot;No. 1 Chinese Restaurant&quot;,
-	&quot;restaurant_id&quot; : &quot;50003206&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b53574&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;17&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9216929,
-				40.6792662
-			]
-		},
-		&quot;street&quot; : &quot;Macdougal Street&quot;,
-		&quot;zipcode&quot; : &quot;11233&quot;
-	},
-	&quot;borough&quot; : &quot;Brooklyn&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-03-26T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-03-13T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		}
-	],
-	&quot;name&quot; : &quot;Crown Fried Chicken&quot;,
-	&quot;restaurant_id&quot; : &quot;41707416&quot;
-}
-Type &quot;it&quot; for more
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;address.loc&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">near</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">geometry</span><span class="p">:</span> <span class="n">CrownHeights</span><span class="p">}}})</span>
 </pre></div>
 </div>
 </div>
@@ -2758,18 +667,18 @@ Type &quot;it&quot; for more
 <p>Si l’on veut trouver les éléments inclus dans un polygone la variable sera de type “Polygon” et aura plusieurs couples de coordonnées.
 Pour avoir un polygone fermé, il faudra veiller à ce que les dernières coordonnées soient égales aux premières.</p>
 <p>Le mot-clé <code class="docutils literal notranslate"><span class="pre">$within</span></code> remplace ici <code class="docutils literal notranslate"><span class="pre">$near</span></code> :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">ref</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span><span class="o">:</span> <span class="p">[[[</span><span class="nx">long1</span><span class="p">,</span> <span class="nx">lat1</span><span class="p">],</span>
-                                                 <span class="p">[</span><span class="nx">long2</span><span class="p">,</span> <span class="nx">lat2</span><span class="p">],</span>
-                                                 <span class="p">[</span><span class="nx">long3</span><span class="p">,</span> <span class="nx">lat3</span><span class="p">],</span>
-                                                 <span class="p">[</span><span class="nx">long4</span><span class="p">,</span> <span class="nx">lat4</span><span class="p">],</span>
-                                                 <span class="p">[</span><span class="nx">long1</span><span class="p">,</span> <span class="nx">lat1</span><span class="p">]]]}</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;clé&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$within</span> <span class="o">:</span> <span class="p">{</span><span class="nx">$geometry</span> <span class="o">:</span> <span class="nx">ref</span><span class="p">}}})</span>                                                 
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Polygon&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;coordinates&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[[[</span><span class="nx">long1</span><span class="p">,</span><span class="w"> </span><span class="nx">lat1</span><span class="p">],</span>
+<span class="w">                                                 </span><span class="p">[</span><span class="nx">long2</span><span class="p">,</span><span class="w"> </span><span class="nx">lat2</span><span class="p">],</span>
+<span class="w">                                                 </span><span class="p">[</span><span class="nx">long3</span><span class="p">,</span><span class="w"> </span><span class="nx">lat3</span><span class="p">],</span>
+<span class="w">                                                 </span><span class="p">[</span><span class="nx">long4</span><span class="p">,</span><span class="w"> </span><span class="nx">lat4</span><span class="p">],</span>
+<span class="w">                                                 </span><span class="p">[</span><span class="nx">long1</span><span class="p">,</span><span class="w"> </span><span class="nx">lat1</span><span class="p">]]]}</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;clé&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$within</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$geometry</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ref</span><span class="p">}}})</span><span class="w">                                                 </span>
 </pre></div>
 </div>
 <p><em>Exemple 2 :</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">eastVillage</span><span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span> <span class="o">:</span> <span class="p">[[[</span><span class="o">-</span><span class="mf">73.9917900</span><span class="p">,</span> <span class="mf">40.7264100</span><span class="p">],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">eastVillage</span><span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span> <span class="p">:</span> <span class="p">[[[</span><span class="o">-</span><span class="mf">73.9917900</span><span class="p">,</span> <span class="mf">40.7264100</span><span class="p">],</span>
                                                     <span class="p">[</span><span class="o">-</span><span class="mf">73.9917900</span><span class="p">,</span> <span class="mf">40.7321400</span><span class="p">],</span>
                                                     <span class="p">[</span><span class="o">-</span><span class="mf">73.9829300</span><span class="p">,</span> <span class="mf">40.7321400</span><span class="p">],</span>
                                                     <span class="p">[</span><span class="o">-</span><span class="mf">73.9829300</span><span class="p">,</span> <span class="mf">40.7264100</span><span class="p">],</span>
@@ -2780,448 +689,13 @@ Pour avoir un polygone fermé, il faudra veiller à ce que les dernières coordo
 </div>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;address.loc&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$within</span> <span class="o">:</span> <span class="p">{</span><span class="nx">$geometry</span> <span class="o">:</span> <span class="nx">eastVillage</span><span class="p">}}})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b516e3&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;347&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.98294899999999,
-				40.7317368
-			]
-		},
-		&quot;street&quot; : &quot;East 14 Street&quot;,
-		&quot;zipcode&quot; : &quot;10003&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;Thai&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-02-26T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-12-20T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 7
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-12-16T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-08-15T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-06-13T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;P&quot;,
-			&quot;score&quot; : 0
-		}
-	],
-	&quot;name&quot; : &quot;Kati Thai Cuisine&quot;,
-	&quot;restaurant_id&quot; : &quot;41415537&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b50faf&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;233&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9829827,
-				40.7311945
-			]
-		},
-		&quot;street&quot; : &quot;1 Avenue&quot;,
-		&quot;zipcode&quot; : &quot;10003&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;Chicken&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-08-06T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 8
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-07-27T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-11-21T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 17
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-05-15T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;C&quot;,
-			&quot;score&quot; : 41
-		}
-	],
-	&quot;name&quot; : &quot;Big Arc Chicken&quot;,
-	&quot;restaurant_id&quot; : &quot;41312502&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b5015e&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;210&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9829479,
-				40.73032
-			]
-		},
-		&quot;street&quot; : &quot;1 Avenue&quot;,
-		&quot;zipcode&quot; : &quot;10009&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;Latin (Cuban, Dominican, Puerto Rican, South &amp; Central American)&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-06-12T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-01-31T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-07-29T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-02-25T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-09-11T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-04-18T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 20
-		}
-	],
-	&quot;name&quot; : &quot;Gena&#39;S Grill&quot;,
-	&quot;restaurant_id&quot; : &quot;40996589&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b51fd8&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;210&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9829479,
-				40.73032
-			]
-		},
-		&quot;street&quot; : &quot;1 Avenue&quot;,
-		&quot;zipcode&quot; : &quot;10009&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;Pizza&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-10-01T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 8
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-02-07T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 19
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-06-05T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 9
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-12-19T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-12-06T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		}
-	],
-	&quot;name&quot; : &quot;Papa John&#39;S Pizza&quot;,
-	&quot;restaurant_id&quot; : &quot;41531418&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b51a57&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;208&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.983001,
-				40.73025
-			]
-		},
-		&quot;street&quot; : &quot;1 Avenue&quot;,
-		&quot;zipcode&quot; : &quot;10009&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;Mediterranean&quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2015-01-07T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;Z&quot;,
-			&quot;score&quot; : 43
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-04-15T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-08-19T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 5
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-03-07T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;C&quot;,
-			&quot;score&quot; : 37
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-05-07T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		}
-	],
-	&quot;name&quot; : &quot;Balade&quot;,
-	&quot;restaurant_id&quot; : &quot;41460032&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f423&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;141&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.98299,
-				40.72726
-			]
-		},
-		&quot;street&quot; : &quot;Avenue A&quot;,
-		&quot;zipcode&quot; : &quot;10009&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2015-01-05T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-06-25T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-03-11T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-02-28T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 11
-		}
-	],
-	&quot;name&quot; : &quot;Doc Holidays&quot;,
-	&quot;restaurant_id&quot; : &quot;40398690&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad719b1d4e452b53750&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;139&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.982969,
-				40.7271749
-			]
-		},
-		&quot;street&quot; : &quot;Avenue A&quot;,
-		&quot;zipcode&quot; : &quot;10009&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-04-08T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 5
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-04-04T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 2
-		}
-	],
-	&quot;name&quot; : &quot;Sustainable Nyc&quot;,
-	&quot;restaurant_id&quot; : &quot;41717412&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b506c3&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;125&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9892102,
-				40.7317679
-			]
-		},
-		&quot;street&quot; : &quot;East   11 Street&quot;,
-		&quot;zipcode&quot; : &quot;10003&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-02-13T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-12-20T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 8
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-04-20T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;C&quot;,
-			&quot;score&quot; : 33
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2011-07-08T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		}
-	],
-	&quot;name&quot; : &quot;Webster Hall Studio&quot;,
-	&quot;restaurant_id&quot; : &quot;41145020&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b50947&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;64&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9889218,
-				40.7313146
-			]
-		},
-		&quot;street&quot; : &quot;3 Avenue&quot;,
-		&quot;zipcode&quot; : &quot;10003&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-12-18T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;Z&quot;,
-			&quot;score&quot; : 30
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-07-14T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2014-01-14T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 13
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-05-20T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 20
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-11-13T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;B&quot;,
-			&quot;score&quot; : 18
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-06-18T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 10
-		}
-	],
-	&quot;name&quot; : &quot;Village Pourhouse&quot;,
-	&quot;restaurant_id&quot; : &quot;41200236&quot;
-}
-{
-	&quot;_id&quot; : ObjectId(&quot;62309ad619b1d4e452b4f323&quot;),
-	&quot;address&quot; : {
-		&quot;building&quot; : &quot;85&quot;,
-		&quot;loc&quot; : {
-			&quot;type&quot; : &quot;Point&quot;,
-			&quot;coordinates&quot; : [
-				-73.9899313,
-				40.731505
-			]
-		},
-		&quot;street&quot; : &quot;4 Avenue&quot;,
-		&quot;zipcode&quot; : &quot;10003&quot;
-	},
-	&quot;borough&quot; : &quot;Manhattan&quot;,
-	&quot;cuisine&quot; : &quot;American &quot;,
-	&quot;grades&quot; : [
-		{
-			&quot;date&quot; : ISODate(&quot;2014-10-27T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2013-09-19T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 12
-		},
-		{
-			&quot;date&quot; : ISODate(&quot;2012-09-17T00:00:00Z&quot;),
-			&quot;grade&quot; : &quot;A&quot;,
-			&quot;score&quot; : 8
-		}
-	],
-	&quot;name&quot; : &quot;Amsterdam Billiards&quot;,
-	&quot;restaurant_id&quot; : &quot;40393154&quot;
-}
-Type &quot;it&quot; for more
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;address.loc&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">within</span> <span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">geometry</span> <span class="p">:</span> <span class="n">eastVillage</span><span class="p">}}})</span>
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -3232,55 +706,119 @@ Type &quot;it&quot; for more
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "imongo"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "imongo",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'imongo'</script>
+    <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="03_dates.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">3. </span>Attributs de type date</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_dates.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Attributs de type date</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="05_agreg.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="05_agreg.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">5. </span>Les requêtes d’agrégation</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Ouvrage collectif<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quoi-servent-ils">4.1. À quoi servent-ils ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quand-les-utiliser">4.2. Quand les utiliser ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntaxe-adaptee">4.3. Syntaxe adaptée</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-composes">4.4. Index composés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-et-index-textuels">4.5. Requêtes et Index textuels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-geo-spatiaux">4.6. Index géo-spatiaux</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Unknown
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

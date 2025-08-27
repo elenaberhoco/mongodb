@@ -1,577 +1,433 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Premières requêtes en MongoDB &#8212; MongoDB : notes de cours</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    <title>1. Premières requêtes en MongoDB &#8212; MongoDB</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-      
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/01_find';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. Attributs de type liste" href="02_listes.html" />
     <link rel="prev" title="MongoDB : Notes de cours" href="00_intro.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">MongoDB : notes de cours</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="00_intro.html">
-   MongoDB : Notes de cours
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Chapitres
- </span>
-</p>
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">MongoDB</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_intro.html">
+                    MongoDB : Notes de cours
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   1. Premières requêtes en MongoDB
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_listes.html">
-   2. Attributs de type liste
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_dates.html">
-   3. Attributs de type date
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_index.html">
-   4. Les index
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_agreg.html">
-   5. Les requêtes d’agrégation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_modif.html">
-   6. Les requêtes de modification
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="07_scripts.html">
-   7. Effectuer des requêtes depuis des programmes Python ou R
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="07_scripts_py.html">
-     7.1. Requêtes depuis Python :
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       pymongo
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="07_scripts_R.html">
-     7.2. Requêtes depuis R :
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       mongolite
-      </span>
-     </code>
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Premières requêtes en MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Attributs de type liste</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_dates.html">3. Attributs de type date</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_index.html">4. Les index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">5. Les requêtes d’agrégation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modif.html">6. Les requêtes de modification</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">7. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">7.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">7.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/content/01_find.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/01_find.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/rtavenar/mongo_book"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/rtavenar/mongo_book/issues/new?title=Issue%20on%20page%20%2Fcontent/01_find.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/elenaberhoco/mongodb-trash" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/elenaberhoco/mongodb-trash/issues/new?title=Issue%20on%20page%20%2Fcontent/01_find.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/rtavenar/mongo_book/main?urlpath=tree/docs/content/01_find.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/01_find.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Premières requêtes en MongoDB</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction-a-mongodb">
-   1.1. Introduction à MongoDB
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#requetes-d-interrogation-et-de-filtrage-des-donnees">
-   1.2. Requêtes d’interrogation et de filtrage des données
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#syntaxe-d-interrogation-de-donnees-sans-et-avec-condition">
-     1.2.1. Syntaxe d’interrogation de données sans et avec condition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#poser-une-condition-sur-une-cle-de-sous-document">
-     1.2.2. Poser une condition sur une clé de sous-document
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#projection-des-donnees">
-     1.2.3. Projection des données
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#requetes-plus-complexes-en-utilisant-des-operateurs">
-   1.3. Requêtes plus complexes en utilisant des opérateurs
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operateurs-de-comparaison">
-     1.3.1. Opérateurs de comparaison
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operateurs-logiques">
-     1.3.2. Opérateurs logiques
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#et-logique">
-       1.3.2.1. ET logique
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#ou-logique">
-       1.3.2.2. OU logique
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#non-ou-logique">
-       1.3.2.3. NON OU logique
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#non-logique">
-       1.3.2.4. NON logique
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#methodes-utiles-pour-des-requetes-en-mongodb">
-   1.4. Méthodes utiles pour des requêtes en MongoDB
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#connaitre-la-liste-des-collections-dans-une-base-de-donnees">
-     1.4.1. Connaître la liste des collections dans une base de données
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#valeurs-distinctes-d-un-champ-la-methode-distinct">
-     1.4.2. Valeurs distinctes d’un champ : la méthode
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       distinct
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compter-le-nombre-d-elements-la-methode-count">
-     1.4.3. Compter le nombre d’éléments : la méthode
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       count
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#trier-les-documents-resultat-la-methode-sort">
-     1.4.4. Trier les documents résultat : la méthode
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       sort
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#limiter-le-nombre-de-documents-retournes-la-methode-limit">
-     1.4.5. Limiter le nombre de documents retournés : la méthode
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       limit
-      </span>
-     </code>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pour-conclure-ce-chapitre">
-   1.5. Pour conclure ce chapitre
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fiche-resume-pour-bien-demarrer-en-mongodb">
-     1.5.1. Fiche résumé pour bien démarrer en MongoDB
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#quiz-premieres-requetes-en-mongodb-a-vous-de-jouer">
-     1.5.2. Quiz “Premières requêtes en MongoDB” : À vous de jouer !
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-a-mongodb">1.1. Introduction à MongoDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-d-interrogation-et-de-filtrage-des-donnees">1.2. Requêtes d’interrogation et de filtrage des données</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntaxe-d-interrogation-de-donnees-sans-et-avec-condition">1.2.1. Syntaxe d’interrogation de données sans et avec condition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poser-une-condition-sur-une-cle-de-sous-document">1.2.2. Poser une condition sur une clé de sous-document</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-des-donnees">1.2.3. Projection des données</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-plus-complexes-en-utilisant-des-operateurs">1.3. Requêtes plus complexes en utilisant des opérateurs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-de-comparaison">1.3.1. Opérateurs de comparaison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-logiques">1.3.2. Opérateurs logiques</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#et-logique">1.3.2.1. ET logique</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ou-logique">1.3.2.2. OU logique</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#non-ou-logique">1.3.2.3. NON OU logique</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#non-logique">1.3.2.4. NON logique</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodes-utiles-pour-des-requetes-en-mongodb">1.4. Méthodes utiles pour des requêtes en MongoDB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connaitre-la-liste-des-collections-dans-une-base-de-donnees">1.4.1. Connaître la liste des collections dans une base de données</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valeurs-distinctes-d-un-champ-la-methode-distinct">1.4.2. Valeurs distinctes d’un champ : la méthode <code class="docutils literal notranslate"><span class="pre">distinct</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-le-nombre-d-elements-la-methode-count">1.4.3. Compter le nombre d’éléments : la méthode <code class="docutils literal notranslate"><span class="pre">count</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trier-les-documents-resultat-la-methode-sort">1.4.4. Trier les documents résultat : la méthode <code class="docutils literal notranslate"><span class="pre">sort</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiter-le-nombre-de-documents-retournes-la-methode-limit">1.4.5. Limiter le nombre de documents retournés : la méthode <code class="docutils literal notranslate"><span class="pre">limit</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-conclure-ce-chapitre">1.5. Pour conclure ce chapitre</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fiche-resume-pour-bien-demarrer-en-mongodb">1.5.1. Fiche résumé pour bien démarrer en MongoDB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz-premieres-requetes-en-mongodb-a-vous-de-jouer">1.5.2. Quiz “Premières requêtes en MongoDB” : À vous de jouer !</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Premières requêtes en MongoDB</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction-a-mongodb">
-   1.1. Introduction à MongoDB
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#requetes-d-interrogation-et-de-filtrage-des-donnees">
-   1.2. Requêtes d’interrogation et de filtrage des données
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#syntaxe-d-interrogation-de-donnees-sans-et-avec-condition">
-     1.2.1. Syntaxe d’interrogation de données sans et avec condition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#poser-une-condition-sur-une-cle-de-sous-document">
-     1.2.2. Poser une condition sur une clé de sous-document
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#projection-des-donnees">
-     1.2.3. Projection des données
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#requetes-plus-complexes-en-utilisant-des-operateurs">
-   1.3. Requêtes plus complexes en utilisant des opérateurs
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operateurs-de-comparaison">
-     1.3.1. Opérateurs de comparaison
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operateurs-logiques">
-     1.3.2. Opérateurs logiques
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#et-logique">
-       1.3.2.1. ET logique
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#ou-logique">
-       1.3.2.2. OU logique
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#non-ou-logique">
-       1.3.2.3. NON OU logique
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#non-logique">
-       1.3.2.4. NON logique
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#methodes-utiles-pour-des-requetes-en-mongodb">
-   1.4. Méthodes utiles pour des requêtes en MongoDB
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#connaitre-la-liste-des-collections-dans-une-base-de-donnees">
-     1.4.1. Connaître la liste des collections dans une base de données
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#valeurs-distinctes-d-un-champ-la-methode-distinct">
-     1.4.2. Valeurs distinctes d’un champ : la méthode
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       distinct
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compter-le-nombre-d-elements-la-methode-count">
-     1.4.3. Compter le nombre d’éléments : la méthode
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       count
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#trier-les-documents-resultat-la-methode-sort">
-     1.4.4. Trier les documents résultat : la méthode
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       sort
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#limiter-le-nombre-de-documents-retournes-la-methode-limit">
-     1.4.5. Limiter le nombre de documents retournés : la méthode
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       limit
-      </span>
-     </code>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pour-conclure-ce-chapitre">
-   1.5. Pour conclure ce chapitre
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fiche-resume-pour-bien-demarrer-en-mongodb">
-     1.5.1. Fiche résumé pour bien démarrer en MongoDB
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#quiz-premieres-requetes-en-mongodb-a-vous-de-jouer">
-     1.5.2. Quiz “Premières requêtes en MongoDB” : À vous de jouer !
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="premieres-requetes-en-mongodb">
-<h1><span class="section-number">1. </span>Premières requêtes en MongoDB<a class="headerlink" href="#premieres-requetes-en-mongodb" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="premieres-requetes-en-mongodb">
+<h1><span class="section-number">1. </span>Premières requêtes en MongoDB<a class="headerlink" href="#premieres-requetes-en-mongodb" title="Link to this heading">#</a></h1>
 <p>Autrices et auteurs : Julie FRANCOISE, Manon MAHEO et Valentin PENISSON</p>
-<div class="section" id="introduction-a-mongodb">
-<h2><span class="section-number">1.1. </span>Introduction à MongoDB<a class="headerlink" href="#introduction-a-mongodb" title="Permalink to this headline">¶</a></h2>
+<section id="introduction-a-mongodb">
+<h2><span class="section-number">1.1. </span>Introduction à MongoDB<a class="headerlink" href="#introduction-a-mongodb" title="Link to this heading">#</a></h2>
 <p>Dans un <strong>système de base de données relationnelles</strong> <em>(comme les bases de données que l’on interroge avec la syntaxe SQL)</em>, les données sont stockées par <strong>ligne</strong> dans des <strong>tables</strong> <em>(également appelées relations)</em>. Le modèle de données relationnel est un modèle <strong>structuré</strong>, comportant des <strong>attributs typés</strong> <em>(les colonnes/attributs des tables ont un type précis qu’il soit numérique, alphanumérique ou temporel)</em> et des <strong>contraintes d’intégrité</strong> <em>(comme par exemple celle de l’unicité des valeurs de la clé primaire)</em>. Dans ce type de structure, il est nécessaire d’établir des <strong>jointures sur plusieurs tables</strong> afin de tirer des informations pertinentes sur la base de données.</p>
 <p>Dans MongoDB, les données sont modélisées sous forme de paires clés-valeurs (comme dans un dictionnaire en Python).
 On ne parle plus de tables et d’enregistrements mais de <strong>collections</strong> et de <strong>documents</strong>.
@@ -579,196 +435,129 @@ Une collection est un ensemble de documents, c’est l’équivalent d’une tab
 <p>De plus, l’utilisation de bases de données NoSQL avec MongoDB nous permet plus de flexibilité en termes de mise à jour de la structure des données : aucun modèle n’est supposé sur les données, aucun attribut n’est obligatoire et il n’y a pas de type fixé pour un attribut.</p>
 <p>Tout document appartient donc à une collection et a un champ appelé <code class="docutils literal notranslate"><span class="pre">_id</span></code> qui identifie le document dans la base de données. Prenons pour exemple la base de données <code class="docutils literal notranslate"><span class="pre">etudiants</span></code>. Voici un exemple de document :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s2">&quot;56011920de43611b917d773d&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;nom&quot;</span> <span class="o">:</span> <span class="s2">&quot;Paul&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;notes&quot;</span> <span class="o">:</span> <span class="p">[</span> 
-        <span class="mf">10.0</span><span class="p">,</span> 
-        <span class="mf">12.0</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;sexe&quot;</span> <span class="o">:</span> <span class="s2">&quot;M&quot;</span>
+<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ObjectId</span><span class="p">(</span><span class="s2">&quot;56011920de43611b917d773d&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s2">&quot;nom&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Paul&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;notes&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span>
+<span class="w">        </span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="mf">12.0</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s2">&quot;sexe&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;M&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Dans ce document, on a accès au nom de l’étudiant par la clé <code class="docutils literal notranslate"><span class="pre">nom</span></code>, à ses notes par la clé <code class="docutils literal notranslate"><span class="pre">notes</span></code> <em>(attention, ici on a une <strong>liste de valeurs</strong> entre crochets, ce type d’attribut n’existe pas dans le modèle relationnel)</em> et à son sexe par la clé <code class="docutils literal notranslate"><span class="pre">sexe</span></code>. L’étudiant représenté par ce document est identifié à l’aide d’une clé <code class="docutils literal notranslate"><span class="pre">_id</span></code>.</p>
 <p>Les clés se doivent d’être des chaînes de caractères et les valeurs peuvent être <em>des valeurs booléennes, des nombres, des chaînes de caractères, des dates ou des listes de valeurs</em> comme nous venons de le voir. Les clés et les valeurs sont sensibles à la casse et au type. Chaque clé doît être unique, il n’est pas possible d’avoir deux fois la même clé dans un document.</p>
-<p>Dans ce chapitre, nous étudierons dans un premier temps <a class="reference external" href="#find">comment interroger les données d’une base de données MongoDB avec la fonction <code class="docutils literal notranslate"><span class="pre">find</span></code></a>.
-Dans un deuxième temps, nous regarderons comment effectuer des <a class="reference external" href="#operateurs">requêtes plus complexes, impliquant des opérateurs de comparaison</a>.
-Quelques <a class="reference external" href="#methodes">méthodes utiles</a> pour des requêtes en MongoDB, une <a class="reference external" href="#resume">fiche “résumé” des points saillants à retenir</a> et un petit <a class="reference external" href="#quiz">quiz</a> sont fournis à la fin de ce chapitre.</p>
-</div>
-<div class="section" id="requetes-d-interrogation-et-de-filtrage-des-donnees">
-<span id="find"></span><h2><span class="section-number">1.2. </span>Requêtes d’interrogation et de filtrage des données<a class="headerlink" href="#requetes-d-interrogation-et-de-filtrage-des-donnees" title="Permalink to this headline">¶</a></h2>
+<p>Dans ce chapitre, nous étudierons dans un premier temps <a class="reference internal" href="#find">comment interroger les données d’une base de données MongoDB avec la fonction <code class="docutils literal notranslate"><span class="pre">find</span></code></a>.
+Dans un deuxième temps, nous regarderons comment effectuer des <a class="reference internal" href="#operateurs">requêtes plus complexes, impliquant des opérateurs de comparaison</a>.
+Quelques <a class="reference internal" href="#methodes">méthodes utiles</a> pour des requêtes en MongoDB, une <a class="reference internal" href="#resume">fiche “résumé” des points saillants à retenir</a> et un petit <a class="reference internal" href="#quiz">quiz</a> sont fournis à la fin de ce chapitre.</p>
+</section>
+<section id="requetes-d-interrogation-et-de-filtrage-des-donnees">
+<span id="find"></span><h2><span class="section-number">1.2. </span>Requêtes d’interrogation et de filtrage des données<a class="headerlink" href="#requetes-d-interrogation-et-de-filtrage-des-donnees" title="Link to this heading">#</a></h2>
 <p>Pour récupérer des documents stockés dans une collection, il est nécessaire d’utiliser la fonction <code class="docutils literal notranslate"><span class="pre">find</span></code>.</p>
 <div class="admonition-remarque admonition">
 <p class="admonition-title">Remarque</p>
 <p>Toute commande sur une collection intitulée <code class="docutils literal notranslate"><span class="pre">collectionName</span></code> utilise le préfixe db : <code class="docutils literal notranslate"><span class="pre">db.collectionName</span></code>. Il suffit d’y associer la fonction souhaitée pour avoir un résultat. En l’occurence, ici la syntaxe de données d’interrogation MongoDB est <code class="docutils literal notranslate"><span class="pre">db.collectionName.find()</span></code> (où vous devrez changer <code class="docutils literal notranslate"><span class="pre">collectionName</span></code> par le nom de la collection sur laquelle vous souhaitez effectuer une requête).</p>
 </div>
-<div class="section" id="syntaxe-d-interrogation-de-donnees-sans-et-avec-condition">
-<h3><span class="section-number">1.2.1. </span>Syntaxe d’interrogation de données sans et avec condition<a class="headerlink" href="#syntaxe-d-interrogation-de-donnees-sans-et-avec-condition" title="Permalink to this headline">¶</a></h3>
+<section id="syntaxe-d-interrogation-de-donnees-sans-et-avec-condition">
+<h3><span class="section-number">1.2.1. </span>Syntaxe d’interrogation de données sans et avec condition<a class="headerlink" href="#syntaxe-d-interrogation-de-donnees-sans-et-avec-condition" title="Link to this heading">#</a></h3>
 <p>En MongoDB, lorsque l’on interroge une base de données, il existe deux types de requêtes simples, retournant respectivement <strong>toutes les occurences d’une collection</strong> ou <strong>seulement la première</strong>. Que l’on souhaite récupérer la première occurrence de la liste des résultats ou bien toute la liste des résultats, voici la syntaxe :</p>
-<div class="sphinx-bs container pb-4 docutils">
-<div class="row docutils">
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">Retourner toutes les occurences
-d’une collection avec find()</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span> <span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
- <span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">({})</span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">Retourner uniquement la première occurence
-d’une collection avec findOne()</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">findOne</span><span class="p">()</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({})</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <p>À noter : Dans les deuxièmes propositions de chaque cas présenté ci-dessus, on a des accolades entre les parenthèses de la fonction. Ces accolades correspondent au <em>document masque</em>. Elles sont vides ce qui indique que nous ne posons pas de condition sur les documents à retourner.
 Si au contraire on souhaite <strong>fixer des contraintes sur les documents à retourner</strong>, il suffit de passer en argument d’une de ces fonctions un document masque contenant les valeurs souhaitées.</p>
 <p>Pour voir cela sur un exemple, sélctionnons la base <code class="docutils literal notranslate"><span class="pre">food</span></code> comme suit :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">use</span> <span class="nx">food</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">food</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>switched to db food
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">use</span> <span class="n">food</span>
+        <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
 </pre></div>
 </div>
 </div>
 </div>
 <p>Cette base de données contient une collection <code class="docutils literal notranslate"><span class="pre">NYfood</span></code> qui recense un ensemble de restaurants new-yorkais et nous donne, pour chaque restaurant, des informations sur son quartier, son adresse, son type de cuisine, son nom, les notes qu’il a obtenues et son identifiant. Voici un extrait d’un document présent dans la collection <code class="docutils literal notranslate"><span class="pre">NYfood</span></code> :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s2">&quot;6006c1882822efb1c9290f68&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;address&quot;</span> <span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;building&quot;</span> <span class="o">:</span> <span class="s2">&quot;265-15&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;loc&quot;</span> <span class="o">:</span> <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;Point&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;coordinates&quot;</span> <span class="o">:</span> <span class="p">[</span> 
-                <span class="o">-</span><span class="mf">73.7032601</span><span class="p">,</span> 
-                <span class="mf">40.7386417</span>
-            <span class="p">]</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;street&quot;</span> <span class="o">:</span> <span class="s2">&quot;Hillside Avenue&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;zipcode&quot;</span> <span class="o">:</span> <span class="s2">&quot;11004&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;borough&quot;</span> <span class="o">:</span> <span class="s2">&quot;Queens&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cuisine&quot;</span> <span class="o">:</span> <span class="s2">&quot;Ice Cream, Gelato, Yogurt, Ices&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;grades&quot;</span> <span class="o">:</span> <span class="p">[</span> 
-        <span class="p">{</span>
-            <span class="s2">&quot;date&quot;</span> <span class="o">:</span> <span class="nx">ISODate</span><span class="p">(</span><span class="s2">&quot;2014-10-28T00:00:00.000Z&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;grade&quot;</span> <span class="o">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;score&quot;</span> <span class="o">:</span> <span class="mf">9</span>
-        <span class="p">},</span> 
-        <span class="p">{</span>
-            <span class="s2">&quot;date&quot;</span> <span class="o">:</span> <span class="nx">ISODate</span><span class="p">(</span><span class="s2">&quot;2013-09-18T00:00:00.000Z&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;grade&quot;</span> <span class="o">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;score&quot;</span> <span class="o">:</span> <span class="mf">10</span>
-        <span class="p">},</span> 
-        <span class="p">{</span>
-            <span class="s2">&quot;date&quot;</span> <span class="o">:</span> <span class="nx">ISODate</span><span class="p">(</span><span class="s2">&quot;2012-09-20T00:00:00.000Z&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;grade&quot;</span> <span class="o">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;score&quot;</span> <span class="o">:</span> <span class="mf">13</span>
-        <span class="p">}</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;Carvel Ice Cream&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;restaurant_id&quot;</span> <span class="o">:</span> <span class="s2">&quot;40361322&quot;</span>
-<span class="p">}</span>   
-    
+<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ObjectId</span><span class="p">(</span><span class="s2">&quot;6006c1882822efb1c9290f68&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s2">&quot;address&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;building&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;265-15&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;loc&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;type&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Point&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;coordinates&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span>
+<span class="w">                </span><span class="o">-</span><span class="mf">73.7032601</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                </span><span class="mf">40.7386417</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;street&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Hillside Avenue&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;zipcode&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;11004&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;borough&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Queens&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;cuisine&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Ice Cream, Gelato, Yogurt, Ices&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;grades&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;date&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">&quot;2014-10-28T00:00:00.000Z&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="s2">&quot;grade&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;score&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">9</span>
+<span class="w">        </span><span class="p">},</span><span class="w"> </span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;date&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">&quot;2013-09-18T00:00:00.000Z&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="s2">&quot;grade&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;score&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10</span>
+<span class="w">        </span><span class="p">},</span><span class="w"> </span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;date&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">&quot;2012-09-20T00:00:00.000Z&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="s2">&quot;grade&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;score&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">13</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Carvel Ice Cream&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;restaurant_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;40361322&quot;</span>
+<span class="p">}</span><span class="w">   </span>
+<span class="w">    </span>
 </pre></div>
 </div>
 <p>En utilisant la syntaxe précédente, recherchons par exemple les documents de la collection <code class="docutils literal notranslate"><span class="pre">NYfood</span></code> correspondant à des <strong>boulangeries</strong> <em>(pour lesquels le champ “cuisine” vaut “Bakery”)</em> <strong>du Bronx</strong> <em>(pour lesquels le champ “borough” vaut “Bronx”)</em>.</p>
-<div class="tabbed-set docutils">
-<input checked="checked" id="90af2185-1db9-4968-bfbb-121d3e3dd4a2" name="22b00a45-dc6c-4ad7-934d-835fc9e20545" type="radio">
-</input><label class="tabbed-label" for="90af2185-1db9-4968-bfbb-121d3e3dd4a2">
-Exemple</label><div class="tabbed-content docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;cuisine&quot;</span><span class="o">:</span> <span class="s2">&quot;Bakery&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="o">:</span> <span class="s2">&quot;Bronx&quot;</span><span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<input id="d2e7469b-27f4-40fa-8575-f08efd0cf483" name="22b00a45-dc6c-4ad7-934d-835fc9e20545" type="radio">
-</input><label class="tabbed-label" for="d2e7469b-27f4-40fa-8575-f08efd0cf483">
-Parallèle avec le langage SQL</label><div class="tabbed-content docutils">
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">NYfood</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">cuisine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Bakery&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">borough</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Bronx&#39;</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>Dans cet exemple, et dans vos requêtes MongoDB en général, la virgule représente un <strong>ET logique</strong> entre les contraintes.</p>
-</div>
-<div class="section" id="poser-une-condition-sur-une-cle-de-sous-document">
-<h3><span class="section-number">1.2.2. </span>Poser une condition sur une clé de sous-document<a class="headerlink" href="#poser-une-condition-sur-une-cle-de-sous-document" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="poser-une-condition-sur-une-cle-de-sous-document">
+<h3><span class="section-number">1.2.2. </span>Poser une condition sur une clé de sous-document<a class="headerlink" href="#poser-une-condition-sur-une-cle-de-sous-document" title="Link to this heading">#</a></h3>
 <p>Il se peut que pour une clé d’un document, comme par exemple l’adresse d’un restaurant dans la collection <code class="docutils literal notranslate"><span class="pre">NYfood</span></code>, nous disposions d’un <strong>sous-document</strong> contenant à la fois les coordonnées GPS et l’adresse postale. Plutôt qu’une liste de valeur comme présentée précédemment, nous avons comme valeur de la clé un nouveau document.</p>
 <p>Si l’on souhaite poser une condition sur une clé ou plusieurs clés de sous-document, on utilise alors la syntaxe suivante :</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;address.zipcode&quot;</span><span class="o">:</span> <span class="s2">&quot;10462&quot;</span><span class="p">})</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;address.zipcode&quot;</span><span class="p">:</span> <span class="s2">&quot;10462&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>où <code class="docutils literal notranslate"><span class="pre">address</span></code> est le sous-document et <code class="docutils literal notranslate"><span class="pre">zipcode</span></code> la clé de ce dernier. Dans cet exemple, nous nous intéressons aux restaurants pour lesquels le zipcode est <code class="docutils literal notranslate"><span class="pre">&quot;10462&quot;</span></code>.</p>
-</div>
-<div class="section" id="projection-des-donnees">
-<h3><span class="section-number">1.2.3. </span>Projection des données<a class="headerlink" href="#projection-des-donnees" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="projection-des-donnees">
+<h3><span class="section-number">1.2.3. </span>Projection des données<a class="headerlink" href="#projection-des-donnees" title="Link to this heading">#</a></h3>
 <p>Les résultats obtenus jusqu’à présent sont parfois assez indigestes, notamment parce que toutes les clés sont retournées pour tous les documents. Il est possible de limiter cela en spécifiant les clés à retourner comme second argument de la fonction <code class="docutils literal notranslate"><span class="pre">find()</span></code>. On appelle cela une <strong>projection</strong>.</p>
 <p>La projection permet de sélectionner les informations à renvoyer. Si, par exemple, je m’intéresse uniquement aux noms des boulangeries du Bronx, je vais limiter les informations retournées en précisant, comme deuxième argument de ma requête <code class="docutils literal notranslate"><span class="pre">find</span></code>, la clé <code class="docutils literal notranslate"><span class="pre">name</span></code> avec la valeur <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
-<div class="tabbed-set docutils">
-<input checked="checked" id="56ea634f-7d0b-410e-b7d8-a683c19cc0ee" name="582d654d-9b7a-4ab1-97ce-1e66a5fa6ba1" type="radio">
-</input><label class="tabbed-label" for="56ea634f-7d0b-410e-b7d8-a683c19cc0ee">
-Projection en MongoDB</label><div class="tabbed-content docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="o">:</span> <span class="s2">&quot;Bakery&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="o">:</span> <span class="s2">&quot;Bronx&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-<input id="94ec719d-5433-444b-83a1-cc9ba693e1aa" name="582d654d-9b7a-4ab1-97ce-1e66a5fa6ba1" type="radio">
-</input><label class="tabbed-label" for="94ec719d-5433-444b-83a1-cc9ba693e1aa">
-Projection en SQL</label><div class="tabbed-content docutils">
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">NYfood</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">cuisine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Bakery&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="s1">&#39;borough&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Bronx&#39;</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>C’est donc l’équivalent du <code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">name</span></code> en SQL. Jusqu’ici, on utilisait le <code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">*</span></code> <em>(pour all)</em> c’est-à-dire qu’on récupérait toutes les valeurs de chaque clé ou de chaque attribut.</p>
 <div class="tip admonition">
-<p class="admonition-title">Embellissez vos résultats ! </p>
+<p class="admonition-title">Embellissez vos résultats !</p>
 <p>Lorsque vous effectuez vos requêtes depuis un client MongoDB en ligne de commande, les résultats de la fonction <code class="docutils literal notranslate"><span class="pre">find()</span></code> peuvent apparaître désorganisés. MongoDB fournit <code class="docutils literal notranslate"><span class="pre">pretty()</span></code> qui affiche les résultats sous une forme plus lisible. La syntaxe est la suivante : <code class="docutils literal notranslate"><span class="pre">db.collectionName.find().pretty()</span></code> 😉</p>
 </div>
 <p>Pour plus de renseignements sur la fonction <code class="docutils literal notranslate"><span class="pre">find()</span></code>, consultez la documentation MongoDB <a class="reference external" href="https://docs.mongodb.com/manual/reference/method/db.collection.find/">disponible ici</a>.</p>
-</div>
-</div>
-<div class="section" id="requetes-plus-complexes-en-utilisant-des-operateurs">
-<span id="operateurs"></span><h2><span class="section-number">1.3. </span>Requêtes plus complexes en utilisant des opérateurs<a class="headerlink" href="#requetes-plus-complexes-en-utilisant-des-operateurs" title="Permalink to this headline">¶</a></h2>
-<p>Nous verrons dans cette section deux types d’opérateurs : les <a class="reference external" href="#comparaison">opérateurs de comparaison</a> et les <a class="reference external" href="#logiques">opérateurs logiques</a>.</p>
+</section>
+</section>
+<section id="requetes-plus-complexes-en-utilisant-des-operateurs">
+<span id="operateurs"></span><h2><span class="section-number">1.3. </span>Requêtes plus complexes en utilisant des opérateurs<a class="headerlink" href="#requetes-plus-complexes-en-utilisant-des-operateurs" title="Link to this heading">#</a></h2>
+<p>Nous verrons dans cette section deux types d’opérateurs : les <a class="reference internal" href="#comparaison">opérateurs de comparaison</a> et les <a class="reference internal" href="#logiques">opérateurs logiques</a>.</p>
 <div class="admonition-remarque admonition">
 <p class="admonition-title">Remarque</p>
 <p>La syntaxe des requêtes avec des opérateurs de comparaison est la suivante : <code class="docutils literal notranslate"><span class="pre">db.collectionName.find({&quot;x&quot;:</span> <span class="pre">{operateur:</span> <span class="pre">valeur}})</span></code>.</p>
 </div>
-<div class="section" id="operateurs-de-comparaison">
-<span id="comparaison"></span><h3><span class="section-number">1.3.1. </span>Opérateurs de comparaison<a class="headerlink" href="#operateurs-de-comparaison" title="Permalink to this headline">¶</a></h3>
+<section id="operateurs-de-comparaison">
+<span id="comparaison"></span><h3><span class="section-number">1.3.1. </span>Opérateurs de comparaison<a class="headerlink" href="#operateurs-de-comparaison" title="Link to this heading">#</a></h3>
 <p>L’opérateur de comparaison permet de comparer deux élements entre eux. Le tableau suivant regroupe l’ensemble des opérateurs de comparaison :</p>
-<table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Opérateur logique</p></th>
 <th class="head"><p>Mot clé en MongoDB</p></th>
@@ -807,78 +596,16 @@ Projection en SQL</label><div class="tabbed-content docutils">
 </tr>
 </tbody>
 </table>
+</div>
 <p>Les opérateurs <code class="docutils literal notranslate"><span class="pre">$eq</span></code>, <code class="docutils literal notranslate"><span class="pre">$ne</span></code>, <code class="docutils literal notranslate"><span class="pre">$lt</span></code>, <code class="docutils literal notranslate"><span class="pre">$gt</span></code>, <code class="docutils literal notranslate"><span class="pre">$lte</span></code>, <code class="docutils literal notranslate"><span class="pre">$gte</span></code> s’utilisent de la même façon en MongoDB. Ces opérateurs comparent la valeur d’une variable à une valeur fixe (nombre, booléen, chaine de caractères…), comme dans l’exemple suivant :</p>
-<div class="sphinx-bs container pb-4 docutils">
-<div class="row docutils">
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">MongoDB</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">$gte</span><span class="o">:</span> <span class="mf">13</span><span class="p">}})</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">SQL</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">notes</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">notes</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">13</span><span class="w"> </span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <p>Cet exemple retourne la liste des étudiants ayant au moins une note supérieure ou égale à 13.</p>
 <p>Les opérateurs <code class="docutils literal notranslate"><span class="pre">$in</span></code> et <code class="docutils literal notranslate"><span class="pre">$nin</span></code> s’utilisent de la même façon en MongoDB (<code class="docutils literal notranslate"><span class="pre">$nin</span></code> étant la négation de <code class="docutils literal notranslate"><span class="pre">$in</span></code>).
 Ces opérateurs testent l’existence de la valeur d’une variable dans une liste.
 La façon de l’utiliser en MongoDB est la suivante :</p>
-<div class="sphinx-bs container pb-4 docutils">
-<div class="row docutils">
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">MongoDB</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$in</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;chaine1&quot;</span><span class="p">,</span> <span class="s2">&quot;chaine2&quot;</span><span class="p">]</span> <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">SQL</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;chaine1&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;chaine2&quot;</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <p>L’opérateur <code class="docutils literal notranslate"><span class="pre">$exists</span></code> vérifie l’existence d’une clé dans un document. Sa syntaxe en MongoDB est :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$exists</span><span class="o">:</span> <span class="kc">true</span><span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">$exists</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -886,263 +613,114 @@ La façon de l’utiliser en MongoDB est la suivante :</p>
 <p>Enfin, l’opérateur <code class="docutils literal notranslate"><span class="pre">$size</span></code> permet de récuperer les documents pour lesquels l’attribut considéré est une liste d’une certaine taille.
 Sa syntaxe en MongoDB est la suivante :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$size</span><span class="o">:</span> <span class="mf">5</span><span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">$size</span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Le résultat obtenu est l’ensemble des documents pour lesquels la liste associée à la clé <code class="docutils literal notranslate"><span class="pre">a</span></code> est de taille 5.</p>
-</div>
-<div class="section" id="operateurs-logiques">
-<span id="logiques"></span><h3><span class="section-number">1.3.2. </span>Opérateurs logiques<a class="headerlink" href="#operateurs-logiques" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="operateurs-logiques">
+<span id="logiques"></span><h3><span class="section-number">1.3.2. </span>Opérateurs logiques<a class="headerlink" href="#operateurs-logiques" title="Link to this heading">#</a></h3>
 <p>Les différents opérateurs logiques en MongoDB sont : <code class="docutils literal notranslate"><span class="pre">$or</span></code>, <code class="docutils literal notranslate"><span class="pre">$not</span></code> et <code class="docutils literal notranslate"><span class="pre">$nor</span></code>.
 Ces opérateurs permettent de tester plusieurs conditions simultanément.</p>
-<div class="section" id="et-logique">
-<h4><span class="section-number">1.3.2.1. </span>ET logique<a class="headerlink" href="#et-logique" title="Permalink to this headline">¶</a></h4>
+<section id="et-logique">
+<h4><span class="section-number">1.3.2.1. </span>ET logique<a class="headerlink" href="#et-logique" title="Link to this heading">#</a></h4>
 <p>Comme indiqué plus haut, pour faire une requête avec un ET logique en MongoDB, il suffit de séparer par une virgule les conditions.
 L’exemple ci-dessous nous montre l’équivalence entre MongoDB et le langage SQL :</p>
-<div class="sphinx-bs container pb-4 docutils">
-<div class="row docutils">
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">MongoDB</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mf">5</span><span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">SQL</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <p>Le résultat de la requête sera les documents validant les deux conditions suivantes : <code class="docutils literal notranslate"><span class="pre">a=1</span></code> et <code class="docutils literal notranslate"><span class="pre">b=5</span></code>.</p>
-</div>
-<div class="section" id="ou-logique">
-<h4><span class="section-number">1.3.2.2. </span>OU logique<a class="headerlink" href="#ou-logique" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="ou-logique">
+<h4><span class="section-number">1.3.2.2. </span>OU logique<a class="headerlink" href="#ou-logique" title="Link to this heading">#</a></h4>
 <p>L’opérateur <code class="docutils literal notranslate"><span class="pre">$or</span></code> permet de renvoyer les documents qui remplissent au moins un des conditions de la requête.
 Le OU logique se construit de la manière suivane : <code class="docutils literal notranslate"><span class="pre">$or</span> <span class="pre">:</span> <span class="pre">[{condition</span> <span class="pre">1},</span> <span class="pre">...</span> <span class="pre">,</span> <span class="pre">{condition</span> <span class="pre">i}]</span></code>. Voici un exemple faisant le parallèle entre le langage MongoDB et le langage SQL :</p>
-<div class="sphinx-bs container pb-4 docutils">
-<div class="row docutils">
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">MongoDB</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="nx">$or</span> <span class="o">:</span> 
-      <span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="mf">1</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mf">5</span><span class="p">}</span>
-      <span class="p">]</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">SQL</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <p>Le résultat de la requête sera les documents validant au moins un des deux conditions suivantes : <code class="docutils literal notranslate"><span class="pre">a=1</span></code> ou <code class="docutils literal notranslate"><span class="pre">b=5</span></code>.</p>
-</div>
-<div class="section" id="non-ou-logique">
-<h4><span class="section-number">1.3.2.3. </span>NON OU logique<a class="headerlink" href="#non-ou-logique" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="non-ou-logique">
+<h4><span class="section-number">1.3.2.3. </span>NON OU logique<a class="headerlink" href="#non-ou-logique" title="Link to this heading">#</a></h4>
 <p>L’opérateur <code class="docutils literal notranslate"><span class="pre">$nor</span></code> permet de renvoyer les documents ne validant aucune des conditions d’une liste de conditions. Voici sa syntaxe qui est très semblable à celle de <code class="docutils literal notranslate"><span class="pre">$or</span></code> :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="nx">$nor</span> <span class="o">:</span> 
-      <span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="mf">1</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">}</span>
-      <span class="p">]</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="p">{</span><span class="nx">$nor</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">      </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;blue&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Le résultat de cette requête sera l’ensemble des documents ne contenant pas la valeur 1 pour l’attribut <code class="docutils literal notranslate"><span class="pre">a</span></code> ni la valeur <code class="docutils literal notranslate"><span class="pre">&quot;blue&quot;</span></code> pour l’attribut <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
-</div>
-<div class="section" id="non-logique">
-<h4><span class="section-number">1.3.2.4. </span>NON logique<a class="headerlink" href="#non-logique" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="non-logique">
+<h4><span class="section-number">1.3.2.4. </span>NON logique<a class="headerlink" href="#non-logique" title="Link to this heading">#</a></h4>
 <p>Le <code class="docutils literal notranslate"><span class="pre">$not</span></code> renvoie les documents qui ne remplissent pas la condition qu’il contient.
 Reprenons l’exemple précédent :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
-    <span class="p">{</span><span class="nx">$not</span> <span class="o">:</span> 
-      <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="mf">1</span><span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="p">{</span><span class="nx">$not</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">      </span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Cette requête retournera donc l’ensemble des documents pour lesquels la clé <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> n’est pas associée à la valeur <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
 <p>Pour plus de renseignements sur les opérateurs, consultez la documentation MongoDB <a class="reference external" href="https://docs.mongodb.com/manual/reference/operator/query/">disponible à cette adresse</a>.</p>
-</div>
-</div>
-</div>
-<div class="section" id="methodes-utiles-pour-des-requetes-en-mongodb">
-<span id="methodes"></span><h2><span class="section-number">1.4. </span>Méthodes utiles pour des requêtes en MongoDB<a class="headerlink" href="#methodes-utiles-pour-des-requetes-en-mongodb" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="connaitre-la-liste-des-collections-dans-une-base-de-donnees">
-<h3><span class="section-number">1.4.1. </span>Connaître la liste des collections dans une base de données<a class="headerlink" href="#connaitre-la-liste-des-collections-dans-une-base-de-donnees" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="methodes-utiles-pour-des-requetes-en-mongodb">
+<span id="methodes"></span><h2><span class="section-number">1.4. </span>Méthodes utiles pour des requêtes en MongoDB<a class="headerlink" href="#methodes-utiles-pour-des-requetes-en-mongodb" title="Link to this heading">#</a></h2>
+<section id="connaitre-la-liste-des-collections-dans-une-base-de-donnees">
+<h3><span class="section-number">1.4.1. </span>Connaître la liste des collections dans une base de données<a class="headerlink" href="#connaitre-la-liste-des-collections-dans-une-base-de-donnees" title="Link to this heading">#</a></h3>
 <p>Pour connaître la <strong>liste des collections</strong> contenues dans une base de données, on utilise la commande suivante sur la base de données considérée :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">getCollectionInfos</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[
-	{
-		&quot;name&quot; : &quot;NYfood&quot;,
-		&quot;type&quot; : &quot;collection&quot;,
-		&quot;options&quot; : {
-			
-		},
-		&quot;info&quot; : {
-			&quot;readOnly&quot; : false,
-			&quot;uuid&quot; : UUID(&quot;812b36e5-7a94-487e-985d-5a3c7ec1ba41&quot;)
-		},
-		&quot;idIndex&quot; : {
-			&quot;v&quot; : 2,
-			&quot;key&quot; : {
-				&quot;_id&quot; : 1
-			},
-			&quot;name&quot; : &quot;_id_&quot;
-		}
-	}
-]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">getCollectionInfos</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>Ci-dessus, par exemple, la base de données courante (<code class="docutils literal notranslate"><span class="pre">food</span></code>) ne contient qu’une collection dont le nom (<code class="docutils literal notranslate"><span class="pre">name</span></code>) est <code class="docutils literal notranslate"><span class="pre">&quot;NYfood&quot;</span></code>.</p>
-</div>
-<div class="section" id="valeurs-distinctes-d-un-champ-la-methode-distinct">
-<h3><span class="section-number">1.4.2. </span>Valeurs distinctes d’un champ : la méthode <code class="docutils literal notranslate"><span class="pre">distinct</span></code><a class="headerlink" href="#valeurs-distinctes-d-un-champ-la-methode-distinct" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="valeurs-distinctes-d-un-champ-la-methode-distinct">
+<h3><span class="section-number">1.4.2. </span>Valeurs distinctes d’un champ : la méthode <code class="docutils literal notranslate"><span class="pre">distinct</span></code><a class="headerlink" href="#valeurs-distinctes-d-un-champ-la-methode-distinct" title="Link to this heading">#</a></h3>
 <p>La méthode <code class="docutils literal notranslate"><span class="pre">distinct</span></code> permet de renvoyer <strong>toutes les valeurs distinctes du champ spécifié</strong>. C’est l’équivalent du <code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">DISTINCT</span></code> en SQL.
 Par exemple, la requête suivante en MongoDB permet d’afficher la liste des notes attribuées à des restaurants du quartier <code class="docutils literal notranslate"><span class="pre">&quot;Manhattan&quot;</span></code> pour la collection <code class="docutils literal notranslate"><span class="pre">NYfood</span></code>.</p>
-<div class="sphinx-bs container pb-4 docutils">
-<div class="row docutils">
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">Syntaxe et exemple en MongoDB</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">distinct</span><span class="p">(</span>
-    <span class="nx">champ</span><span class="p">,</span> 
-    <span class="p">{...}</span> <span class="c1">// Ici, une condition</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header docutils">
-<p class="card-text">Équivalent de la syntaxe en SQL</p>
-</div>
-<div class="card-body docutils">
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="p">(</span><span class="n">champ</span><span class="p">)</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">collectionName</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="c1">-- Ici, une condition</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="compter-le-nombre-d-elements-la-methode-count">
-<h3><span class="section-number">1.4.3. </span>Compter le nombre d’éléments : la méthode <code class="docutils literal notranslate"><span class="pre">count</span></code><a class="headerlink" href="#compter-le-nombre-d-elements-la-methode-count" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="compter-le-nombre-d-elements-la-methode-count">
+<h3><span class="section-number">1.4.3. </span>Compter le nombre d’éléments : la méthode <code class="docutils literal notranslate"><span class="pre">count</span></code><a class="headerlink" href="#compter-le-nombre-d-elements-la-methode-count" title="Link to this heading">#</a></h3>
 <p>La méthode <code class="docutils literal notranslate"><span class="pre">count</span></code> permet de <strong>compter le nombre de documents dans une collection</strong>. On peut l’utiliser directement sur la collection de base pour connaître le nombre de documents dans la collection ou bien l’utiliser après avoir exécuté une requête :</p>
-<div class="tabbed-set docutils">
-<input checked="checked" id="c5204161-9c83-4e18-a135-6f8b35b717d9" name="0821959b-41c1-4c0c-853e-80dc4082b8a7" type="radio">
-</input><label class="tabbed-label" for="c5204161-9c83-4e18-a135-6f8b35b717d9">
-Sur une collection sans requête</label><div class="tabbed-content docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">count</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<input id="339bb833-0d0b-4ce7-a743-88da335cbaf2" name="0821959b-41c1-4c0c-853e-80dc4082b8a7" type="radio">
-</input><label class="tabbed-label" for="339bb833-0d0b-4ce7-a743-88da335cbaf2">
-Sur une collection après requête</label><div class="tabbed-content docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="o">:</span> <span class="s2">&quot;Bakery&quot;</span><span class="p">}).</span><span class="nx">count</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<input id="9c6affc6-e858-4644-9d07-434d8062827a" name="0821959b-41c1-4c0c-853e-80dc4082b8a7" type="radio">
-</input><label class="tabbed-label" for="9c6affc6-e858-4644-9d07-434d8062827a">
-Syntaxe alternative</label><div class="tabbed-content docutils">
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">NYfood</span><span class="p">.</span><span class="nx">count</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="o">:</span> <span class="s2">&quot;Bakery&quot;</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>Bien entendu, les résultats seront différents car nous n’avons pas le même nombre de documents avant et après un filtrage de données. Dans le premier exemple, on souhaite afficher le nombre de documents dans la collection <code class="docutils literal notranslate"><span class="pre">NYfood</span></code> tandis que dans les deux autres, on récupère le nombre de documents correspondant à des boulangeries (pour lesquels l’attribut <code class="docutils literal notranslate"><span class="pre">&quot;cuisine&quot;</span></code> vaut <code class="docutils literal notranslate"><span class="pre">&quot;Bakery&quot;</span></code>).</p>
-</div>
-<div class="section" id="trier-les-documents-resultat-la-methode-sort">
-<h3><span class="section-number">1.4.4. </span>Trier les documents résultat : la méthode <code class="docutils literal notranslate"><span class="pre">sort</span></code><a class="headerlink" href="#trier-les-documents-resultat-la-methode-sort" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="trier-les-documents-resultat-la-methode-sort">
+<h3><span class="section-number">1.4.4. </span>Trier les documents résultat : la méthode <code class="docutils literal notranslate"><span class="pre">sort</span></code><a class="headerlink" href="#trier-les-documents-resultat-la-methode-sort" title="Link to this heading">#</a></h3>
 <p>La méthode <code class="docutils literal notranslate"><span class="pre">sort</span></code> sert à <strong>trier les documents de sortie</strong> à partir d’une ou plusieurs clés. Pour choisir l’ordre de tri, il suffit de spécifier la valeur <code class="docutils literal notranslate"><span class="pre">1</span></code> pour trier dans l’ordre croissant et <code class="docutils literal notranslate"><span class="pre">-1</span></code> pour trier dans l’ordre décroissant.</p>
 <p>Par exemple, pour trier les documents de sortie en fonction de la clé <code class="docutils literal notranslate"><span class="pre">key1</span></code> de façon croissante on utilisera la syntaxe suivante :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">sort</span><span class="p">(</span>
-  <span class="p">{</span><span class="s2">&quot;key1&quot;</span> <span class="o">:</span> <span class="mf">1</span><span class="p">}</span>
+<span class="w">  </span><span class="p">{</span><span class="s2">&quot;key1&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Il est également possible de faire un <strong>tri sur plusieurs clés</strong> :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">sort</span><span class="p">(</span>
-  <span class="p">{</span><span class="s2">&quot;key1&quot;</span> <span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="s2">&quot;key2&quot;</span> <span class="o">:</span> <span class="o">-</span><span class="mf">1</span><span class="p">}</span>
+<span class="w">  </span><span class="p">{</span><span class="s2">&quot;key1&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;key2&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Ici, on fera un tri croissant sur la clé <code class="docutils literal notranslate"><span class="pre">key1</span></code> et, en cas d’égalité, les résultats seront triés par valeur de <code class="docutils literal notranslate"><span class="pre">key2</span></code> décroissante.</p>
-</div>
-<div class="section" id="limiter-le-nombre-de-documents-retournes-la-methode-limit">
-<h3><span class="section-number">1.4.5. </span>Limiter le nombre de documents retournés : la méthode <code class="docutils literal notranslate"><span class="pre">limit</span></code><a class="headerlink" href="#limiter-le-nombre-de-documents-retournes-la-methode-limit" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="limiter-le-nombre-de-documents-retournes-la-methode-limit">
+<h3><span class="section-number">1.4.5. </span>Limiter le nombre de documents retournés : la méthode <code class="docutils literal notranslate"><span class="pre">limit</span></code><a class="headerlink" href="#limiter-le-nombre-de-documents-retournes-la-methode-limit" title="Link to this heading">#</a></h3>
 <p>La méthode <code class="docutils literal notranslate"><span class="pre">limit</span></code> permet de <strong>limiter le nombre de documents renvoyés</strong>. Elle accepte les arguments numériques. Voici la syntaxe :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collectionName</span><span class="p">.</span><span class="nx">find</span><span class="p">({...}).</span><span class="nx">limit</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="pour-conclure-ce-chapitre">
-<span id="resume"></span><h2><span class="section-number">1.5. </span>Pour conclure ce chapitre<a class="headerlink" href="#pour-conclure-ce-chapitre" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="fiche-resume-pour-bien-demarrer-en-mongodb">
-<h3><span class="section-number">1.5.1. </span>Fiche résumé pour bien démarrer en MongoDB<a class="headerlink" href="#fiche-resume-pour-bien-demarrer-en-mongodb" title="Permalink to this headline">¶</a></h3>
-<table class="colwidths-auto table">
+</section>
+</section>
+<section id="pour-conclure-ce-chapitre">
+<span id="resume"></span><h2><span class="section-number">1.5. </span>Pour conclure ce chapitre<a class="headerlink" href="#pour-conclure-ce-chapitre" title="Link to this heading">#</a></h2>
+<section id="fiche-resume-pour-bien-demarrer-en-mongodb">
+<h3><span class="section-number">1.5.1. </span>Fiche résumé pour bien démarrer en MongoDB<a class="headerlink" href="#fiche-resume-pour-bien-demarrer-en-mongodb" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Objectif</p></th>
 <th class="head"><p>Syntaxe</p></th>
@@ -1182,11 +760,12 @@ Syntaxe alternative</label><div class="tabbed-content docutils">
 </tbody>
 </table>
 </div>
-<div class="section" id="quiz-premieres-requetes-en-mongodb-a-vous-de-jouer">
-<span id="quiz"></span><h3><span class="section-number">1.5.2. </span>Quiz “Premières requêtes en MongoDB” : À vous de jouer !<a class="headerlink" href="#quiz-premieres-requetes-en-mongodb-a-vous-de-jouer" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="quiz-premieres-requetes-en-mongodb-a-vous-de-jouer">
+<span id="quiz"></span><h3><span class="section-number">1.5.2. </span>Quiz “Premières requêtes en MongoDB” : À vous de jouer !<a class="headerlink" href="#quiz-premieres-requetes-en-mongodb-a-vous-de-jouer" title="Link to this heading">#</a></h3>
 <p>Pour vous tester et être certain que vous avez bien compris, répondez aux questions du quiz ci-dessous.</p>
 <p><strong>Qu’est-ce qui caractérise MongoDB ?</strong></p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>C’est un modèle orienté graphique</p></li>
 <li><p>C’est un modèle orienté document</p></li>
 <li><p>C’est un modèle structuré</p></li>
@@ -1196,10 +775,10 @@ Syntaxe alternative</label><div class="tabbed-content docutils">
 <p><em>Réponse 2 : C’est un modèle orienté document.</em></p>
 </div>
 <p><strong>Que nous renvoie cette requête sur la collection <code class="docutils literal notranslate"><span class="pre">notes</span></code> de la base <code class="docutils literal notranslate"><span class="pre">etudiants</span></code> ?</strong></p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">({},</span> <span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">&quot;_id&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">})</span> 
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">notes</span><span class="p">.</span><span class="nx">find</span><span class="p">({},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">})</span><span class="w"> </span>
 </pre></div>
 </div>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Affiche <strong>tout</strong> le contenu de la collection <code class="docutils literal notranslate"><span class="pre">notes</span></code></p></li>
 <li><p>Les noms des étudiants de la base et la clé <code class="docutils literal notranslate"><span class="pre">_id</span></code> qui identifie chaque étudiant</p></li>
 <li><p>Tous les noms des étudiants de la base, mais pas les autres clés</p></li>
@@ -1209,7 +788,7 @@ Syntaxe alternative</label><div class="tabbed-content docutils">
 <p><em>Réponse 3 : L’argument <code class="docutils literal notranslate"><span class="pre">&quot;_id&quot;:</span> <span class="pre">false</span></code> permet de retirer l’affichage de la clé <code class="docutils literal notranslate"><span class="pre">id</span></code>. On ne récupère que le noms des étudiants de la base.</em></p>
 </div>
 <p><strong>Comment récupérer la liste des étudiants ayant obtenu exactement deux notes ?</strong></p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">db.notes.find({&quot;notes&quot;:</span> <span class="pre">{$size:</span> <span class="pre">2}})</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">db.notes.find({&quot;notes&quot;:</span> <span class="pre">{$exists:</span> <span class="pre">true}})</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">db.notes.find({$or:</span> <span class="pre">[{&quot;notes&quot;:</span> <span class="pre">{$size:</span> <span class="pre">1}},{&quot;notes&quot;:</span> <span class="pre">{$size:</span> <span class="pre">2}}]})</span></code></p></li>
@@ -1219,7 +798,7 @@ Syntaxe alternative</label><div class="tabbed-content docutils">
 <p><em>Réponse 1 : L’opérateur <code class="docutils literal notranslate"><span class="pre">$size</span></code> permet de prendre en compte la taille de la liste de valeurs, telle qu’une liste de notes. Ici on souhaite que la liste de notes soit précisement de taille 2.</em></p>
 </div>
 <p><strong>Quel opérateur permet de ne renvoyer que les documents qui ne vérifient aucune condition de la liste ?</strong></p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>L’opérateur <code class="docutils literal notranslate"><span class="pre">$eq</span></code></p></li>
 <li><p>L’opérateur <code class="docutils literal notranslate"><span class="pre">$nor</span></code></p></li>
 <li><p>L’opérateur <code class="docutils literal notranslate"><span class="pre">$gt</span></code></p></li>
@@ -1229,7 +808,7 @@ Syntaxe alternative</label><div class="tabbed-content docutils">
 <p><em>Réponse 2 : L’opérateur <code class="docutils literal notranslate"><span class="pre">$nor</span></code> permet de ne renvoyer que les documents qui ne vérifient aucune condition de la liste.</em></p>
 </div>
 <p><strong>Quelle méthode ci-dessous ne fait pas partie du langage MongoDB ?</strong></p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.find({}).orderby({&quot;key&quot;</span> <span class="pre">:</span> <span class="pre">1})</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.find({}).sort({&quot;key&quot;</span> <span class="pre">:</span> <span class="pre">1})</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.find({}).limit(3)</span></code></p></li>
@@ -1239,9 +818,9 @@ Syntaxe alternative</label><div class="tabbed-content docutils">
 <p><em>Réponse 1 : Bien que <code class="docutils literal notranslate"><span class="pre">ORDER</span> <span class="pre">BY</span></code> soit une instruction en SQL, ce n’est pas disponible pour les bases de données en MongoDB.</em></p>
 </div>
 <p>Afin que le langage MongoDB n’ait plus aucun secret pour vous, nous vous invitons à lire les chapitres suivants et à consulter la <a class="reference external" href="https://docs.mongodb.com">documentation MongoDB</a> !</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1252,55 +831,144 @@ Syntaxe alternative</label><div class="tabbed-content docutils">
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "imongo"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "imongo",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'imongo'</script>
+    <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="00_intro.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">MongoDB : Notes de cours</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="00_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">MongoDB : Notes de cours</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="02_listes.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="02_listes.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">2. </span>Attributs de type liste</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Ouvrage collectif<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-a-mongodb">1.1. Introduction à MongoDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-d-interrogation-et-de-filtrage-des-donnees">1.2. Requêtes d’interrogation et de filtrage des données</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntaxe-d-interrogation-de-donnees-sans-et-avec-condition">1.2.1. Syntaxe d’interrogation de données sans et avec condition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poser-une-condition-sur-une-cle-de-sous-document">1.2.2. Poser une condition sur une clé de sous-document</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-des-donnees">1.2.3. Projection des données</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-plus-complexes-en-utilisant-des-operateurs">1.3. Requêtes plus complexes en utilisant des opérateurs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-de-comparaison">1.3.1. Opérateurs de comparaison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-logiques">1.3.2. Opérateurs logiques</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#et-logique">1.3.2.1. ET logique</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ou-logique">1.3.2.2. OU logique</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#non-ou-logique">1.3.2.3. NON OU logique</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#non-logique">1.3.2.4. NON logique</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodes-utiles-pour-des-requetes-en-mongodb">1.4. Méthodes utiles pour des requêtes en MongoDB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connaitre-la-liste-des-collections-dans-une-base-de-donnees">1.4.1. Connaître la liste des collections dans une base de données</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valeurs-distinctes-d-un-champ-la-methode-distinct">1.4.2. Valeurs distinctes d’un champ : la méthode <code class="docutils literal notranslate"><span class="pre">distinct</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-le-nombre-d-elements-la-methode-count">1.4.3. Compter le nombre d’éléments : la méthode <code class="docutils literal notranslate"><span class="pre">count</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trier-les-documents-resultat-la-methode-sort">1.4.4. Trier les documents résultat : la méthode <code class="docutils literal notranslate"><span class="pre">sort</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiter-le-nombre-de-documents-retournes-la-methode-limit">1.4.5. Limiter le nombre de documents retournés : la méthode <code class="docutils literal notranslate"><span class="pre">limit</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-conclure-ce-chapitre">1.5. Pour conclure ce chapitre</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fiche-resume-pour-bien-demarrer-en-mongodb">1.5.1. Fiche résumé pour bien démarrer en MongoDB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz-premieres-requetes-en-mongodb-a-vous-de-jouer">1.5.2. Quiz “Premières requêtes en MongoDB” : À vous de jouer !</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Unknown
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
