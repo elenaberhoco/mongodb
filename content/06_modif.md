@@ -13,79 +13,9 @@ kernelspec:
   name: python3
 ---
 
-# Les requêtes de modification
+INTÉRESSANT : 
 
-* Auteurs : Rémi Leduc, Léo Rouger, Clément Caillard
-
-Ce chapitre traite des différentes requêtes de modification ([insertion](sec:insertion), [modification](sec:modification) et [suppression](sec:suppression)).
-
-(sec:insertion)=
-## Insertion
-
-Pour la création d'une nouvelle collection, il est nécessaire de sélectionner une base. Si elle n'existe pas, elle sera alors créée.
-
-```{code-cell}
-use voitures
-```
-
-### Création d'une collection 
-
-Il est nécessaire d'utiliser la commande `db.createCollection("NomDeLaNouvelleCollection")` pour créer une nouvelle collection au sein de la base sélectionnée.  
-Exemple:
-  
-```{code-cell}
-db.createCollection("ventes")
-```
-
-Ici, on crée par exemple une collection "ventes" au sein de la base "voitures".
-
-```{admonition} Attention
-:class: warning
-Si vous tentez d'exécuter plusieurs fois la commande, une erreur surviendra car votre collection existe déjà.
-```
-
-### Ajout de nouveaux documents 
-
-La commande `db.NomDeLaCollection.insert([])` permet l'ajout d'une liste de document au sein de la collection.  
-Exemple: 
-
-```{code-cell}js
-db.ventes.insert([{"nom" : "C1"}, {"nom" : "C2"}])
-```
-
-Si on exécute la ligne suivante, on retrouve bien les documents créés :
-
-```{code-cell}
-db.ventes.find({})
-```
-
-(sec:modification)=
-## Modification
-### Remplacement d'un document
-```{code-cell}
-db.ventes.update(
-	{"nom": "C1"},
-	{"nom": "C1", "marque": "Citroën"}
-)
-```
-Le document sélectionné sur la première ligne est supprimé et remplacé selon les champs renseignés sur la seconde ligne. Les champs qui ne sont pas renseignés sont donc supprimés.
-
-```{admonition} Attention
-:class: warning
-Seul le premier document de la liste sera modifié.
-```
-
-### Modification d'un document
-Si l'on souhaite conserver les autres champs, il suffit d'inclure la seconde ligne dans un `$set`.
-```{code-cell}
-db.ventes.update(
-	{"nom": "C2"},
-	{$set:
-		{"marque": "Citroën"}
-	}
-)
-```
-Ici également, seul le premier document de la liste répondant aux critères de la première ligne sera modifié.
+Pour celui-ci : remplacé par updateMany ?
 
 ### Modification de plusieurs documents
 Pour modifier plusieurs documents à la fois, il est nécessaire d'ajouter `{multi: true}` en fin de requête.
@@ -97,6 +27,8 @@ db.ventes.update(
 )
 ```
 Cette requête, par exemple, ajoute un attribut "pays" ayant la valeur "France" aux modèles C1 **et** C2.
+
+PAS VU :
 
 ### Upsert
 L'option `upsert` (mélange de "update" et "insert") permet de mettre une condition sur la requête : si aucun document ne correspond aux conditions indiquées en première ligne, alors un nouveau document est créé par les champs renseignés sur la seconde ligne.
@@ -118,27 +50,7 @@ db.ventes.update(
 ```
 Cette fois-ci, un nouveau document est ajouté à la base.
 
-(sec:suppression)=
-## Suppression
-
-Comme toutes les bonnes choses ont une fin, il est possible de supprimer une base, ou bien, sans être aussi radical, des éléments plus précis.
-Nous allons voir ici comment procéder aux différentes suppressions :
-
-### Suppression d'une base entière
-```js
-db.dropDatabase()
-```
-Lors de l'exécution de cette commande, c'est la base **courante**, celle qui est pointée par _db_, qui sera supprimée.
-```{admonition} Important !
-:class: warning
-Notez bien que tous les index qui pouvaient exister dans les collections de cette base seront également supprimés !
-```
-
-### Suppression d'une collection
-```js
-db.nomDeLaCollection.drop()
-```
-Ici encore, les index éventuellement présents dans la collection supprimée seront eux aussi effacés.
+PAS VU : 
 
 ### Suppression de documents dans une collection
 Nous voilà arrivés au gros morceau...
@@ -159,5 +71,3 @@ db.ventes.remove({"marque" : "Citroën"})
 ```js
 db.nomDeLaCollection.remove({"_id" : ObjectId("5612c6c0a5c56580cfacc342")})
 ``` 
-
-Et voilà, vous savez tout sur la création, la suppression et la modification de bases !
