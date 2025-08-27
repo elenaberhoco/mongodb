@@ -13,6 +13,8 @@ kernelspec:
   name: python3
 ---
 
+# Titre 2
+
 Mais les cellules peuvent échouer à cause du kernel python :
 ```{code-cell}
 use etudiants
@@ -48,7 +50,7 @@ db.notes.find(
 ```
 Cette fois, on ne retourne plus que 2 étudiants qui n'ont que des notes au-dessus de 12.
 
-## Récapitulatif
+## Recap
 
 Sympa les bloc gris aussi :
 

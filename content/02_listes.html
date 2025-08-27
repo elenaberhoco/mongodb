@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. Récapitulatif &#8212; MongoDB</title>
+    <title>2. Titre 2 &#8212; MongoDB</title>
   
   
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/02_listes';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Requêtes et Index textuels" href="04_index.html" />
+    <link rel="next" title="3. Titre 3" href="04_index.html" />
     <link rel="prev" title="1. Titre 1" href="01_find.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -176,14 +176,13 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Titre 1</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Récapitulatif</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_index.html">3. Requêtes et Index textuels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_modif.html">4. Modification de plusieurs documents</a></li>
-
-
-<li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">7. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">7.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">7.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Titre 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_index.html">3. Titre 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">4. Titre 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modif.html">5. Titre 5</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">6. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">6.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">6.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
 </ul>
 </details></li>
 </ul>
@@ -358,7 +357,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -369,11 +370,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Récapitulatif</h1>
+    <h1>Titre 2</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">2.1. Recap</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -383,7 +392,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>Mais les cellules peuvent échouer à cause du kernel python :</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="titre-2">
+<h1><span class="section-number">2. </span>Titre 2<a class="headerlink" href="#titre-2" title="Link to this heading">#</a></h1>
+<p>Mais les cellules peuvent échouer à cause du kernel python :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">etudiants</span>
@@ -431,8 +442,8 @@ document.write(`
 </div>
 </div>
 <p>Cette fois, on ne retourne plus que 2 étudiants qui n’ont que des notes au-dessus de 12.</p>
-<section id="recapitulatif">
-<h1><span class="section-number">2. </span>Récapitulatif<a class="headerlink" href="#recapitulatif" title="Link to this heading">#</a></h1>
+<section id="recap">
+<h2><span class="section-number">2.1. </span>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
 <p>Sympa les bloc gris aussi :</p>
 <ul class="simple">
 <li><p><em>Je souhaite que <strong>toutes les conditions</strong> soient vérifiées <strong>au moins une fois</strong> par les éléments de ma liste, comment faire ?</em></p></li>
@@ -455,6 +466,7 @@ document.write(`
 <div><p>Utilisation de l’opérateur <code class="docutils literal notranslate"><span class="pre">$nor</span></code>.</p>
 </div></blockquote>
 <p>Avec <code class="docutils literal notranslate"><span class="pre">$nor</span></code>, on liste les conditions que nous ne souhaitons pas retourner. Ainsi, on ne récupère pas les éléments qui valident des conditions. Il faut notamment penser à retirer les éléments vides avec <code class="docutils literal notranslate"><span class="pre">{$size:</span> <span class="pre">0}</span></code> et les éléments inexistants avec <code class="docutils literal notranslate"><span class="pre">{$exists:</span> <span class="pre">false}</span></code>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -501,7 +513,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Requêtes et Index textuels</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Titre 3</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -511,6 +523,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">2.1. Recap</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

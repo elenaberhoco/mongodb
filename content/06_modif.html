@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4. Modification de plusieurs documents &#8212; MongoDB</title>
+    <title>5. Titre 5 &#8212; MongoDB</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/06_modif';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7. Effectuer des requêtes depuis des programmes Python ou R" href="07_scripts.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="05_agreg.html" />
+    <link rel="next" title="6. Effectuer des requêtes depuis des programmes Python ou R" href="07_scripts.html" />
+    <link rel="prev" title="4. Titre 4" href="05_agreg.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -176,14 +176,13 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Titre 1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Récapitulatif</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_index.html">3. Requêtes et Index textuels</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Modification de plusieurs documents</a></li>
-
-
-<li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">7. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">7.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">7.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Titre 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_index.html">3. Titre 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">4. Titre 4</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Titre 5</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">6. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">6.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">6.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
 </ul>
 </details></li>
 </ul>
@@ -371,7 +370,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Modification de plusieurs documents</h1>
+    <h1>Titre 5</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -381,11 +380,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4. Modification de plusieurs documents</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#upsert">5. Upsert</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-de-documents-dans-une-collection">6. Suppression de documents dans une collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-de-plusieurs-documents">5.1. Modification de plusieurs documents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upsert">5.2. Upsert</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-de-documents-dans-une-collection">5.3. Suppression de documents dans une collection</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -396,10 +394,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>INTÉRESSANT :</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="titre-5">
+<h1><span class="section-number">5. </span>Titre 5<a class="headerlink" href="#titre-5" title="Link to this heading">#</a></h1>
+<p>INTÉRESSANT :</p>
 <p>Pour celui-ci : remplacé par updateMany ?</p>
 <section id="modification-de-plusieurs-documents">
-<h1><span class="section-number">4. </span>Modification de plusieurs documents<a class="headerlink" href="#modification-de-plusieurs-documents" title="Link to this heading">#</a></h1>
+<h2><span class="section-number">5.1. </span>Modification de plusieurs documents<a class="headerlink" href="#modification-de-plusieurs-documents" title="Link to this heading">#</a></h2>
 <p>Pour modifier plusieurs documents à la fois, il est nécessaire d’ajouter <code class="docutils literal notranslate"><span class="pre">{multi:</span> <span class="pre">true}</span></code> en fin de requête.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -424,7 +424,7 @@ document.write(`
 <p>PAS VU :</p>
 </section>
 <section id="upsert">
-<h1><span class="section-number">5. </span>Upsert<a class="headerlink" href="#upsert" title="Link to this heading">#</a></h1>
+<h2><span class="section-number">5.2. </span>Upsert<a class="headerlink" href="#upsert" title="Link to this heading">#</a></h2>
 <p>L’option <code class="docutils literal notranslate"><span class="pre">upsert</span></code> (mélange de “update” et “insert”) permet de mettre une condition sur la requête : si aucun document ne correspond aux conditions indiquées en première ligne, alors un nouveau document est créé par les champs renseignés sur la seconde ligne.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -453,7 +453,7 @@ document.write(`
 <p>PAS VU :</p>
 </section>
 <section id="suppression-de-documents-dans-une-collection">
-<h1><span class="section-number">6. </span>Suppression de documents dans une collection<a class="headerlink" href="#suppression-de-documents-dans-une-collection" title="Link to this heading">#</a></h1>
+<h2><span class="section-number">5.3. </span>Suppression de documents dans une collection<a class="headerlink" href="#suppression-de-documents-dans-une-collection" title="Link to this heading">#</a></h2>
 <p>Nous voilà arrivés au gros morceau…
 Lorsque l’on veut supprimer certains documents en particulier <strong>sans toucher aux index</strong>, il faut utiliser la commande suivante :</p>
 <div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">remove</span><span class="p">({})</span>
@@ -479,6 +479,7 @@ Pour ce faire, il convient d’utiliser l’attribut “_id” puisqu’il est u
 <div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">remove</span><span class="p">({</span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ObjectId</span><span class="p">(</span><span class="s2">&quot;5612c6c0a5c56580cfacc342&quot;</span><span class="p">)})</span>
 </pre></div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -517,7 +518,7 @@ Pour ce faire, il convient d’utiliser l’attribut “_id” puisqu’il est u
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Titre 4</p>
       </div>
     </a>
     <a class="right-next"
@@ -525,7 +526,7 @@ Pour ce faire, il convient d’utiliser l’attribut “_id” puisqu’il est u
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Effectuer des requêtes depuis des programmes Python ou R</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Effectuer des requêtes depuis des programmes Python ou R</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -545,11 +546,10 @@ Pour ce faire, il convient d’utiliser l’attribut “_id” puisqu’il est u
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4. Modification de plusieurs documents</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#upsert">5. Upsert</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-de-documents-dans-une-collection">6. Suppression de documents dans une collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-de-plusieurs-documents">5.1. Modification de plusieurs documents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upsert">5.2. Upsert</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-de-documents-dans-une-collection">5.3. Suppression de documents dans une collection</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
