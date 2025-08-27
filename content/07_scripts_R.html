@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -168,18 +168,18 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="00_intro.html">
-                    MongoDB : Notes de cours
+                    MongoDB
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Premières requêtes en MongoDB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Attributs de type liste</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_dates.html">3. Attributs de type date</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_index.html">4. Les index</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">5. Les requêtes d’agrégation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_modif.html">6. Les requêtes de modification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Titre 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Récapitulatif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_index.html">3. Requêtes et Index textuels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modif.html">4. Modification de plusieurs documents</a></li>
+
+
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="07_scripts.html">7. Effectuer des requêtes depuis des programmes Python ou R</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">7.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">7.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
@@ -629,7 +629,7 @@ document.write(`
 </section>
 <section id="selectionner-par-date">
 <h3><span class="section-number">7.2.2.5. </span>Sélectionner par date<a class="headerlink" href="#selectionner-par-date" title="Link to this heading">#</a></h3>
-<p>Le traitement des dates avec <em>mongolite</em> mérite une attention particulière. En effet, lorsque l’on souhaite intéragir avec une collection sur un champ de type <em>date</em>, la syntaxe sera relativement différente de celle que l’on peut utiliser en <em>MongoDB</em> (<a class="reference internal" href="03_dates.html"><span class="std std-doc">plus de précisions ici</span></a>) ou avec <em>pymongo</em>. En raison de la classe d’une requête en mongolite (chaîne de caractère), on ne pourra pas utiliser d’objet R spécifique aux dates (comme les datetimes en python par exemple). Ainsi, toutes les dates définies dans une requête en mongolite devront être spécifiées dans un format purement JSON intégrant un opérateur <code class="docutils literal notranslate"><span class="pre">$date</span></code> et une syntaxe UTC. Concrètement, ce format sera du type :</p>
+<p>Le traitement des dates avec <em>mongolite</em> mérite une attention particulière. En effet, lorsque l’on souhaite intéragir avec une collection sur un champ de type <em>date</em>, la syntaxe sera relativement différente de celle que l’on peut utiliser en <em>MongoDB</em> (<a class="reference internal" href="#03_dates.md"><span class="xref myst">plus de précisions ici</span></a>) ou avec <em>pymongo</em>. En raison de la classe d’une requête en mongolite (chaîne de caractère), on ne pourra pas utiliser d’objet R spécifique aux dates (comme les datetimes en python par exemple). Ainsi, toutes les dates définies dans une requête en mongolite devront être spécifiées dans un format purement JSON intégrant un opérateur <code class="docutils literal notranslate"><span class="pre">$date</span></code> et une syntaxe UTC. Concrètement, ce format sera du type :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;$date&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;AAAA-MM-JJThh:mm:ssZ&quot;</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>

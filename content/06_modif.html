@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6. Les requêtes de modification &#8212; MongoDB</title>
+    <title>4. Modification de plusieurs documents &#8212; MongoDB</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="7. Effectuer des requêtes depuis des programmes Python ou R" href="07_scripts.html" />
-    <link rel="prev" title="5. Les requêtes d’agrégation" href="05_agreg.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="05_agreg.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,18 +169,18 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="00_intro.html">
-                    MongoDB : Notes de cours
+                    MongoDB
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Premières requêtes en MongoDB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Attributs de type liste</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_dates.html">3. Attributs de type date</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_index.html">4. Les index</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">5. Les requêtes d’agrégation</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Les requêtes de modification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Titre 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Récapitulatif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_index.html">3. Requêtes et Index textuels</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Modification de plusieurs documents</a></li>
+
+
 <li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">7. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">7.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">7.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
@@ -371,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Les requêtes de modification</h1>
+    <h1>Modification de plusieurs documents</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -381,25 +381,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion">6.1. Insertion</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creation-d-une-collection">6.1.1. Création d’une collection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ajout-de-nouveaux-documents">6.1.2. Ajout de nouveaux documents</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4. Modification de plusieurs documents</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#upsert">5. Upsert</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-de-documents-dans-une-collection">6. Suppression de documents dans une collection</a></li>
 </ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modification">6.2. Modification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remplacement-d-un-document">6.2.1. Remplacement d’un document</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-d-un-document">6.2.2. Modification d’un document</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-de-plusieurs-documents">6.2.3. Modification de plusieurs documents</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upsert">6.2.4. Upsert</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression">6.3. Suppression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-d-une-base-entiere">6.3.1. Suppression d’une base entière</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-d-une-collection">6.3.2. Suppression d’une collection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-de-documents-dans-une-collection">6.3.3. Suppression de documents dans une collection</a></li>
-</ul>
-</li>
-</ul>
+
             </nav>
         </div>
     </div>
@@ -410,107 +396,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="les-requetes-de-modification">
-<h1><span class="section-number">6. </span>Les requêtes de modification<a class="headerlink" href="#les-requetes-de-modification" title="Link to this heading">#</a></h1>
-<ul class="simple">
-<li><p>Auteurs : Rémi Leduc, Léo Rouger, Clément Caillard</p></li>
-</ul>
-<p>Ce chapitre traite des différentes requêtes de modification (<a class="reference internal" href="#sec-insertion"><span class="std std-ref">insertion</span></a>, <a class="reference internal" href="#sec-modification"><span class="std std-ref">modification</span></a> et <a class="reference internal" href="#sec-suppression"><span class="std std-ref">suppression</span></a>).</p>
-<section id="insertion">
-<span id="sec-insertion"></span><h2><span class="section-number">6.1. </span>Insertion<a class="headerlink" href="#insertion" title="Link to this heading">#</a></h2>
-<p>Pour la création d’une nouvelle collection, il est nécessaire de sélectionner une base. Si elle n’existe pas, elle sera alors créée.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">voitures</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-    <span class="n">use</span> <span class="n">voitures</span>
-        <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
-</pre></div>
-</div>
-</div>
-</div>
-<section id="creation-d-une-collection">
-<h3><span class="section-number">6.1.1. </span>Création d’une collection<a class="headerlink" href="#creation-d-une-collection" title="Link to this heading">#</a></h3>
-<p>Il est nécessaire d’utiliser la commande <code class="docutils literal notranslate"><span class="pre">db.createCollection(&quot;NomDeLaNouvelleCollection&quot;)</span></code> pour créer une nouvelle collection au sein de la base sélectionnée.<br />
-Exemple:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">createCollection</span><span class="p">(</span><span class="s2">&quot;ventes&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Ici, on crée par exemple une collection “ventes” au sein de la base “voitures”.</p>
-<div class="warning admonition">
-<p class="admonition-title">Attention</p>
-<p>Si vous tentez d’exécuter plusieurs fois la commande, une erreur surviendra car votre collection existe déjà.</p>
-</div>
-</section>
-<section id="ajout-de-nouveaux-documents">
-<h3><span class="section-number">6.1.2. </span>Ajout de nouveaux documents<a class="headerlink" href="#ajout-de-nouveaux-documents" title="Link to this heading">#</a></h3>
-<p>La commande <code class="docutils literal notranslate"><span class="pre">db.NomDeLaCollection.insert([])</span></code> permet l’ajout d’une liste de document au sein de la collection.<br />
-Exemple:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">ventes</span><span class="o">.</span><span class="n">insert</span><span class="p">([{</span><span class="s2">&quot;nom&quot;</span> <span class="p">:</span> <span class="s2">&quot;C1&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;nom&quot;</span> <span class="p">:</span> <span class="s2">&quot;C2&quot;</span><span class="p">}])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Si on exécute la ligne suivante, on retrouve bien les documents créés :</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">ventes</span><span class="o">.</span><span class="n">find</span><span class="p">({})</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="modification">
-<span id="sec-modification"></span><h2><span class="section-number">6.2. </span>Modification<a class="headerlink" href="#modification" title="Link to this heading">#</a></h2>
-<section id="remplacement-d-un-document">
-<h3><span class="section-number">6.2.1. </span>Remplacement d’un document<a class="headerlink" href="#remplacement-d-un-document" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">ventes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-	<span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span> <span class="s2">&quot;C1&quot;</span><span class="p">},</span>
-	<span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;marque&quot;</span><span class="p">:</span> <span class="s2">&quot;Citroën&quot;</span><span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Le document sélectionné sur la première ligne est supprimé et remplacé selon les champs renseignés sur la seconde ligne. Les champs qui ne sont pas renseignés sont donc supprimés.</p>
-<div class="warning admonition">
-<p class="admonition-title">Attention</p>
-<p>Seul le premier document de la liste sera modifié.</p>
-</div>
-</section>
-<section id="modification-d-un-document">
-<h3><span class="section-number">6.2.2. </span>Modification d’un document<a class="headerlink" href="#modification-d-un-document" title="Link to this heading">#</a></h3>
-<p>Si l’on souhaite conserver les autres champs, il suffit d’inclure la seconde ligne dans un <code class="docutils literal notranslate"><span class="pre">$set</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">ventes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-	<span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span> <span class="s2">&quot;C2&quot;</span><span class="p">},</span>
-	<span class="p">{</span><span class="err">$</span><span class="nb">set</span><span class="p">:</span>
-		<span class="p">{</span><span class="s2">&quot;marque&quot;</span><span class="p">:</span> <span class="s2">&quot;Citroën&quot;</span><span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Ici également, seul le premier document de la liste répondant aux critères de la première ligne sera modifié.</p>
-</section>
+  <p>INTÉRESSANT :</p>
+<p>Pour celui-ci : remplacé par updateMany ?</p>
 <section id="modification-de-plusieurs-documents">
-<h3><span class="section-number">6.2.3. </span>Modification de plusieurs documents<a class="headerlink" href="#modification-de-plusieurs-documents" title="Link to this heading">#</a></h3>
+<h1><span class="section-number">4. </span>Modification de plusieurs documents<a class="headerlink" href="#modification-de-plusieurs-documents" title="Link to this heading">#</a></h1>
 <p>Pour modifier plusieurs documents à la fois, il est nécessaire d’ajouter <code class="docutils literal notranslate"><span class="pre">{multi:</span> <span class="pre">true}</span></code> en fin de requête.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -522,11 +411,20 @@ Exemple:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+    <span class="p">{</span><span class="s2">&quot;nom&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="ow">in</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">]}},</span>
+              <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
 </div>
 <p>Cette requête, par exemple, ajoute un attribut “pays” ayant la valeur “France” aux modèles C1 <strong>et</strong> C2.</p>
+<p>PAS VU :</p>
 </section>
 <section id="upsert">
-<h3><span class="section-number">6.2.4. </span>Upsert<a class="headerlink" href="#upsert" title="Link to this heading">#</a></h3>
+<h1><span class="section-number">5. </span>Upsert<a class="headerlink" href="#upsert" title="Link to this heading">#</a></h1>
 <p>L’option <code class="docutils literal notranslate"><span class="pre">upsert</span></code> (mélange de “update” et “insert”) permet de mettre une condition sur la requête : si aucun document ne correspond aux conditions indiquées en première ligne, alors un nouveau document est créé par les champs renseignés sur la seconde ligne.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -552,32 +450,10 @@ Exemple:</p>
 </div>
 </div>
 <p>Cette fois-ci, un nouveau document est ajouté à la base.</p>
-</section>
-</section>
-<section id="suppression">
-<span id="sec-suppression"></span><h2><span class="section-number">6.3. </span>Suppression<a class="headerlink" href="#suppression" title="Link to this heading">#</a></h2>
-<p>Comme toutes les bonnes choses ont une fin, il est possible de supprimer une base, ou bien, sans être aussi radical, des éléments plus précis.
-Nous allons voir ici comment procéder aux différentes suppressions :</p>
-<section id="suppression-d-une-base-entiere">
-<h3><span class="section-number">6.3.1. </span>Suppression d’une base entière<a class="headerlink" href="#suppression-d-une-base-entiere" title="Link to this heading">#</a></h3>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">dropDatabase</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Lors de l’exécution de cette commande, c’est la base <strong>courante</strong>, celle qui est pointée par <em>db</em>, qui sera supprimée.</p>
-<div class="warning admonition">
-<p class="admonition-title">Important !</p>
-<p>Notez bien que tous les index qui pouvaient exister dans les collections de cette base seront également supprimés !</p>
-</div>
-</section>
-<section id="suppression-d-une-collection">
-<h3><span class="section-number">6.3.2. </span>Suppression d’une collection<a class="headerlink" href="#suppression-d-une-collection" title="Link to this heading">#</a></h3>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">drop</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Ici encore, les index éventuellement présents dans la collection supprimée seront eux aussi effacés.</p>
+<p>PAS VU :</p>
 </section>
 <section id="suppression-de-documents-dans-une-collection">
-<h3><span class="section-number">6.3.3. </span>Suppression de documents dans une collection<a class="headerlink" href="#suppression-de-documents-dans-une-collection" title="Link to this heading">#</a></h3>
+<h1><span class="section-number">6. </span>Suppression de documents dans une collection<a class="headerlink" href="#suppression-de-documents-dans-une-collection" title="Link to this heading">#</a></h1>
 <p>Nous voilà arrivés au gros morceau…
 Lorsque l’on veut supprimer certains documents en particulier <strong>sans toucher aux index</strong>, il faut utiliser la commande suivante :</p>
 <div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">remove</span><span class="p">({})</span>
@@ -603,9 +479,6 @@ Pour ce faire, il convient d’utiliser l’attribut “_id” puisqu’il est u
 <div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">remove</span><span class="p">({</span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ObjectId</span><span class="p">(</span><span class="s2">&quot;5612c6c0a5c56580cfacc342&quot;</span><span class="p">)})</span>
 </pre></div>
 </div>
-<p>Et voilà, vous savez tout sur la création, la suppression et la modification de bases !</p>
-</section>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -644,7 +517,7 @@ Pour ce faire, il convient d’utiliser l’attribut “_id” puisqu’il est u
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Les requêtes d’agrégation</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
       </div>
     </a>
     <a class="right-next"
@@ -672,25 +545,11 @@ Pour ce faire, il convient d’utiliser l’attribut “_id” puisqu’il est u
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion">6.1. Insertion</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creation-d-une-collection">6.1.1. Création d’une collection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ajout-de-nouveaux-documents">6.1.2. Ajout de nouveaux documents</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4. Modification de plusieurs documents</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#upsert">5. Upsert</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-de-documents-dans-une-collection">6. Suppression de documents dans une collection</a></li>
 </ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modification">6.2. Modification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remplacement-d-un-document">6.2.1. Remplacement d’un document</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-d-un-document">6.2.2. Modification d’un document</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-de-plusieurs-documents">6.2.3. Modification de plusieurs documents</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upsert">6.2.4. Upsert</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression">6.3. Suppression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-d-une-base-entiere">6.3.1. Suppression d’une base entière</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-d-une-collection">6.3.2. Suppression d’une collection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-de-documents-dans-une-collection">6.3.3. Suppression de documents dans une collection</a></li>
-</ul>
-</li>
-</ul>
+
   </nav></div>
 
 </div></div>

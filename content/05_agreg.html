@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5. Les requêtes d’agrégation &#8212; MongoDB</title>
+    <title>&lt;no title&gt; &#8212; MongoDB</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/05_agreg';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. Les requêtes de modification" href="06_modif.html" />
-    <link rel="prev" title="4. Les index" href="04_index.html" />
+    <link rel="next" title="4. Modification de plusieurs documents" href="06_modif.html" />
+    <link rel="prev" title="3. Requêtes et Index textuels" href="04_index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,18 +169,18 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="00_intro.html">
-                    MongoDB : Notes de cours
+                    MongoDB
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Premières requêtes en MongoDB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Attributs de type liste</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_dates.html">3. Attributs de type date</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_index.html">4. Les index</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Les requêtes d’agrégation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_modif.html">6. Les requêtes de modification</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Titre 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Récapitulatif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_index.html">3. Requêtes et Index textuels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modif.html">4. Modification de plusieurs documents</a></li>
+
+
 <li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">7. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">7.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">7.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
@@ -371,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Les requêtes d’agrégation</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -380,28 +380,9 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regroupements">5.1. Regroupements</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateur-de-somme">5.1.1. Opérateur de somme</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateur-de-comptage">5.1.2. Opérateur de comptage</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-d-extremum">5.1.3. Opérateurs d’extremum</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sans-regroupement">5.1.3.1. Sans regroupement</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#avec-regroupement">5.1.3.2. Avec regroupement</a></li>
+                <ul class="simple visible nav section-nav flex-column">
 </ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#successions-d-etapes-d-agregation">5.2. Successions d’étapes d’agrégation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">5.2.1. Introduction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project">5.2.2. Project</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sort">5.2.3. Sort</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limit">5.2.4. Limit</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#match">5.2.5. Match</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unwind">5.2.6. Unwind</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quelques-requetes-pour-tout-comprendre">5.2.7. Quelques requêtes pour tout comprendre</a></li>
-</ul>
-</li>
-</ul>
+
             </nav>
         </div>
     </div>
@@ -412,345 +393,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="les-requetes-d-agregation">
-<h1><span class="section-number">5. </span>Les requêtes d’agrégation<a class="headerlink" href="#les-requetes-d-agregation" title="Link to this heading">#</a></h1>
-<section id="regroupements">
-<span id="sec-exec"></span><h2><span class="section-number">5.1. </span>Regroupements<a class="headerlink" href="#regroupements" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Auteurs/trices : <strong>CASTRIQUE Jérémy, NOJAC Dimitri, VAVASSEUR Salomé</strong></p></li>
-</ul>
-<p>Dans cette partie, nous allons étudier <strong>les regroupements dans les requêtes d’aggrégation</strong>. Dans un premier temps, nous étudierons ce qu’est l’étape de regroupement. Ensuite nous regarderons comment effectuer des calculs à l’aide des 4 d’opérateurs qui sont : <code class="docutils literal notranslate"><span class="pre">$sum</span></code>, <code class="docutils literal notranslate"><span class="pre">$max</span></code>, <code class="docutils literal notranslate"><span class="pre">$min</span></code>, <code class="docutils literal notranslate"><span class="pre">$count</span></code> avec ou sans groupe.</p>
-<p>Les requêtes de regroupement vont permettre d’effectuer des opérations d’accumulation sur des documents regroupés. Il est l’équivalent de l’opérateur <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> en SQL.</p>
-<p><strong>Syntaxe</strong></p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">coll</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">([</span>
-<span class="w">	</span><span class="p">{</span><span class="nx">$group</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">expression</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="c1">// Group By Expression</span>
-<span class="w">      		 </span><span class="o">&lt;</span><span class="nx">field1</span><span class="o">&gt;:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">accumulator1</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">expression1</span><span class="o">&gt;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">      		</span><span class="p">...}</span>
-<span class="w">	</span><span class="p">}</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-<p>Pour tous les opérateurs que nous allons étudier dans cette partie du cours, la syntaxe sera identique à celle-ci.</p>
-<section id="operateur-de-somme">
-<h3><span class="section-number">5.1.1. </span>Opérateur de somme<a class="headerlink" href="#operateur-de-somme" title="Link to this heading">#</a></h3>
-<p>L’équivalent en SQL de l’opérateur <code class="docutils literal notranslate"><span class="pre">$sum</span></code> est <code class="docutils literal notranslate"><span class="pre">SUM</span></code> qui permet de sommer les valeurs prises pour un attribut.</p>
-<p><strong>Exemple de requête sans regroupement</strong></p>
-<p>Vous remarquez qu’ici l’expression qui guide le regroupement est <code class="docutils literal notranslate"><span class="pre">null</span></code>, soit une constante.
-Cela signifie que tous les documents de la base seront regroupés ensemble et qu’un seul calcul sera fait pour ce groupe.</p>
-<p><strong>Exemple de requête avec regroupement</strong></p>
-<p>Pour créer des groupes d’individus, il faut indiquer comment former ces groupes dans l’identifiant.</p>
-<p>Sur la base de <code class="docutils literal notranslate"><span class="pre">food</span></code>, on peut par exemple filtrer par quartier.</p>
-<p>Voici un exemple de requête :</p>
-<p><em>En mongoDB :</em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">food</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-    <span class="n">use</span> <span class="n">food</span>
-        <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span>
-  <span class="p">{</span><span class="err">$</span><span class="n">group</span><span class="p">:</span> <span class="p">{</span><span class="n">_id</span><span class="p">:</span> <span class="s2">&quot;$borough&quot;</span><span class="p">,</span>
-    	   <span class="n">nb</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="nb">sum</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span><span class="p">:</span> <span class="s2">&quot;$grades&quot;</span><span class="p">}}}}</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><em>En SQL :</em></p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">n_grades</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">nb</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">NYfood</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">borough</span>
-</pre></div>
-</div>
-<p>Dans cette requête, MongoDB va regrouper les individus ayant la même valweur pour l’attribut spécifié comme <code class="docutils literal notranslate"><span class="pre">_id</span></code> et donc considérer les restaurants d’un même quartier ensemble.</p>
-<p>L’opérateur <code class="docutils literal notranslate"><span class="pre">$sum</span></code> permet de calculer et de retourner les sommes de variables numériques (ici les sommes des nombres de notes).</p>
-<div class="tip admonition">
-<p class="admonition-title">Attention</p>
-<p>Il ne prend pas en compte les variables non numériques.</p>
-</div>
-<p><strong>Syntaxe</strong></p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">coll</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">([</span>
-<span class="w">     </span><span class="p">{</span><span class="nx">$group</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">&lt;</span><span class="kd">var</span><span class="o">&gt;</span><span class="p">,</span>
-<span class="w">	      </span><span class="nx">somme</span><span class="w"> </span><span class="o">:</span><span class="p">{</span><span class="w"> </span><span class="nx">$sum</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">expression1</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">expression2</span><span class="o">&gt;</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">]}}}</span>
-<span class="w">     </span><span class="p">}</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-<p><strong>Autre exemple</strong></p>
-<p>Pour cette partie, nous allons nous placer dans cette base que nous avons créée.</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;objet&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prix&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quantité&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">},</span>
-<span class="p">{</span><span class="w"> </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;objet&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prix&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">20</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quantité&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">},</span>
-<span class="p">{</span><span class="w"> </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;objet&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prix&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quantité&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">},</span>
-<span class="p">{</span><span class="w"> </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;objet&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prix&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quantité&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">},</span>
-<span class="p">{</span><span class="w"> </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;objet&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prix&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quantité&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">}</span>
-</pre></div>
-</div>
-<p><em><strong>Sans regroupement</strong></em>
-Jusqu’ici, nous avons compté le nombre d’individus grâce à l’attribu <code class="docutils literal notranslate"><span class="pre">$sum</span></code>, mais celui ci permet aussi <code class="docutils literal notranslate"><span class="pre">d'additionner</span> <span class="pre">des</span> <span class="pre">variables</span></code>.</p>
-<p>On se place maintenant dans la collection précédente.</p>
-<p><em><strong>Résultat obtenu :</strong></em></p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/* 1 */</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;qtt_tot&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">28.0</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Ici, on calcule la somme des quantités vendues.</p>
-<p><em><strong>Avec regroupement</strong></em>
-Si on veut sélectionner les sommes des durées de films par genre, il suffit de rajouter un regroupement comme le suivant :</p>
-<p><em><strong>Résultat obtenu :</strong></em></p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/* 1 */</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">20.0</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;qtt_tot&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1.0</span>
-<span class="p">}</span>
-<span class="w"> </span>
-<span class="cm">/* 2 */</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;qtt_tot&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">12.0</span>
-<span class="p">}</span>
-<span class="w"> </span>
-<span class="cm">/* 3 */</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;qtt_tot&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">15.0</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="operateur-de-comptage">
-<h3><span class="section-number">5.1.2. </span>Opérateur de comptage<a class="headerlink" href="#operateur-de-comptage" title="Link to this heading">#</a></h3>
-<p>L’opérateur <code class="docutils literal notranslate"><span class="pre">$count</span></code> renvoie le nombre de documents présents dans l’aggrégation.</p>
-<p>Dans cet exemple, on assigne à la valeur NB_+24 le nombre de documents ayant un individu avec un âge supérieur à 24 :</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">large_db</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span>
-    <span class="p">{</span><span class="err">$</span><span class="n">match</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">gt</span><span class="p">:</span> <span class="mi">24</span><span class="p">}}},</span>
-    <span class="p">{</span><span class="err">$</span><span class="n">count</span><span class="p">:</span> <span class="s2">&quot;NB_+24&quot;</span><span class="p">}</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>L’opérateur <code class="docutils literal notranslate"><span class="pre">$match</span></code> exclu les documents qui possèdent un individu avec un âge &lt;24.
-L’opérateur <code class="docutils literal notranslate"><span class="pre">$count</span></code> va donc agir sur les documents ayant un individu avec un âge supérieur à 24 à l’opérateur <code class="docutils literal notranslate"><span class="pre">$gt</span></code> (plus grand que) et va assigner
-à la valeur NB_+24 le nombre de documents répondant au critère.</p>
-<p>Une autre façon (moins directe) d’effectuer des opérations de comptage est d’utiliser l’opérateur <code class="docutils literal notranslate"><span class="pre">$sum</span></code>.</p>
-<p><em><strong>Sans regroupement</strong></em>
-Regardons une requête simple :</p>
-<p><em>En mongoDB :</em></p>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span>
-      <span class="p">{</span><span class="err">$</span><span class="n">group</span><span class="p">:{</span><span class="n">_id</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-              <span class="n">nb</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="nb">sum</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}}</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><em>En SQL :</em></p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">nb</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">NYfood</span>
-</pre></div>
-</div>
-<p>On utilise la fonction aggregate.
-Lorsqu’on utilise aggregate, il faut donner les individus sur lesquels on veut faire la requête.
-Dans notre cas, on choisit tout les individus. On le note <code class="docutils literal notranslate"><span class="pre">id:</span> <span class="pre">null</span></code>.
-On créé notre variable qu’on appelle nb qui va faire la somme de tout les individus.</p>
-<p>Dans cet exemple, nous avons compté le nombre d’individus sans sélection.</p>
-<p>En pratique, cela n’a pas forcément beaucoup d’intérêt.
-Il s’avère plus utile de pouvoir sélectionner le nombre de variables répondant à un critère. Pour cela, nous allons regarder avec une requête de regroupement.</p>
-<p><em><strong>Avec regroupement</strong></em>
-Toujours dans la collection NYfood de la base food, on cherche à connaitre le nombre de restaurants par type de cuisine. Pour cela, on va effectuer un regroupement sur l’attribut “cuisine”.</p>
-<p><em>En mongoDB :</em></p>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span>
-      <span class="p">{</span><span class="err">$</span><span class="n">group</span><span class="p">:{</span><span class="n">_id</span><span class="p">:</span> <span class="s2">&quot;$cuisine&quot;</span><span class="p">,</span>
-              <span class="n">nb_par_cuis</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="nb">sum</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}}</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><em>En SQL :</em></p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">nb_par_cuisine</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">NYfood</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">cuisine</span>
-</pre></div>
-</div>
-<p>On obtient donc plusieurs listes différentes contenant pour chacune le nombre de restaurants dans chaque liste nommée par le type de cuisine.</p>
-<p>Il y a donc eu un comptage du nombre de restaurants en fonction de la variable cuisine.</p>
-</section>
-<section id="operateurs-d-extremum">
-<h3><span class="section-number">5.1.3. </span>Opérateurs d’extremum<a class="headerlink" href="#operateurs-d-extremum" title="Link to this heading">#</a></h3>
-<p><strong>Syntaxe</strong></p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">coll</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">([</span>
-<span class="w">     </span><span class="p">{</span><span class="nx">$group</span><span class="o">:</span>
-<span class="w">         </span><span class="p">{</span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">&lt;</span><span class="kd">var</span><span class="o">&gt;</span><span class="p">,</span>
-<span class="w">	   </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$max</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">expression1</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">expression2</span><span class="o">&gt;</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">]}}}</span>
-<span class="w">     </span><span class="p">}</span>
-<span class="w">   </span><span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>Pour cette partie on se basera sur cette collection pour les exemples :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;objet&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prix&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quantité&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">},</span>
-<span class="p">{</span><span class="w"> </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;objet&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prix&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">20</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quantité&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">},</span>
-<span class="p">{</span><span class="w"> </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;objet&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prix&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quantité&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">},</span>
-<span class="p">{</span><span class="w"> </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;objet&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prix&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quantité&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">},</span>
-<span class="p">{</span><span class="w"> </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;objet&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prix&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quantité&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>Nous allons nous intéresser aux opérateurs <code class="docutils literal notranslate"><span class="pre">$min</span></code> et <code class="docutils literal notranslate"><span class="pre">$max</span></code> au sein de l’opéarteur <code class="docutils literal notranslate"><span class="pre">$group</span></code>,
-ils peuvent aussi être utilisés dans l’opérateur <code class="docutils literal notranslate"><span class="pre">$project</span></code> que nous verrons en deuxième partie de chapitre.
-En SQL, les équivalents sont les opérateurs <code class="docutils literal notranslate"><span class="pre">MIN</span></code>et `MAX.</p>
-<section id="sans-regroupement">
-<h4><span class="section-number">5.1.3.1. </span>Sans regroupement<a class="headerlink" href="#sans-regroupement" title="Link to this heading">#</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">$min</span></code> et <code class="docutils literal notranslate"><span class="pre">$max</span></code> s’ils sont utilisés sans regroupement retournent respectivement la valeur minimale et la valeur maximale
-de l’attribut sur lequel ils sont appliqués et ceci sur tous les documents.</p>
-<p><em>Exemple :</em></p>
-<div class="tip admonition">
-<p class="admonition-title">Attention</p>
-<p>Ne pas oublier le “$” dans les attributs entre guillemets à droite des deux points pour bien faire référence à l’attribut
-et non à une chaîne de caractères.</p>
-</div>
-<p>Cette requête renvoie la valeur maximale puis minimale que prend la variable <code class="docutils literal notranslate"><span class="pre">$prix</span></code> sur tous les documents :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;prix_max&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">20.0</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;prix_min&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">5.0</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="avec-regroupement">
-<h4><span class="section-number">5.1.3.2. </span>Avec regroupement<a class="headerlink" href="#avec-regroupement" title="Link to this heading">#</a></h4>
-<p>On peut aussi réaliser un regroupement et ainsi <code class="docutils literal notranslate"><span class="pre">$min</span></code> et <code class="docutils literal notranslate"><span class="pre">$max</span></code> renvoient toujours la valeur minimale et la valeur maximale
-de l’attribut sur lequel ils sont appliqués, mais cette fois-ci en étant appliqués sur les documents de l’ensemble de documents qui partagent la même clé de regroupement.</p>
-<p><em>Exemple :</em></p>
-<p>On groupe à l’aide de la clé <code class="docutils literal notranslate"><span class="pre">objet</span></code>,
-on renvoie donc la valeur maximale puis minimale que prend la variable <code class="docutils literal notranslate"><span class="pre">quantité</span></code> pour chaque <code class="docutils literal notranslate"><span class="pre">objet</span></code> différent :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;quantité_max&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;quantité_min&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">2.0</span>
-<span class="p">}</span>
-
-<span class="cm">/* 2 */</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;b&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;quantité_max&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;quantité_min&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1.0</span>
-<span class="p">}</span>
-
-<span class="cm">/* 3 */</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;c&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;quantité_max&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;quantité_min&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">5.0</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<div class="admonition-null-ou-inexistant admonition">
-<p class="admonition-title">Null ou inexistant</p>
-<p>Si certains documents ont une valeur de type null ou qui n’existe pas pour l’attribut sur lequel on applique <code class="docutils literal notranslate"><span class="pre">$min</span></code> ou <code class="docutils literal notranslate"><span class="pre">$max</span></code>,
-les opérateurs ne prennent pas en compte les valeurs de type null ou manquantes pour le calcul.
-Si tous les documents ont une valeur de type null ou qui n’existe pas, les opérateurs renvoient null pour la valeur minimale
-ou la valeur maximale.</p>
-</div>
-</section>
-</section>
-</section>
-<section id="successions-d-etapes-d-agregation">
-<h2><span class="section-number">5.2. </span>Successions d’étapes d’agrégation<a class="headerlink" href="#successions-d-etapes-d-agregation" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Auteurs/trices : <strong>Marine BINARD, Yann CAUSEUR, Arthur CONAS</strong></p></li>
-</ul>
-<section id="introduction">
-<h3><span class="section-number">5.2.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h3>
-<p>Les successions d’étapes d’agrégation vont permettre d’obtenir des requêtes proches de ce qu’on peut trouver en SQL.
-Contrairement à SQL où l’ordre est pré-défini (<code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">FROM</span> <span class="pre">WHERE</span> <span class="pre">ORDER</span> <span class="pre">BY</span></code>), ici ce n’est pas le cas. Il n’empêche que <strong>l’ordre dans lequel on place
-nos étapes est crucial.</strong></p>
-<p>Nos étapes peuvent toutes être effectuées une à une et indépendamment. En fait, à l’intérieur de notre <code class="docutils literal notranslate"><span class="pre">db.coll.aggregate([])</span></code>, il y aura notre liste d’étapes,
-contenues dans des crochets et séparées par des virgules, qui s’effectueront sur les données que <strong>l’étape d’avant aura rendue.</strong></p>
-<p>Il peut donc être intéressant d’éxécuter le code étape par étape pour savoir sur quelles données on travaille à un moment donné.</p>
-<p>Dans la suite, nous présentons de nouvelles étapes d’agrégation.</p>
-</section>
-<section id="project">
-<h3><span class="section-number">5.2.2. </span>Project<a class="headerlink" href="#project" title="Link to this heading">#</a></h3>
-<p><em><strong>Pourquoi l’utiliser ?</strong></em><br />
-Il peut arriver lors d’une requête d’agrégation de vouloir créer de nouvelles variables par exemple, pour des calculs. La commande <code class="docutils literal notranslate"><span class="pre">$project</span></code> permet donc de créer de nouvelles variables. Néanmoins, il faut faire attention,
-lorsque l’on crée une nouvelle variable dans une requête d’agrégation.
-Tous les attributs déjà existants pour les documents d’une collection ne sont plus mémorisés. Donc, si on veut créer une nouvelle variable, tout en gardant celles déjà existantes, il faut le mentionner dans le <code class="docutils literal notranslate"><span class="pre">$project</span></code>.</p>
-<p><em><strong>Comment ça fonctionne ?</strong></em></p>
-<p><strong>Syntaxe</strong> :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>db.coll.aggregate( 
-  [
-    {$project : {&lt;nom_nouv_att1&gt; : &lt;val_att1&gt;, &lt;nom_nouv_att2&gt; : &lt;val_att2&gt;, ... }}
-  ]
-)
-</pre></div>
-</div>
-<p>Le fait de vouloir garder un attribut déjà existant fonctionne de la même façon que la création, il faut donc renommer la variable existante.</p>
-<p><em><strong>Exemple :</strong></em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">food</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span> 
-  <span class="p">[</span>
-    <span class="p">{</span><span class="err">$</span><span class="n">project</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;n_notes&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span> <span class="p">:</span> <span class="s1">&#39;$grades&#39;</span><span class="p">}}}</span>
-  <span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Sur l’exemple ci-dessus, on vient créer une variable n_notes qui prend pour valeur la taille de la liste <code class="docutils literal notranslate"><span class="pre">grades</span></code>
-(qui contient les différentes notes attribuées aux restaurants).
-On cherche donc, ici, à compter le nombre de notes attribué à chaque restaurant.
-Mais tous les autres attributs du restaurant sont effacés. Par la suite,
-on ne pourra donc retrouver que le nombre de notes attribué et non le quartier
-ou le type de restaurant.
-Si on veut afficher le quartier en question, on doit le préciser tel que :</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span> 
-  <span class="p">[</span>
-    <span class="p">{</span><span class="err">$</span><span class="n">project</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;n_notes&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span> <span class="p">:</span> <span class="s1">&#39;$grades&#39;</span><span class="p">},</span> <span class="n">quartier</span> <span class="p">:</span><span class="s1">&#39;$borough&#39;</span><span class="p">}}</span>
-  <span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+  <p>ON PEUT RENOMMER :</p>
 <p>Avec cette requête, on peut voir le quartier du restaurant. Par ailleurs, la variable <code class="docutils literal notranslate"><span class="pre">borough</span></code>
 a été renommée <code class="docutils literal notranslate"><span class="pre">quartier</span></code>. On peut également conserver cette
 variable sans la renommer avec cette syntaxe.</p>
@@ -764,319 +407,15 @@ variable sans la renommer avec cette syntaxe.</p>
 </pre></div>
 </div>
 </div>
-</div>
-<p><em><strong>Traduction SQL :</strong></em></p>
-<p>L’équivalent en SQL de la commande <code class="docutils literal notranslate"><span class="pre">$project</span></code> est l’étape <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> et <code class="docutils literal notranslate"><span class="pre">AS</span></code> qui
-permettent de créer de nouvelles variables. Par contre, en SQL,
-l’étape <code class="docutils literal notranslate"><span class="pre">AS</span></code> est facultative, la nouvelle variable prendra
-comme nom la formule du calcul. En MongoDB, elle est obligatoire !
-Si on ne précise pas le nom de la nouvelle variable, cela affichera
-une erreur. Pour la traduction SQL de l’exemple précédent, il convient de faire attention.
-Pour rappel, les listes n’existent pas en SQL ! D’où la nécessité
-dans certains moments de faire des calculs verticaux, ce qui n’est pas nécéssaire.
-Dans notre cas, en SQL l’attribut <code class="docutils literal notranslate"><span class="pre">grades</span></code> serait une table à part entière (avec toutes les notes <code class="docutils literal notranslate"><span class="pre">grade</span></code>, une clé étrangère faisant référence au restaurant)
-Il faudrait donc faire une jointure sur celle-ci puis grouper par restaurant (en imaginant qu’il existe un ID pour chaque restaurant)
-L’exemple serait donc:</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">borough</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">NYfood</span><span class="w"> </span><span class="k">NATURAL</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">grades</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">restoID</span>
-<span class="k">HAVING</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">&quot;n_notes&quot;</span>
-</pre></div>
-</div>
-</section>
-<section id="sort">
-<h3><span class="section-number">5.2.3. </span>Sort<a class="headerlink" href="#sort" title="Link to this heading">#</a></h3>
-<p><em><strong>Pourquoi l’utiliser ?</strong></em></p>
-<p>Comme dans la plus part des langages de bases de données, MongoDB ne stocke pas les documents dans une collection dans un ordre
-en particulier. C’est pourquoi l’étape <code class="docutils literal notranslate"><span class="pre">sort</span></code> (tri en français) va permettre
-de trier l’ensemble de tous les documents d’entrée afin de les renvoyer dans
-l’ordre choisi par l’utilisateur. Nous pouvons les trier dans l’ordre croissant,
-décroissant, chronologique ou bien alphabétique selon le type du champ
-souhaitant être trié.
-Il est possible de trier sur plusieurs champs à la fois, mais dans ce cas l’ordre de tri est évalué de gauche à droite.
-Le <code class="docutils literal notranslate"><span class="pre">$sort</span></code> est finalement l’équivalent du <code class="docutils literal notranslate"><span class="pre">ORDER</span> <span class="pre">BY</span></code> en SQL.</p>
-<p><em><strong>Comment ça fonctionne ?</strong></em></p>
-<p><strong>Syntaxe</strong> :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>db.coll.aggregate(
-	[
-	 {$sort: {&lt;champ1&gt;: &lt;sort order&gt;, &lt;champ2&gt;: &lt;sort order&gt; ...}}
-	]
-)
-</pre></div>
-</div>
-<p>Le <code class="docutils literal notranslate"><span class="pre">&lt;sort</span> <span class="pre">order&gt;</span></code> peut prendre la valeur : 1 (croissant), -1 (décroissant) ou encore <code class="docutils literal notranslate"><span class="pre">{$meta:</span> <span class="pre">&quot;textScore&quot;}</span></code>(il s’agit d’un tri de métadonnées textScore calculées dans l’ordre décroissant).</p>
-<p><em><strong>Exemples :</strong></em></p>
-<p>Attention à bien prendre en compte le fait que lors du
-tri sur un champ contenant des valeurs en double (ou non unique),
-les documents contenant ces valeurs peuvent être renvoyés dans
-n’importe quel ordre.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
-   <span class="p">[</span>
-	 <span class="p">{</span><span class="err">$</span><span class="n">sort</span> <span class="p">:</span> <span class="p">{</span><span class="n">borough</span> <span class="p">:</span> <span class="mi">1</span><span class="p">}}</span>
-   <span class="p">]</span>
-<span class="p">)</span>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+    <span class="p">{</span><span class="err">$</span><span class="n">project</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;n_notes&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span> <span class="p">:</span> <span class="s1">&#39;$grades&#39;</span><span class="p">},</span> <span class="n">borough</span> <span class="p">:</span> <span class="mi">1</span><span class="p">}}</span>
+     <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
 </pre></div>
 </div>
 </div>
 </div>
-<p><em><strong>Traduction SQL :</strong></em></p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">borough</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">NYfood</span><span class="w"> </span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">borough</span>
-</pre></div>
-</div>
-<p>En effet, dans l’exemple ci-dessus, le champ quartier n’est
-pas un champ avec des valeurs uniques. Si un ordre de tri
-cohérent est souhaité, il est important d’au moins inclure
-un champ dans votre tri qui contient des valeurs uniques.
-Généralement, le moyen le plus simple de garantir cela consiste
-à inclure le champ _id dans la requête de tri.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
-   <span class="p">[</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">sort</span> <span class="p">:</span> <span class="p">{</span><span class="n">borough</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">_id</span> <span class="p">:</span> <span class="mi">1</span><span class="p">}}</span>
-   <span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Cette fois ci, la requête affichera l’ensemble
-de la collection avec les noms de quartier
-affichés par ordre alphabétique. Les collections
-du quartier de “Bronx” seront les premières à être affichées,
-puis ensuite l’ordre par identifiant sera conservé
-lorsque le nom de quartier sera le même pour plusieurs collections.</p>
-<p><em><strong>Traduction SQL :</strong></em></p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">borough</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">NYfood</span><span class="w"> </span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">borough</span><span class="p">,</span><span class="w"> </span><span class="n">_id</span>
-</pre></div>
-</div>
-</section>
-<section id="limit">
-<h3><span class="section-number">5.2.4. </span>Limit<a class="headerlink" href="#limit" title="Link to this heading">#</a></h3>
-<p><em><strong>Pourquoi l’utiliser ?</strong></em></p>
-<p>L’étape <code class="docutils literal notranslate"><span class="pre">$limit</span></code> va simplement permettre de
-limiter le nombre de documents voulant être
-affichés par la requête. Il n’y a pas grand
-intérêt à utiliser le limit tout seul. Généralement,
-il est utilisé avec l’étape <code class="docutils literal notranslate"><span class="pre">$sort</span></code> vu précédemment.</p>
-<p><em><strong>Comment ça fonctionne ?</strong></em></p>
-<p><strong>Syntaxe</strong> :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>db.coll.aggregate(
-	[
-	 {$limit : 5} 
-	]
-)
-</pre></div>
-</div>
-<p>L’argument qui est pris par le <code class="docutils literal notranslate"><span class="pre">$limit</span></code> est toujours
-un entier positif, qui va déterminer le nombre
-de collections que l’on souhaite afficher.</p>
-<p><em><strong>Exemple</strong></em></p>
-<p>Dans cet exemple, on souhaite afficher les 3 quartiers
-possédant le plus de restaurants.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
-	<span class="p">[</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">group</span><span class="p">:</span> <span class="p">{</span><span class="n">_id</span><span class="p">:</span> <span class="s2">&quot;$borough&quot;</span><span class="p">,</span> <span class="n">nb</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="nb">sum</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}},</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">sort</span><span class="p">:</span> <span class="p">{</span><span class="n">nb</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}},</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">limit</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
-	<span class="p">]</span>
-<span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<p>On remarque ici que nous ne pouvons pas utiliser
-l’étape <code class="docutils literal notranslate"><span class="pre">$limit</span></code> seul sans le sort.
-Nous avons d’abord besoin de trier le nombre
-de restaurants par ordre décroissant puis enfin<br />
-préciser que nous souhaitons obtenir seulement les
-3 premiers quartiers contenant le plus de restaurants.</p>
-<p><em><strong>Traduction SQL :</strong></em></p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="n">borough</span><span class="p">)</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">NYfood</span><span class="w"> </span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">borough</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="n">borough</span><span class="p">)</span><span class="w"> </span><span class="k">desc</span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">3</span>
-</pre></div>
-</div>
-</section>
-<section id="match">
-<h3><span class="section-number">5.2.5. </span>Match<a class="headerlink" href="#match" title="Link to this heading">#</a></h3>
-<p><em><strong>Pourquoi l’utiliser</strong></em></p>
-<p><code class="docutils literal notranslate"><span class="pre">$match</span></code> peut être utilisé comme un filtre, avec une condition. On pourrait le mettre n’importe où dans notre requête mais il est particulièrement intéressant en début ou en fin de requête.</p>
-<p><em><strong>Comment ça fonctionne ?</strong></em></p>
-<p><strong>Syntaxe</strong> :</p>
-<p>Le <code class="docutils literal notranslate"><span class="pre">$match</span></code> est un requête du type de celles qu’on passe à <code class="docutils literal notranslate"><span class="pre">find</span></code>.</p>
-<p><em><strong>Exemple :</strong></em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span> 
-  <span class="p">[</span>  
-   <span class="p">{</span><span class="err">$</span><span class="n">match</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">}},</span>
-   <span class="p">{</span><span class="err">$</span><span class="n">unwind</span><span class="p">:</span> <span class="s2">&quot;$grades&quot;</span><span class="p">},</span>
-   <span class="p">{</span><span class="err">$</span><span class="n">group</span> <span class="p">:</span> <span class="p">{</span><span class="n">_id</span><span class="p">:</span> <span class="s2">&quot;$grades.grade&quot;</span><span class="p">,</span>
-       <span class="n">n</span><span class="p">:{</span><span class="err">$</span><span class="nb">sum</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
-            <span class="p">}</span>
-          <span class="p">},</span>
-    <span class="p">{</span><span class="err">$</span><span class="n">match</span><span class="p">:{</span><span class="n">n</span><span class="p">:{</span><span class="err">$</span><span class="n">gt</span><span class="p">:</span><span class="mi">1000</span><span class="p">}}},</span>
-  <span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">n</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">NYfood</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">Borough</span><span class="o">=</span><span class="s1">&#39;Brooklyn&#39;</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">grade</span>
-<span class="k">HAVING</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1000</span>
-</pre></div>
-</div>
-<p>Ici le premier <code class="docutils literal notranslate"><span class="pre">$match</span></code> sert comme un <code class="docutils literal notranslate"><span class="pre">WHERE</span></code>,
-et le deuxième comme un <code class="docutils literal notranslate"><span class="pre">HAVING</span></code> en SQL.</p>
-<p>Dans tous les cas, le <code class="docutils literal notranslate"><span class="pre">$match</span></code> fait une sélection sur le jeu de données en fonction d’une condition, au moment où il est placé.</p>
-<p>Si le <code class="docutils literal notranslate"><span class="pre">$match</span></code> est au début, il fera une sélection sur l’ensemble des données (ici <code class="docutils literal notranslate"><span class="pre">NYfood</span></code>) mais n’aura pas accès aux opérations qui sont effectuées après (comme le <code class="docutils literal notranslate"><span class="pre">$group</span></code> dans notre cas).
-C’est pour cela qu’on utilise aussi le <code class="docutils literal notranslate"><span class="pre">$match</span></code> plus tard, pour avoir accès aux données créées avec nos bouts de requêtes précédents, ce qui permet ici d’avoir accès au <code class="docutils literal notranslate"><span class="pre">n</span></code>.
-Cependant, ce dernier <code class="docutils literal notranslate"><span class="pre">$match</span></code> n’a pas accès à toute la base de données <code class="docutils literal notranslate"><span class="pre">NYfood</span></code> et n’agit que sur les résultats des requêtes précédentes.</p>
-</section>
-<section id="unwind">
-<h3><span class="section-number">5.2.6. </span>Unwind<a class="headerlink" href="#unwind" title="Link to this heading">#</a></h3>
-<p><em><strong>Pourquoi l’utiliser ?</strong></em></p>
-<p>Il arrive que les documents de certaines collections possèdent pour attribut une liste. Lorsque l’on effectue une requête d’agrégation, il peut être nécéssaire d’agir non pas sur la liste mais sur chaque élément de la liste. Pour cela, on utilise la commande <code class="docutils literal notranslate"><span class="pre">$unwind</span></code>. Elle permet, pour chaque élément de la liste, de dupliquer le document pour chaque valeur de la liste.</p>
-<p><em><strong>Comment ça fonctionne ?</strong></em></p>
-<p><strong>Syntaxe</strong> :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>db.coll.aggregate( 
-  [
-   {$unwind : &quot;$att&quot;}}
-  ]
-)
-</pre></div>
-</div>
-<p>En général, un <code class="docutils literal notranslate"><span class="pre">$unwid</span></code> seul n’a peu d’intérêt.<code class="docutils literal notranslate"><span class="pre">$att</span></code> est une liste de taille 10 que la collection comporte 1000 individus, la requête d’exemple renverra un résultat de 10 000 lignes (10 * 1000)</p>
-<p><em><strong>Exemple</strong></em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span> 
-  <span class="p">[</span>
-   <span class="p">{</span><span class="err">$</span><span class="n">unwind</span> <span class="p">:</span><span class="s2">&quot;$grades&quot;</span><span class="p">},</span>
-   <span class="p">{</span><span class="err">$</span><span class="n">group</span><span class="p">:</span> <span class="p">{</span><span class="n">_id</span> <span class="p">:</span> <span class="s1">&#39;$grades.grade&#39;</span><span class="p">,</span> 
-             <span class="n">n</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="nb">sum</span><span class="p">:</span><span class="mi">1</span><span class="p">}}</span>
-    <span class="p">},</span>
-  <span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Voici un exemple concret d’utilisation d’un <code class="docutils literal notranslate"><span class="pre">$unwind</span></code>. Dans la requête, on cherche à compter le nombre de A ayant été attribués à l’ensemble des restaurants de la collection, puis le nombre de B, C ….
-Pour que cette requête fonctionne, le <code class="docutils literal notranslate"><span class="pre">$unwind</span></code> est obligatoire, sinon on considère la liste entière des notes et on ne peut donc pas compter.</p>
-<p><em><strong>Traduction SQL :</strong></em></p>
-<p>Il n’existe pas réellement d’équivalent SQL au <code class="docutils literal notranslate"><span class="pre">$unwind</span></code>. Néanmoins, il se rapproche d’une opération de jointure sans aucun filtre.</p>
-</section>
-<section id="quelques-requetes-pour-tout-comprendre">
-<h3><span class="section-number">5.2.7. </span>Quelques requêtes pour tout comprendre<a class="headerlink" href="#quelques-requetes-pour-tout-comprendre" title="Link to this heading">#</a></h3>
-<p>Afin d’illustrer le fonctionnement pas à pas, découpons une requête en détail.
-Pour cet exemple, on veut  <strong>les 3 notes les plus données dans les restaurants du quartier de Brooklyn</strong>.
-La première étape naturelle est de sélectionner les restaurants présents uniquement dans le quartier de Brooklyn.
-Pour cela on utilise <code class="docutils literal notranslate"><span class="pre">$match</span></code>, qui retourne uniquement les restaurants de Brooklyn.</p>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
-	<span class="p">[</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">match</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">}},</span>
-    	<span class="p">]</span>
-<span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<p>Dans un second temps, il faut voir que pour récupérer les différentes valeurs de notes, il faut acceder à chaque élément de la liste et non la liste entière. Pour y accéder, il faut utiliser la commande <code class="docutils literal notranslate"><span class="pre">$unwind</span></code>, qui rendra donc à cette étape tous les restaurants de Brooklyn associés à une note qu’il a obtenu (Attention, cela retourne beaucoup de résultats : nombre de restaurants * nombre de notes)</p>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
-	<span class="p">[</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">match</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">}},</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">unwind</span><span class="p">:</span> <span class="s2">&quot;$grades&quot;</span><span class="p">},</span>
-    <span class="p">]</span>
-<span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<p>Ensuite, pour savoir quelle note a été la plus attribuée, il faut grouper pour chaque valeur de note. On utilise donc un <code class="docutils literal notranslate"><span class="pre">$group</span></code> sur l’attribut <code class="docutils literal notranslate"><span class="pre">$grades.grade$</span> <span class="pre">(accessible</span> <span class="pre">grâce</span> <span class="pre">a</span> </code>$unwind<code class="docutils literal notranslate"><span class="pre">).</span> <span class="pre">Puis,</span> <span class="pre">on</span> <span class="pre">décide</span> <span class="pre">de</span> <span class="pre">compter</span> <span class="pre">le</span> <span class="pre">nombre</span> <span class="pre">d'itérations</span> <span class="pre">de</span> <span class="pre">chaque</span> <span class="pre">note</span> <span class="pre">stockée</span> <span class="pre">dans</span> <span class="pre">la</span> <span class="pre">variable</span> </code>nb`. Cette étape nous retourne donc le nombre de fois où chaque note a été attribuée à un restaurant.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
-	<span class="p">[</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">match</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">}},</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">unwind</span><span class="p">:</span> <span class="s2">&quot;$grades&quot;</span><span class="p">},</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">group</span><span class="p">:</span> <span class="p">{</span><span class="n">_id</span><span class="p">:</span> <span class="s2">&quot;$grades.grade&quot;</span><span class="p">,</span> <span class="n">nb</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="nb">sum</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}},</span>
-    <span class="p">]</span>
-<span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<p>Nous sommes donc tout proches du résultat espéré. Il reste maintenant à trier les résultats par ordre décroissant, afin d’avoir les notes les plus données au début : <code class="docutils literal notranslate"><span class="pre">{$sort:</span> <span class="pre">{nb:</span> <span class="pre">-1}}</span></code>. Mais comme l’énoncé le précise, on souhaite afficher uniquement les 3 notes les plus données. Etant donné que les notes sont triées, il faut seulement préciser : <code class="docutils literal notranslate"><span class="pre">{$limit:</span> <span class="pre">3}</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
-	<span class="p">[</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">match</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">}},</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">unwind</span><span class="p">:</span> <span class="s2">&quot;$grades&quot;</span><span class="p">},</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">group</span><span class="p">:</span> <span class="p">{</span><span class="n">_id</span><span class="p">:</span> <span class="s2">&quot;$grades.grade&quot;</span><span class="p">,</span> <span class="n">nb</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="nb">sum</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}},</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">sort</span><span class="p">:</span> <span class="p">{</span><span class="n">nb</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}},</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">limit</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<p>On obtient bien, avec cette requête, les 3 notes les plus attribuées aux restaurants de Brooklyn !</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
-	<span class="p">[</span>
-
-     <span class="p">{</span><span class="err">$</span><span class="n">project</span><span class="p">:</span> <span class="p">{</span><span class="n">taille</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">size</span><span class="p">:</span> <span class="s2">&quot;$grades&quot;</span><span class="p">}}},</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">match</span> <span class="p">:{</span><span class="n">taille</span><span class="p">:{</span><span class="err">$</span><span class="n">gt</span><span class="p">:</span><span class="mi">2</span><span class="p">}}},</span>
-     <span class="p">{</span><span class="err">$</span><span class="n">group</span><span class="p">:</span> <span class="p">{</span><span class="n">_id</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="n">nb_min</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="nb">min</span><span class="p">:</span> <span class="s2">&quot;$taille&quot;</span><span class="p">},</span>
-      <span class="n">nb_max</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="nb">max</span><span class="p">:</span> <span class="s2">&quot;$taille&quot;</span><span class="p">}}</span>
-                        <span class="p">},</span>         
-    <span class="p">]</span>
-<span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<p>Dans cette deuxième requête, on montre bien ici qu’il n’y a pas d’ordre pré-défini d’étape, et ici le <code class="docutils literal notranslate"><span class="pre">$match</span></code> n’est ni au début de la requête, ni à la fin.</p>
-<p>Expliquons cette requête (qui n’a pas beaucoup d’intérêt pratique).</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">$project</span></code> : création de la variable taille, qui correspond au nombre de notes données à un restaurant.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">$match</span></code> : Dans le tableau rendu précédemment, on ne prend que les restaurants ayant plus de 2 notes.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">$group</span></code> : Sur le résultat de la requête précédente, on groupe tout les restaurants (_id : null), et on regarde le nombre minimum et maximum de notes attribuées
-à un restaurant. (Ayant sélectionné les individus supérieurs à deux, le minimum ne pouvait être que 3 ou plus.</p></li>
-</ul>
-<p>En SQL, on aurait :</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">taille</span><span class="p">,</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">taille</span><span class="p">),</span><span class="k">MIN</span><span class="p">(</span><span class="n">taille</span><span class="p">)</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">NYfood</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">taille</span><span class="o">&gt;=</span><span class="mi">2</span>
-</pre></div>
-</div>
-<p><strong>Résultat final : Le nombre minimum et maximum de notes attribué aux restaurants ayant au moins deux notes.</strong></p>
-</section>
-</section>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1114,7 +453,7 @@ Pour cela on utilise <code class="docutils literal notranslate"><span class="pre
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Les index</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Requêtes et Index textuels</p>
       </div>
     </a>
     <a class="right-next"
@@ -1122,7 +461,7 @@ Pour cela on utilise <code class="docutils literal notranslate"><span class="pre
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Les requêtes de modification</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Modification de plusieurs documents</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1141,28 +480,9 @@ Pour cela on utilise <code class="docutils literal notranslate"><span class="pre
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regroupements">5.1. Regroupements</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateur-de-somme">5.1.1. Opérateur de somme</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateur-de-comptage">5.1.2. Opérateur de comptage</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-d-extremum">5.1.3. Opérateurs d’extremum</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sans-regroupement">5.1.3.1. Sans regroupement</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#avec-regroupement">5.1.3.2. Avec regroupement</a></li>
+    <ul class="simple visible nav section-nav flex-column">
 </ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#successions-d-etapes-d-agregation">5.2. Successions d’étapes d’agrégation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">5.2.1. Introduction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project">5.2.2. Project</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sort">5.2.3. Sort</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limit">5.2.4. Limit</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#match">5.2.5. Match</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unwind">5.2.6. Unwind</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quelques-requetes-pour-tout-comprendre">5.2.7. Quelques requêtes pour tout comprendre</a></li>
-</ul>
-</li>
-</ul>
+
   </nav></div>
 
 </div></div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4. Les index &#8212; MongoDB</title>
+    <title>3. Requêtes et Index textuels &#8212; MongoDB</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/04_index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. Les requêtes d’agrégation" href="05_agreg.html" />
-    <link rel="prev" title="3. Attributs de type date" href="03_dates.html" />
+    <link rel="next" title="&lt;no title&gt;" href="05_agreg.html" />
+    <link rel="prev" title="2. Récapitulatif" href="02_listes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,18 +169,18 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="00_intro.html">
-                    MongoDB : Notes de cours
+                    MongoDB
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Premières requêtes en MongoDB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Attributs de type liste</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_dates.html">3. Attributs de type date</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Les index</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">5. Les requêtes d’agrégation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_modif.html">6. Les requêtes de modification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Titre 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Récapitulatif</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Requêtes et Index textuels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modif.html">4. Modification de plusieurs documents</a></li>
+
+
 <li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">7. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">7.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">7.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
@@ -358,9 +358,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -371,24 +369,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Les index</h1>
+    <h1>Requêtes et Index textuels</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quoi-servent-ils">4.1. À quoi servent-ils ?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quand-les-utiliser">4.2. Quand les utiliser ?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntaxe-adaptee">4.3. Syntaxe adaptée</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-composes">4.4. Index composés</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-et-index-textuels">4.5. Requêtes et Index textuels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-geo-spatiaux">4.6. Index géo-spatiaux</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -398,178 +383,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="les-index">
-<h1><span class="section-number">4. </span>Les index<a class="headerlink" href="#les-index" title="Link to this heading">#</a></h1>
-<ul class="simple">
-<li><p>Auteurs/trices : Adrien VIGUE, Etienne BARON, Camille MONOT</p></li>
-</ul>
-<p>Ce chapitre traite de :</p>
-<ul class="simple">
-<li><p>Index + requêtes textuelles + requêtes géographiques</p></li>
-</ul>
-<section id="a-quoi-servent-ils">
-<h2><span class="section-number">4.1. </span>À quoi servent-ils ?<a class="headerlink" href="#a-quoi-servent-ils" title="Link to this heading">#</a></h2>
-<p>Les index prennent en charge l’exécution efficace des requêtes dans MongoDB. Sans index, MongoDB doit effectuer une analyse de collection , c’est-à-dire analyser chaque document d’une collection, pour sélectionner les documents qui correspondent à l’instruction de requête. Si un index approprié existe pour une requête, MongoDB peut utiliser l’index pour limiter le nombre de documents qu’il doit inspecter. Les index de MongoDB sont similaires aux index d’autres systèmes de base de données. MongoDB définit les index au niveau de la collection et prend en charge les index sur n’importe quel champ ou sous-champ des documents dans une collection MongoDB.</p>
-<p>En bref, les index sont un moyen de trouver rapidement et efficacement du contenu dans une base de données.</p>
-</section>
-<section id="quand-les-utiliser">
-<h2><span class="section-number">4.2. </span>Quand les utiliser ?<a class="headerlink" href="#quand-les-utiliser" title="Link to this heading">#</a></h2>
-<p>On met en place des index à chaque fois qu’on s’attend à avoir beaucoup de requêtes sur une clé (resp. un ensemble de clés).
-Par exemple, on souhaite récupérer les notes d’un étudiant à l’aide de son numéro étudiant. Il faudra alors mettre un index sur la clé “numéro étudiant” afin de réaliser des requêtes efficaces pour retrouver toutes les informations de l’étudiant en fonction de son numéro.</p>
-<div class="tip admonition">
-<p class="admonition-title">⚠️ Attention</p>
-<p>On ne peut pas toujours utiliser des index. En effet, les index rendent la mise à jour de la base fastidieuse : à chaque fois que
-vous rajoutez de nouvelles données, vous devez redéfinir vos index. Il est donc nécessaire d’utiliser avec parcimonie des index sur une base
-où vous vous attendez à devoir faire des mises à jour régulières.</p>
-</div>
-</section>
-<section id="syntaxe-adaptee">
-<h2><span class="section-number">4.3. </span>Syntaxe adaptée<a class="headerlink" href="#syntaxe-adaptee" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Création d’un index</p></li>
-</ul>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;cle&quot;</span><span class="o">:</span><span class="mf">1</span><span class="p">})</span>
-</pre></div>
-</div>
-<p>On crée ici un index dans la collection ‘collec’ de la base de données courante ‘db’. On donne ensuite le nom du champs sur lequel on va ensuite créer la clé. Le “:1” signifie que l’index va trier les données dans l’ordre croissant.</p>
-<p><em>Exemple :</em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">food</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-    <span class="n">use</span> <span class="n">food</span>
-        <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">createIndex</span><span class="p">({</span><span class="s2">&quot;borough&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Ici on crée un index “quartier” dans la collection NYfood de la base food. Le quartier étant une information importante du restaurant, il est judicieux de créer un index pour toutes les requêtes ultérieures.</p>
-<div class="admonition-a-noter admonition">
-<p class="admonition-title">✍ À noter</p>
-<p>Si on avait mis une valeur négative à la place du 1, les données auraient été triées dans l’ordre décroissant.
-Le tri n’a cependant pas d’importance sur l’efficacité de la requête.</p>
-</div>
-<ul class="simple">
-<li><p>Récupération d’index</p></li>
-</ul>
-<p>Lorsque l’on prend en main une nouvelle base mongoDB, il est judicieux de se renseigner sur les index déjà créés, afin de construire les requêtes les plus optimisées possible. Pour cela, on utilise getIndexes :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collec</span><span class="p">.</span><span class="nx">getIndexes</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>La syntaxe est très simple et limpide, et donc si l’on applique cette dernière à notre exemple :</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">getIndexes</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>Opérateurs bénéficiant de l’index</p></li>
-</ul>
-<p>Construire une requête mongoDB utilisant des index ne diffèrent pas d’une requête n’en utilisant pas, toutefois, certains opérateurs logiques bénéficient tout particulièrement de la présence d’un ou plusieurs index. Il est donc pertinent de construire des index si vous pensez utiliser ces opérateurs.</p>
-<p><em>Exemple 1 : Opérateur égal (:, <code class="docutils literal notranslate"><span class="pre">$eq</span></code>)</em></p>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>On récupère les restaurants proposant de la cuisine chinoise dans le quartier de Brooklyn.</p>
-<p><em>Exemple 2 : Opérateur infériorité/supériorité (<code class="docutils literal notranslate"><span class="pre">$lt</span></code>, <code class="docutils literal notranslate"><span class="pre">$lte</span></code>, <code class="docutils literal notranslate"><span class="pre">$gt</span></code>, <code class="docutils literal notranslate"><span class="pre">$gte</span></code>)</em></p>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">gte</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="err">$</span><span class="n">lt</span><span class="p">:</span> <span class="s2">&quot;D&quot;</span><span class="p">}})</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>On récupère les restaurant dont le nom est situé entre “C” et “D” dans l’ordre lexicographique.</p>
-<p><em>Exemple 3 : différence d’exécution avec et sans index</em></p>
-<p>Reprenons la requête vue à l’exemple 1, mais cette fois affichons son temps d’exécution :</p>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Rajoutons maintenant l’index “cuisine” (l’index quartier ayant déjà été créé plus haut) :</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">createIndex</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>On peut maintenant relancer la requête et observer la différence :</p>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="index-composes">
-<h2><span class="section-number">4.4. </span>Index composés<a class="headerlink" href="#index-composes" title="Link to this heading">#</a></h2>
-<p>Il est également possible de créer des index non pas sur un mais sur plusieurs champs de la base de données, on appelle alors un tel index un “index composé”. L’intérêt d’une telle pratique est de lier des champs entre eux et d’optimiser grandement des requêtes portant sur ces derniers. Si l’on s’attend à effectuer de telles requêtes, alors créer un index composé devient judicieux.</p>
-<ul class="simple">
-<li><p>Création d’un index composé</p></li>
-</ul>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;cle1&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;cle2&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">}</span>
-</pre></div>
-</div>
-<div class="tip admonition">
-<p class="admonition-title">⚠️ Attention</p>
-<p>L’ordre dans lequel vous déclarez vos champs à une importance capitale dans le résultat renvoyé par la requête.
-Par exemple, l’index composé suivant : db.nomDeLaCollection.createIndex({“cle2”: 1, “cle1”: 1}, ne correspond pas du tout
-à l’index vu juste au-dessus.
-Certaines requêtes pourront ainsi être accélérées par l’un ou l’autre des index mais pas forcément par les deux.</p>
-</div>
-<ul class="simple">
-<li><p>Exemple de requête utilisant un index composé</p></li>
-</ul>
-<p>Nous avons déjà vu un tel exemple, en effet si nous revenons un peu plus haut, nous avons déjà donné une requête de ce type :</p>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Ici, on pourrait profiter  d’un index composé sur les attributs “cuisine” et “borough” :</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">createIndex</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Répétons notre requête pour voir l’intérêt de notre nouvel index :</p>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;borough&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;executionStats&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
+  <p>INTÉRESSANT</p>
 <section id="requetes-et-index-textuels">
-<h2><span class="section-number">4.5. </span>Requêtes et Index textuels<a class="headerlink" href="#requetes-et-index-textuels" title="Link to this heading">#</a></h2>
+<h1><span class="section-number">3. </span>Requêtes et Index textuels<a class="headerlink" href="#requetes-et-index-textuels" title="Link to this heading">#</a></h1>
 <p>Lorsque l’on veut interroger notre base de données sur un champ de type “chaîne de caractères”, deux méthodes s’offrent à nous : on peut utiliser soit des requêtes régulières, soit un index textuel qui a été créé sur-le-champ. L’avantage de la première méthode est une très grande précision, et on l’utilisera donc lorsque l’on recherchera du texte très précis, tandis que la seconde méthode utilise la puissance de l’index pour effectuer une recherche de type “moteur de recherche”, renvoyant des résultats proches de ce qui a été demandé. Ici, comme on s’intéresse uniquement au index, nous ne développerons que la seconde méthode.</p>
 <ul class="simple">
 <li><p>Création d’un index textuel</p></li>
@@ -612,6 +428,14 @@ Certaines requêtes pourront ainsi être accélérées par l’un ou l’autre d
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">discours</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="err">$</span><span class="n">text</span> <span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">search</span> <span class="p">:</span> <span class="s2">&quot;famille -politique&quot;</span><span class="p">}})</span>
+                      <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
 </div>
 <p><em>Exemple 2 : Liste ordonnée par pertinence des documents par rapport au terme “écologie”</em> :</p>
 <div class="cell tag_output_scroll docutils container">
@@ -621,80 +445,6 @@ Certaines requêtes pourront ainsi être accélérées par l’un ou l’autre d
 </div>
 </div>
 </div>
-</section>
-<section id="index-geo-spatiaux">
-<h2><span class="section-number">4.6. </span>Index géo-spatiaux<a class="headerlink" href="#index-geo-spatiaux" title="Link to this heading">#</a></h2>
-<p>Avec des données géo-spatiales (longitude, latitude), il est possible de créer un index géo-spatial.
-En plus d’une meilleure efficacité, cet index va permettre de trouver des éléments proches d’un point donné ou bien trouver des éléments inclus dans un polygone.</p>
-<ul class="simple">
-<li><p>Création d’un index</p></li>
-</ul>
-<p>Pour créer un index géo-spatial il faut lui donner le type “2dsphere” :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">coll</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="s2">&quot;att&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2dsphere&quot;</span><span class="p">})</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Requêtes avancées</p></li>
-</ul>
-<p>Pour obtenir les éléments les plus proches d’un point on définit d’abord une variable de type “Point” avec ses coordonnées.</p>
-<p>Le mot-clé <code class="docutils literal notranslate"><span class="pre">$near</span></code> est nécessaire:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Point&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;coordinates&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">longitude</span><span class="p">,</span><span class="w"> </span><span class="nx">latitude</span><span class="p">]}</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;clé&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$near</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$geometry</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ref</span><span class="p">}}})</span>
-</pre></div>
-</div>
-<p><em>Exemple 1 :</em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">food</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">CrownHeights</span><span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">73.923</span><span class="p">,</span> <span class="mf">40.676</span><span class="p">]}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;address.loc&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">near</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">geometry</span><span class="p">:</span> <span class="n">CrownHeights</span><span class="p">}}})</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Si l’on veut trouver les éléments inclus dans un polygone la variable sera de type “Polygon” et aura plusieurs couples de coordonnées.
-Pour avoir un polygone fermé, il faudra veiller à ce que les dernières coordonnées soient égales aux premières.</p>
-<p>Le mot-clé <code class="docutils literal notranslate"><span class="pre">$within</span></code> remplace ici <code class="docutils literal notranslate"><span class="pre">$near</span></code> :</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Polygon&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;coordinates&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[[[</span><span class="nx">long1</span><span class="p">,</span><span class="w"> </span><span class="nx">lat1</span><span class="p">],</span>
-<span class="w">                                                 </span><span class="p">[</span><span class="nx">long2</span><span class="p">,</span><span class="w"> </span><span class="nx">lat2</span><span class="p">],</span>
-<span class="w">                                                 </span><span class="p">[</span><span class="nx">long3</span><span class="p">,</span><span class="w"> </span><span class="nx">lat3</span><span class="p">],</span>
-<span class="w">                                                 </span><span class="p">[</span><span class="nx">long4</span><span class="p">,</span><span class="w"> </span><span class="nx">lat4</span><span class="p">],</span>
-<span class="w">                                                 </span><span class="p">[</span><span class="nx">long1</span><span class="p">,</span><span class="w"> </span><span class="nx">lat1</span><span class="p">]]]}</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">nomDeLaCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;clé&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$within</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">$geometry</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ref</span><span class="p">}}})</span><span class="w">                                                 </span>
-</pre></div>
-</div>
-<p><em>Exemple 2 :</em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">eastVillage</span><span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span> <span class="p">:</span> <span class="p">[[[</span><span class="o">-</span><span class="mf">73.9917900</span><span class="p">,</span> <span class="mf">40.7264100</span><span class="p">],</span>
-                                                    <span class="p">[</span><span class="o">-</span><span class="mf">73.9917900</span><span class="p">,</span> <span class="mf">40.7321400</span><span class="p">],</span>
-                                                    <span class="p">[</span><span class="o">-</span><span class="mf">73.9829300</span><span class="p">,</span> <span class="mf">40.7321400</span><span class="p">],</span>
-                                                    <span class="p">[</span><span class="o">-</span><span class="mf">73.9829300</span><span class="p">,</span> <span class="mf">40.7264100</span><span class="p">],</span>
-                                                    <span class="p">[</span><span class="o">-</span><span class="mf">73.9917900</span><span class="p">,</span> <span class="mf">40.7264100</span><span class="p">]]]}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;address.loc&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">within</span> <span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">geometry</span> <span class="p">:</span> <span class="n">eastVillage</span><span class="p">}}})</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -728,12 +478,12 @@ Pour avoir un polygone fermé, il faudra veiller à ce que les dernières coordo
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="03_dates.html"
+       href="02_listes.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Attributs de type date</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Récapitulatif</p>
       </div>
     </a>
     <a class="right-next"
@@ -741,7 +491,7 @@ Pour avoir un polygone fermé, il faudra veiller à ce que les dernières coordo
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Les requêtes d’agrégation</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -751,26 +501,6 @@ Pour avoir un polygone fermé, il faudra veiller à ce que les dernières coordo
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quoi-servent-ils">4.1. À quoi servent-ils ?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quand-les-utiliser">4.2. Quand les utiliser ?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntaxe-adaptee">4.3. Syntaxe adaptée</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-composes">4.4. Index composés</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-et-index-textuels">4.5. Requêtes et Index textuels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-geo-spatiaux">4.6. Index géo-spatiaux</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
