@@ -1,4 +1,3 @@
 jupyter-book
-git+git://github.com/elenaberhoco/imongo.git#egg=imongo-kernel
 pymongo
 matplotlib

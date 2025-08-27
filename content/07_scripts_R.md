@@ -8,9 +8,9 @@ jupytext:
     format_version: 0.12
     jupytext_version: 1.9.1
 kernelspec:
-  display_name: R
-  language: R
-  name: ir
+  display_name: base
+  language: ''
+  name: python3
 ---
 
 (sec:mongolite)=
