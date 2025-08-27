@@ -13,6 +13,8 @@ kernelspec:
   name: python3
 ---
 
+# Titre 4
+
 ON PEUT RENOMMER :
 
 Avec cette requête, on peut voir le quartier du restaurant. Par ailleurs, la variable `borough` 
