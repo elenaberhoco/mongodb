@@ -15,6 +15,12 @@ kernelspec:
 
 # Titre 1
 
+```{code-cell}
+:tags: [output_scroll]
+import panel as pn
+```
+
+
 ## Titre 1.1
 
 
@@ -42,27 +48,18 @@ Remarque !
 
 Text text text
 
-````{panels}
+::::{grid}
+:gutter: 2
 
-Retourner toutes les occurences 
-d'une collection avec find()
-^^^
-```javascript
- db.collectionName.find()
- db.collectionName.find({}) 
-```
+:::{grid-item-card} Retourner toutes les occurences d'une collection avec find()
+BLI ?
+:::
 
----
+:::{grid-item-card} Retourner uniquement la première occurence d'une collection avec findOne()
+BLO ?
+:::
+::::
 
-Retourner uniquement la première occurence
-d'une collection avec findOne()
-^^^
-```javascript
-db.collectionName.findOne()
-db.collectionName.findOne({})
-```
-
-````
 Text
 
 ```
@@ -70,24 +67,53 @@ code
 ```
 Text
 
-````{tabbed} Onglet 1
 
 ```javascript
 db.NYfood.find(
     {"cuisine": "Bakery", "borough": "Bronx"}
 )
 ```
-````
 
-````{tabbed} Onglet 2
-
-```sql
-SELECT *
-FROM NYfood
-WHERE cuisine = 'Bakery' AND borough = 'Bronx'
+````{tab-set} 
+```{tab-item} Onglet 1
+Blu
 ```
-
+```{tab-item} Onglet 2
+Blo
+```
 ````
+Text Text
+
+`````{tab-set}
+````{tab-item} Tab 1 title
+My first tab
+````
+
+````{tab-item} Tab 2 title
+```python
+def main():
+    return
+```
+bli
+````
+`````
+
+MORE TABS !! 
+
+````{tab} Python
+```python
+def main():
+    return
+```
+````
+````{tab} C++
+```c++
+int main(const int argc, const char **argv) {
+  return 0;
+}
+```
+````
+
 
 ### Titre 1.2.2
 
@@ -104,7 +130,7 @@ Text
 ```{admonition} On peut mettre ce qu'on veut !
 :class: tip
 
-Et tout plsin de texte là
+Et tout plein de texte là
 ```
 
 (operateurs)=
@@ -161,6 +187,42 @@ La jolie cellule :
 ```{code-cell}
 db.getCollectionInfos()
 ```
+
+Encore plus d'onglets : 
+
+::::{tab-set}
+:sync-group: category
+
+:::{tab-item} Label1
+:sync: key1
+
+Content 1
+:::
+
+:::{tab-item} Label2
+:sync: key2
+
+Content 2
+:::
+
+::::
+
+::::{tab-set}
+:sync-group: category
+
+:::{tab-item} Label1
+:sync: key1
+
+Content 1
+:::
+
+:::{tab-item} Label2
+:sync: key2
+
+Content 2
+:::
+
+::::
 
 (resume)=
 ## Conclusion
