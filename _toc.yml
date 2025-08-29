@@ -4,8 +4,8 @@ options:
   caption: Chapitres
   numbered: true
 chapters:
-- file: content/01_find
-- file: content/02_listes
+- file: content/01_installation
+- file: content/02_creation
 - file: content/04_index
 - file: content/05_agreg
 - file: content/06_modif
