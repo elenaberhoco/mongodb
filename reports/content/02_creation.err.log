@@ -22,18 +22,14 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-cursor = db.NYfood.find({"cuisine": "Bakery"})
-cursor=list(cursor)
-print(cursor[0]["address"]["loc"]["coordinates"])
+db.NYfood.find({"address.zipcode": "10462"})
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mIndexError[0m                                Traceback (most recent call last)
-Cell [0;32mIn[12], line 3[0m
-[1;32m      1[0m cursor [38;5;241m=[39m db[38;5;241m.[39mNYfood[38;5;241m.[39mfind({[38;5;124m"[39m[38;5;124mcuisine[39m[38;5;124m"[39m: [38;5;124m"[39m[38;5;124mBakery[39m[38;5;124m"[39m})
-[1;32m      2[0m cursor[38;5;241m=[39m[38;5;28mlist[39m(cursor)
-[0;32m----> 3[0m [38;5;28mprint[39m([43mcursor[49m[43m[[49m[38;5;241;43m0[39;49m[43m][49m[[38;5;124m"[39m[38;5;124maddress[39m[38;5;124m"[39m][[38;5;124m"[39m[38;5;124mloc[39m[38;5;124m"[39m][[38;5;124m"[39m[38;5;124mcoordinates[39m[38;5;124m"[39m])
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m [43mdb[49m[38;5;241m.[39mNYfood[38;5;241m.[39mfind({[38;5;124m"[39m[38;5;124maddress.zipcode[39m[38;5;124m"[39m: [38;5;124m"[39m[38;5;124m10462[39m[38;5;124m"[39m})
 
-[0;31mIndexError[0m: list index out of range
+[0;31mNameError[0m: name 'db' is not defined
 

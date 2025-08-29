@@ -170,14 +170,14 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="00_intro.html">
-                    MongoDB
+                    MongoDB : Base de données NoSQL orientée documents
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Titre 1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Titre 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_installation.html">1. Installation de MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_creation.html">2. Créer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_index.html">3. Titre 3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_agreg.html">4. Titre 4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_modif.html">5. Titre 5</a></li>
@@ -515,7 +515,7 @@ document.write(`
 <p><em>Mongolite</em> utilise une syntaxe JSON dans les arguments de ses méthodes pour interroger des collections. Cette syntaxe JSON devra être spécifiée sous forme de chaîne de caractère dans R. Ces différentes chaînes feront alors l’objet de divers paramètres pour les méthodes présentées dans ce chapitre.</p>
 <section id="methode-count">
 <h3><span class="section-number">6.2.2.1. </span>Méthode count<a class="headerlink" href="#methode-count" title="Link to this heading">#</a></h3>
-<p>Tout comme le <code class="docutils literal notranslate"><span class="pre">.count()</span></code> en MongoDB (<a class="reference internal" href="01_find.html"><span class="std std-doc">plus de précisions ici</span></a>), la méthode <code class="docutils literal notranslate"><span class="pre">count()</span></code> nous permet de calculer le nombre de résultats d’une collection, ou encore le nombre de résultats d’une certaine requête. Cette méthode n’a qu’un seul argument (query) et sa valeur par défaut est “{}”. Elle renvoie un entier.</p>
+<p>Tout comme le <code class="docutils literal notranslate"><span class="pre">.count()</span></code> en MongoDB (<span class="xref myst">plus de précisions ici</span>), la méthode <code class="docutils literal notranslate"><span class="pre">count()</span></code> nous permet de calculer le nombre de résultats d’une collection, ou encore le nombre de résultats d’une certaine requête. Cette méthode n’a qu’un seul argument (query) et sa valeur par défaut est “{}”. Elle renvoie un entier.</p>
 <p><strong>Exemples :</strong></p>
 <p>Afficher le nombre de résultats de la base NYfood par exemple :</p>
 <div class="cell docutils container">
@@ -531,7 +531,7 @@ document.write(`
 </section>
 <section id="methode-find">
 <h3><span class="section-number">6.2.2.2. </span>Méthode find<a class="headerlink" href="#methode-find" title="Link to this heading">#</a></h3>
-<p>La méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code> permet, à l’instar du <code class="docutils literal notranslate"><span class="pre">.find</span></code> en MongoDB (<a class="reference internal" href="01_find.html"><span class="std std-doc">plus de précisions ici</span></a>), d’interroger une collection en filtrant les documents et les champs. De plus, cette méthode intègre la possibilité de limiter, trier et skiper les documents d’un résultat. Autrement dit, cette méthode comprends en ses arguments le <code class="docutils literal notranslate"><span class="pre">.limit</span></code>, le <code class="docutils literal notranslate"><span class="pre">.sort</span></code> et le <code class="docutils literal notranslate"><span class="pre">.skip</span></code> de MongoDB. Présentons alors les 5 arguments de cette méthode :</p>
+<p>La méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code> permet, à l’instar du <code class="docutils literal notranslate"><span class="pre">.find</span></code> en MongoDB (<span class="xref myst">plus de précisions ici</span>), d’interroger une collection en filtrant les documents et les champs. De plus, cette méthode intègre la possibilité de limiter, trier et skiper les documents d’un résultat. Autrement dit, cette méthode comprends en ses arguments le <code class="docutils literal notranslate"><span class="pre">.limit</span></code>, le <code class="docutils literal notranslate"><span class="pre">.sort</span></code> et le <code class="docutils literal notranslate"><span class="pre">.skip</span></code> de MongoDB. Présentons alors les 5 arguments de cette méthode :</p>
 <ul class="simple">
 <li><p>query : correspond à la requête de filtrage des documents passée en premier agument d’un <code class="docutils literal notranslate"><span class="pre">.find</span></code> en MongoDB ; ‘{}’ est la valeur par défaut</p></li>
 <li><p>fields : correspond à la requête de filtrage des champs passée en second argument d’un <code class="docutils literal notranslate"><span class="pre">.find</span></code> en MongoDB</p></li>
@@ -616,7 +616,7 @@ document.write(`
 </section>
 <section id="methode-distinct">
 <h3><span class="section-number">6.2.2.4. </span>Méthode distinct<a class="headerlink" href="#methode-distinct" title="Link to this heading">#</a></h3>
-<p>Tout comme le <code class="docutils literal notranslate"><span class="pre">.distinct()</span></code> en MongoDB (<a class="reference internal" href="01_find.html"><span class="std std-doc">plus de précisions ici</span></a>), la méthode <code class="docutils literal notranslate"><span class="pre">distinct()</span></code> nous renvoie les valeurs distinctes d’un champ.</p>
+<p>Tout comme le <code class="docutils literal notranslate"><span class="pre">.distinct()</span></code> en MongoDB (<span class="xref myst">plus de précisions ici</span>), la méthode <code class="docutils literal notranslate"><span class="pre">distinct()</span></code> nous renvoie les valeurs distinctes d’un champ.</p>
 <p><strong>Exemple :</strong></p>
 <p>Affichez la liste des notes existant dans la base :</p>
 <div class="cell docutils container">

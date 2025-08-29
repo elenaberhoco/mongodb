@@ -171,14 +171,14 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="00_intro.html">
-                    MongoDB
+                    MongoDB : Base de données NoSQL orientée documents
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_find.html">1. Titre 1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_listes.html">2. Titre 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_installation.html">1. Installation de MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_creation.html">2. Créer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_index.html">3. Titre 3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_agreg.html">4. Titre 4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_modif.html">5. Titre 5</a></li>
@@ -570,209 +570,7 @@ Enfin, il ne nous reste plus qu’à récupérer la collection souhaitée. Cela 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">db</span><span class="o">.</span><span class="n">list_collection_names</span><span class="p">()</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/database.py:1226,</span> in <span class="ni">Database.list_collection_names</span><span class="nt">(self, session, filter, comment, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1194</span> <span class="k">def</span><span class="w"> </span><span class="nf">list_collection_names</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1195</span>     <span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1196</span>     <span class="n">session</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ClientSession</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1199</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1200</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1201</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Get a list of all the collection names in this database.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1202</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1203</span><span class="sd">     For example, to list all non-system collections::</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1224</span><span class="sd">     .. versionadded:: 3.6</span>
-<span class="g g-Whitespace">   </span><span class="mi">1225</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1226</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_list_collection_names</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="n">comment</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/database.py:1191,</span> in <span class="ni">Database._list_collection_names</span><span class="nt">(self, session, filter, comment, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1187</span>     <span class="k">if</span> <span class="ow">not</span> <span class="nb">filter</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s2">&quot;name&quot;</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1188</span>         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;nameOnly&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">   </span><span class="mi">1190</span> <span class="k">return</span> <span class="p">[</span>
-<span class="nn">-&gt; 1191     result[&quot;name&quot;] for result</span> in <span class="ni">self._list_collections_helper</span><span class="nt">(session=session, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1192</span> <span class="p">]</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/database.py:1138,</span> in <span class="ni">Database._list_collections_helper</span><span class="nt">(self, session, filter, comment, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1130</span> <span class="k">def</span><span class="w"> </span><span class="nf">_cmd</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1131</span>     <span class="n">session</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ClientSession</span><span class="p">],</span>
-<span class="g g-Whitespace">   </span><span class="mi">1132</span>     <span class="n">_server</span><span class="p">:</span> <span class="n">Server</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1133</span>     <span class="n">conn</span><span class="p">:</span> <span class="n">Connection</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1134</span>     <span class="n">read_preference</span><span class="p">:</span> <span class="n">_ServerMode</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1135</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CommandCursor</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1136</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_list_collections</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">read_preference</span><span class="o">=</span><span class="n">read_preference</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1138</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">_retryable_read</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1139</span>     <span class="n">_cmd</span><span class="p">,</span> <span class="n">read_pref</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="n">_Op</span><span class="o">.</span><span class="n">LIST_COLLECTIONS</span>
-<span class="g g-Whitespace">   </span><span class="mi">1140</span> <span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/mongo_client.py:2041,</span> in <span class="ni">MongoClient._retryable_read</span><span class="nt">(self, func, read_pref, session, operation, address, retryable, operation_id)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2036</span> <span class="c1"># Ensure that the client supports retrying on reads and there is no session in</span>
-<span class="g g-Whitespace">   </span><span class="mi">2037</span> <span class="c1"># transaction, otherwise, we will not support retry behavior for this call.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2038</span> <span class="n">retryable</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2039</span>     <span class="n">retryable</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">retry_reads</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">session</span> <span class="ow">and</span> <span class="n">session</span><span class="o">.</span><span class="n">in_transaction</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2040</span> <span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2041</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_retry_internal</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2042</span>     <span class="n">func</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2043</span>     <span class="n">session</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2044</span>     <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2045</span>     <span class="n">operation</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2046</span>     <span class="n">is_read</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2047</span>     <span class="n">address</span><span class="o">=</span><span class="n">address</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2048</span>     <span class="n">read_pref</span><span class="o">=</span><span class="n">read_pref</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2049</span>     <span class="n">retryable</span><span class="o">=</span><span class="n">retryable</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2050</span>     <span class="n">operation_id</span><span class="o">=</span><span class="n">operation_id</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2051</span> <span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/_csot.py:125,</span> in <span class="ni">apply.&lt;locals&gt;.csot_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">123</span>         <span class="k">with</span> <span class="n">_TimeoutContext</span><span class="p">(</span><span class="n">timeout</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">124</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">125</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/mongo_client.py:1997,</span> in <span class="ni">MongoClient._retry_internal</span><span class="nt">(self, func, session, bulk, operation, is_read, address, read_pref, retryable, operation_id)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1971</span> <span class="nd">@_csot</span><span class="o">.</span><span class="n">apply</span>
-<span class="g g-Whitespace">   </span><span class="mi">1972</span> <span class="k">def</span><span class="w"> </span><span class="nf">_retry_internal</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1973</span>     <span class="bp">self</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1982</span>     <span class="n">operation_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1983</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1984</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Internal retryable helper for all client transactions.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1985</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1986</span><span class="sd">     :param func: Callback function we want to retry</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1995</span><span class="sd">     :return: Output of the calling func()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1996</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1997</span>     <span class="k">return</span> <span class="n">_ClientConnectionRetryable</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1998</span>         <span class="n">mongo_client</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1999</span>         <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2000</span>         <span class="n">bulk</span><span class="o">=</span><span class="n">bulk</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2001</span>         <span class="n">operation</span><span class="o">=</span><span class="n">operation</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2002</span>         <span class="n">is_read</span><span class="o">=</span><span class="n">is_read</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2003</span>         <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2004</span>         <span class="n">read_pref</span><span class="o">=</span><span class="n">read_pref</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2005</span>         <span class="n">address</span><span class="o">=</span><span class="n">address</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2006</span>         <span class="n">retryable</span><span class="o">=</span><span class="n">retryable</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2007</span>         <span class="n">operation_id</span><span class="o">=</span><span class="n">operation_id</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2008</span>     <span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/mongo_client.py:2745,</span> in <span class="ni">_ClientConnectionRetryable.run</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2743</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_last_error</span><span class="p">(</span><span class="n">check_csot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2744</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2745</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_read</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">2746</span> <span class="k">except</span> <span class="n">ServerSelectionTimeoutError</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2747</span>     <span class="c1"># The application may think the write was never attempted</span>
-<span class="g g-Whitespace">   </span><span class="mi">2748</span>     <span class="c1"># if we raise ServerSelectionTimeoutError on the retry</span>
-<span class="g g-Whitespace">   </span><span class="mi">2749</span>     <span class="c1"># attempt. Raise the original exception instead.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2750</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_last_error</span><span class="p">()</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/mongo_client.py:2890,</span> in <span class="ni">_ClientConnectionRetryable._read</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2885</span> <span class="k">def</span><span class="w"> </span><span class="nf">_read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2886</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Wrapper method for read-type retryable client executions</span>
-<span class="g g-Whitespace">   </span><span class="mi">2887</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">2888</span><span class="sd">     :return: Output for func()&#39;s call</span>
-<span class="g g-Whitespace">   </span><span class="mi">2889</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">2890</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_server</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_server</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">2891</span>     <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_pref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Read Preference required on read calls&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">2892</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">_conn_from_server</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_read_pref</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">)</span> <span class="k">as</span> <span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2893</span>         <span class="n">conn</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2894</span>         <span class="n">read_pref</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2895</span>     <span class="p">):</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/mongo_client.py:2838,</span> in <span class="ni">_ClientConnectionRetryable._get_server</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2833</span> <span class="k">def</span><span class="w"> </span><span class="nf">_get_server</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Server</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2834</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Retrieves a server object based on provided object context</span>
-<span class="g g-Whitespace">   </span><span class="mi">2835</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">2836</span><span class="sd">     :return: Abstraction to connect to server</span>
-<span class="g g-Whitespace">   </span><span class="mi">2837</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">2838</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">_select_server</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2839</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_server_selector</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2840</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2841</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_operation</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2842</span>         <span class="n">address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_address</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2843</span>         <span class="n">deprioritized_servers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_deprioritized_servers</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2844</span>         <span class="n">operation_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_operation_id</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2845</span>     <span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/mongo_client.py:1827,</span> in <span class="ni">MongoClient._select_server</span><span class="nt">(self, server_selector, session, operation, address, deprioritized_servers, operation_id)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1825</span>             <span class="k">raise</span> <span class="n">AutoReconnect</span><span class="p">(</span><span class="s2">&quot;server </span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2"> no longer available&quot;</span> <span class="o">%</span> <span class="n">address</span><span class="p">)</span>  <span class="c1"># noqa: UP031</span>
-<span class="g g-Whitespace">   </span><span class="mi">1826</span>     <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1827</span>         <span class="n">server</span> <span class="o">=</span> <span class="n">topology</span><span class="o">.</span><span class="n">select_server</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1828</span>             <span class="n">server_selector</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1829</span>             <span class="n">operation</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1830</span>             <span class="n">deprioritized_servers</span><span class="o">=</span><span class="n">deprioritized_servers</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1831</span>             <span class="n">operation_id</span><span class="o">=</span><span class="n">operation_id</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1832</span>         <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1833</span>     <span class="k">return</span> <span class="n">server</span>
-<span class="g g-Whitespace">   </span><span class="mi">1834</span> <span class="k">except</span> <span class="n">PyMongoError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1835</span>     <span class="c1"># Server selection errors in a transaction are transient.</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/topology.py:409,</span> in <span class="ni">Topology.select_server</span><span class="nt">(self, selector, operation, server_selection_timeout, address, deprioritized_servers, operation_id)</span>
-<span class="g g-Whitespace">    </span><span class="mi">399</span> <span class="k">def</span><span class="w"> </span><span class="nf">select_server</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">400</span>     <span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">401</span>     <span class="n">selector</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Selection</span><span class="p">],</span> <span class="n">Selection</span><span class="p">],</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">406</span>     <span class="n">operation_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">407</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Server</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">408</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Like select_servers, but choose a random server if several match.&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">409</span>     <span class="n">server</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_server</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">410</span>         <span class="n">selector</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">411</span>         <span class="n">operation</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">412</span>         <span class="n">server_selection_timeout</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">413</span>         <span class="n">address</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">414</span>         <span class="n">deprioritized_servers</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">415</span>         <span class="n">operation_id</span><span class="o">=</span><span class="n">operation_id</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">416</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">417</span>     <span class="k">if</span> <span class="n">_csot</span><span class="o">.</span><span class="n">get_timeout</span><span class="p">():</span>
-<span class="g g-Whitespace">    </span><span class="mi">418</span>         <span class="n">_csot</span><span class="o">.</span><span class="n">set_rtt</span><span class="p">(</span><span class="n">server</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">min_round_trip_time</span><span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/topology.py:387,</span> in <span class="ni">Topology._select_server</span><span class="nt">(self, selector, operation, server_selection_timeout, address, deprioritized_servers, operation_id)</span>
-<span class="g g-Whitespace">    </span><span class="mi">378</span> <span class="k">def</span><span class="w"> </span><span class="nf">_select_server</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">379</span>     <span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">380</span>     <span class="n">selector</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Selection</span><span class="p">],</span> <span class="n">Selection</span><span class="p">],</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">385</span>     <span class="n">operation_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">386</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Server</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">387</span>     <span class="n">servers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">select_servers</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">388</span>         <span class="n">selector</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">server_selection_timeout</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">operation_id</span>
-<span class="g g-Whitespace">    </span><span class="mi">389</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">390</span>     <span class="n">servers</span> <span class="o">=</span> <span class="n">_filter_servers</span><span class="p">(</span><span class="n">servers</span><span class="p">,</span> <span class="n">deprioritized_servers</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">391</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">servers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/topology.py:294,</span> in <span class="ni">Topology.select_servers</span><span class="nt">(self, selector, operation, server_selection_timeout, address, operation_id)</span>
-<span class="g g-Whitespace">    </span><span class="mi">291</span>     <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_monitors</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">293</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">294</span>     <span class="n">server_descriptions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_servers_loop</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span>         <span class="n">selector</span><span class="p">,</span> <span class="n">server_timeout</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">operation_id</span><span class="p">,</span> <span class="n">address</span>
-<span class="g g-Whitespace">    </span><span class="mi">296</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">298</span>     <span class="k">return</span> <span class="p">[</span>
-<span class="g g-Whitespace">    </span><span class="mi">299</span>         <span class="n">cast</span><span class="p">(</span><span class="n">Server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_server_by_address</span><span class="p">(</span><span class="n">sd</span><span class="o">.</span><span class="n">address</span><span class="p">))</span> <span class="k">for</span> <span class="n">sd</span> <span class="ow">in</span> <span class="n">server_descriptions</span>
-<span class="g g-Whitespace">    </span><span class="mi">300</span>     <span class="p">]</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/synchronous/topology.py:368,</span> in <span class="ni">Topology._select_servers_loop</span><span class="nt">(self, selector, timeout, operation, operation_id, address)</span>
-<span class="g g-Whitespace">    </span><span class="mi">362</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_check_all</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">364</span> <span class="c1"># Release the lock and wait for the topology description to</span>
-<span class="g g-Whitespace">    </span><span class="mi">365</span> <span class="c1"># change, or for a timeout. We won&#39;t miss any changes that</span>
-<span class="g g-Whitespace">    </span><span class="mi">366</span> <span class="c1"># came after our most recent apply_selector call, since we&#39;ve</span>
-<span class="g g-Whitespace">    </span><span class="mi">367</span> <span class="c1"># held the lock until now.</span>
-<span class="ne">--&gt; </span><span class="mi">368</span> <span class="n">_cond_wait</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_condition</span><span class="p">,</span> <span class="n">common</span><span class="o">.</span><span class="n">MIN_HEARTBEAT_INTERVAL</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">369</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="o">.</span><span class="n">check_compatible</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">370</span> <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/site-packages/pymongo/lock.py:92,</span> in <span class="ni">_cond_wait</span><span class="nt">(condition, timeout)</span>
-<span class="g g-Whitespace">     </span><span class="mi">91</span> <span class="k">def</span><span class="w"> </span><span class="nf">_cond_wait</span><span class="p">(</span><span class="n">condition</span><span class="p">:</span> <span class="n">threading</span><span class="o">.</span><span class="n">Condition</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">92</span>     <span class="k">return</span> <span class="n">condition</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/lib/python3.9/threading.py:316,</span> in <span class="ni">Condition.wait</span><span class="nt">(self, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">314</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">315</span>     <span class="k">if</span> <span class="n">timeout</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">316</span>         <span class="n">gotit</span> <span class="o">=</span> <span class="n">waiter</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">317</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">318</span>         <span class="n">gotit</span> <span class="o">=</span> <span class="n">waiter</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
 </pre></div>
 </div>
 </div>
@@ -819,6 +617,11 @@ Le fonctionement est le même que sur l’interface MongoDB:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pymongo.synchronous.cursor.Cursor at 0x7fa677c9e460&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Ainsi, pour accéder au contenu de la requête il nous faut parcourir l’objet renvoyé par celle-ci, comme un objet itérable en Python.
 Exemple, on affiche les deux premiers individus issus de la requête.</p>
@@ -852,6 +655,18 @@ Ainsi, nous récupérons ci-dessous la localisation et les coordonnées du premi
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Bakery&quot;</span><span class="p">})</span>
 <span class="n">cursor</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;address&quot;</span><span class="p">][</span><span class="s2">&quot;loc&quot;</span><span class="p">][</span><span class="s2">&quot;coordinates&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">NYfood</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;cuisine&quot;</span><span class="p">:</span> <span class="s2">&quot;Bakery&quot;</span><span class="p">})</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">cursor</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;address&quot;</span><span class="p">][</span><span class="s2">&quot;loc&quot;</span><span class="p">][</span><span class="s2">&quot;coordinates&quot;</span><span class="p">])</span>
+
+<span class="ne">IndexError</span>: list index out of range
 </pre></div>
 </div>
 </div>
