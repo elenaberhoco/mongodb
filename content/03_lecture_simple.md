@@ -15,11 +15,10 @@ kernelspec:
 
 # Requête simple
 
-La méthode `find()` permet de **sélectionner des documents en fonction de critères de filtrage**. Elle renvoie un **curseur**, c'est-à-dire un pointeur vers les résultats d'une requête. Les curseurs permettent d'itérer sur les résultats **un lot à la fois**.    
-La syntaxe de la méthode `find()` est la suivante : 
+La méthode `find()` permet de **sélectionner des documents en fonction de critères de filtrage**. Elle renvoie un **curseur**, c'est-à-dire un pointeur vers les résultats d'une requête. Le curseur permet d'itérer sur les résultats **un lot à la fois**. La syntaxe de la méthode `find()` est la suivante :    
 
 ```
-db.<collection>.find(<filtre>, <projection>) 
+db.<collection>.find(<filter>, <projection>) 
 ```
 
 ````{admonition} Example
@@ -34,6 +33,7 @@ db.recettes.insert({
                     "ingredients": ["aubergine", "courgette", "poivron", "tomate", "oignon","ail"],
                     "origine":{"pays":"France","region":"Provence"}
                     })  
+
 db.recettes.insert({
                     "nom":"Tiramisu",
                     "type":"dessert",
@@ -48,17 +48,20 @@ db.recettes.insert({
                         { "numero": 6, "description": "Réfrigérer au moins 4 h. Saupoudrer de cacao avant de servir." } 
                     ]
                     })  
+
 db.recettes.insert({
                     "nom":"Soupe à l'oignon",
                     "type":"entrée",
                     "ingredients": ["oignon","vin","gruyère","beurre"]
                     })  
+
 db.recettes.insert({
                     "nom":"Quiche lorraine",
                     "type":"plat principal",
                     "ingredients":["pâte brisée", "oeufs", "crème fraîche", "lardons", "gruyère"],
                     "origine":{"pays":"France","region":"Lorraine"}
                     })  
+
 db.recettes.insert({
                     "nom":"Mousse au chocolat",
                     "type":"dessert",
@@ -69,7 +72,7 @@ db.recettes.insert({
 
 ## Requête sans condition
 
-Pour **lister l'ensemble des documents de la collection**, il suffit d'utiliser `find()` sans spécifier de conditions.
+Pour **lister l'ensemble des documents de la collection**, il suffit d'utiliser `find()` sans spécifier de conditions. S'il y a plus de documents que ce qui peut être renvoyé en une fois (taille du lot), il faudra taper `it` (*iterate*) une ou plusieurs fois pour accéder aux documents suivants.   
 ````{admonition} Example
 :class: tip
 
@@ -118,6 +121,22 @@ La commande suivante retourne tous les plats contenant des oeufs, c'est-à-dire 
 ```
 db.recettes.find({"ingredients":"oeufs"})
 ```
+Notez que cette commande n'est pas équivalente à :
+```
+db.recettes.find({"ingredients":["oeufs"]})
+```
+Dans ce cas, aucun document n'est retourné car aucun document n'a un champ `ingredients` *exactement* égal à `["oeufs"]`. Ils contiennent tous des ingrédients supplémentaires.   
+````
+Il est possible de spécifier plusieurs filtres en les séparant par une virgule. Dans ce cas, seuls les documents vérifiant l'ensemble des conditions d'égalité seront retournés (ET logique).
+
+````{admonition} Example
+:class: tip
+
+Pour récupérer tous les plats principaux contenant des oeufs il faut donc taper : 
+
+```
+db.recettes.find({"type":"plat principal","ingredients":"oeufs"})
+```
 ````
 
 La syntaxe `<embedded_object>.<embedded_key>` permet d'accéder aux attributs d'un **document imbriqué** ou aux valeurs d'une **liste**. Il devient alors possible d'extraire des documents **en fonction du contenu** de ces objets.
@@ -154,21 +173,21 @@ db.recettes.find({"etapes.numero":3})
 ### Projection
 
 La plupart du temps, seule une partie de l'information contenue dans les documents nous intéresse. Le second argument de la fonction `find()`, appelé **projection**, permet de **spécifier les clés à renvoyer** dans les documents qui correspondent au filtre de requête. Pour ce faire, vous pouvez :
-- soit indiquer les champs que vous souhaitez inclure : `{<key>:<1_or_true>}`  
-- soit indiquer les champs que vous souhaitez exclure : `{<key>:<0_or_false>}`   
+- Indiquer les champs que vous souhaitez **inclure** : `{<key>:<1_or_true>}`  
+- Indiquer les champs que vous souhaitez **exclure** : `{<key>:<0_or_false>}`   
 
-Vous ne pouvez pas faire les deux à la fois. La seule exception est `_id` que vous pouvez explicitement exclure tout en listant des champs à inclure. L'attribut `_id` est inclus par défaut dans les documents renvoyés.
+Vous ne pouvez **pas** faire **les deux à la fois**. La seule exception est `_id` que vous pouvez explicitement exclure tout en listant des champs à inclure. L'attribut `_id` est inclus par défaut dans les documents renvoyés.
 
 ````{admonition} Example
 :class: tip
 
-Pour extraire le nom et le type de tous les plats contenant des oeufs, et exclure le champ `_id` des résultats, il suffit de taper :
+Afin de tenir compte des allergies, nous voudrions extraire le nom et le type de toutes les recettes contenant des oeufs. Voici la commande :
 ```
-db.recettes.find({"ingredients":"oeufs"},{"nom":true,"type":true,"_id":false})
+db.recettes.find({"ingredients":"oeufs"},{"nom":true,"type":true})
 ```
-Pour trouver la région d'origine de la Ratatouille, il suffit de taper :
+Pour trouver la région d'origine de la Ratatouille et exclure le champ `_id` des résultats, il suffit de taper :
 ```
-db.recettes.find({"nom":"Ratatouille"},{"origine.region":1})
+db.recettes.find({"nom":"Ratatouille"},{"origine.region":1,"_id":0})
 ```
 Pour connaître le nom de tous les plats disponibles dans notre collection de recettes, il suffit de ne fixer aucune condition sur les documents :  
 ```
@@ -178,20 +197,81 @@ db.recettes.find({},{"nom":true,"_id":false})
 
 ## Modification du curseur
 
+Certaines méthodes modifient la manière dont la requête sous-jacente est exécutée. La syntaxe est la suivante:
+```
+db.<collection>.find(<filter>, <projection>).<cursor_modifier>
+```
+
+`count()` modifie le curseur afin qu'il renvoie le nombre de documents qui correspondent au filtre de requête plutôt que les documents eux-mêmes.
+````{admonition} Example
+:class: tip
+
+Combien y a-t-il de recettes contenant du gruyère ?
+```
+db.recettes.find({"ingredients":"gruyère"}).count()
+```
+````
+
+`sort()` renvoie les documents triés dans l'ordre croissant (1) ou décroissant (-1) en fonction du ou des champs spécifiés. La syntaxe est la suivante :  
+```
+db.<collection>.find(<filter>, <projection>).sort({<key1>:<1_or_-1>,<key2>:<1_or_-1> ...})
+```
+````{admonition} Example
+:class: tip
+
+Pour trier les recettes par `type` dans l'ordre inverse de l'ordre alphabétique, *puis* par `nom` dans l'ordre alphabétique :
+```
+db.recettes.find().sort({"type":-1,"nom":1})
+```
+````
+
+`limit()` limite le nombre de documents renvoyés.
+````{admonition} Example
+:class: tip
+
+Trouvons une idée de dessert à cuisiner :
+```
+db.recettes.find({"type":"dessert"},{"_id":0}).limit(1)
+```
+````
+
 ## Exercice
+
+1. Téléchargez le jeu de données `movies.json`.
+2. Affichez le premier document pour vous familiariser avec le nom des clés. Dans ce jeu de données, tous les documents ont les mêmes clés.
+3. Récupérez les informations du film `Blade Runner`.   
+**Aide** : en anglais, *titre* se dit *title*.
+4. Récupérez le titre des films du `genre` `drama`. Que signifie le message qui apparait en bas de votre écran: `Type "it" for more` ? 
+5. Récupérez le nom et le prénom du réalisateur de `Kill Bill`.  
+**Aide** : En anglais, *nom de famille* se dit *last name*, *prénom* se dit *first name*, et *réalisateur* se dit *director*.
+6. Combien y a-t-il de films français (`FR`) dans la base de données ?  
+**Aide** : En anglais, *pays* se dit *country*.
+7. Lister les films sortis en `1995` par ordre alphabétique. Quel est le premier ?   
+**Aide** : En anglais *année* se dit *year*.
+8. Dans quels films l'acteur `Bruce Willis` a-t-il joué ? Retournez le titre et le genre des films.    
+
+Avec des requêtes simples, on peut déjà extraire beaucoup d'informations intéressantes !
 
 ## En résumé
 
-Encore un joli tableau !
+Dans ce chapitre vous avez appris que :
+- Les **valeurs** des paires clé-valeur sont **consultables** : elles sont accessibles et peuvent être utilisées pour filtrer les documents.   
+
+Dans ce chapitre vous avez manipulé les fonctions suivantes :  
 
 Objectif | Syntaxe
 --- | ---
-Récupérer toutes les occurrences de la collection | `db.collectionName.find({})`
-Récupérer la première occurrence de la collection | `db.collectionName.findOne({})`
-Filtrer les données | `db.collectionName.find({"x": valeur})`
-Limiter l'affichage des clés | `db.collectionName.find({}, {"key": true}) `
-Formater les documents de sortie | `db.collectionName.find({}).pretty()`
-Trier les documents de sortie | `db.collectionName.find().sort({"key" : 1})`
-Compter les documents de sortie | `db.collectionName.find({}).count()`
-Limiter les documents de sortie | `db.collectionName.find({}).limit(2)`
-Valeurs distinctes d'un champ | `db.collectionName.distinct(champ, {})`
+Récupérer tous les documents d'une collection | `db.<collection>.find()`  
+Récupérer le premier document d'une collection | `db.<collection>.findOne()`  
+Filtrer les documents en fonction d'une ou plusieurs conditions d'égalité | `db.<collection>.find({<key>:<value>,...})`  
+Récupérer tous les champs spécifiés dans la projection, pour tous les documents qui répondent aux critères de recherche | `db.<collection>.find(<filter>,<projection>)` où `<projection> = {<key>:<0_or_1>,...}`  
+Compter le nombre de documents qui répondent aux critères de recherche | `db.<collection>.find(<filter>,<projection>).count()`   
+Trier les documents qui répondent aux critères de recherche | `db.<collection>.find(<filter>,<projection>).sort(<condition>)` où `<condition> = {<key>:<1_or_-1>,...}`
+Limiter le nombre de documents qui répondent aux critères de recherche à renvoyer | `db.<collection>.find(<filter>,<projection>).limit(<n>)`
+
+````{admonition} Tip
+:class: note
+
+`db.<collection>.find(<filter>,<projection>)` peut se comprendre ainsi : "je veux extraire les documents de la `<collection>` qui vérifient les conditions suivantes : `<filter>`, et pour ces documents je veux récupérer les informations suivantes : `<projection>`."
+
+````

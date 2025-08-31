@@ -77,7 +77,7 @@ Notez qu'il n'y a pas d'attributs (ou *clés*) vides dans MongoDB : les *valeurs
 :::{caution}
 Avant de pouvoir travailler en Visual Studio Code, il faut démarrer une instance MongoDB.
 ````{tab} Windows
-À FAIRE
+(à venir)
 ````
 ````{tab} Linux
 ```console
@@ -348,7 +348,7 @@ Vous savez également importer des données dans MongoDB avec `mongoimport`.
 :::{warning}
 N'oubliez pas d'arrêtez MongoDB quand vous avez terminé !
 ````{tab} Windows
-À FAIRE
+(à venir)
 ````
 ````{tab} Linux
 ```console 
