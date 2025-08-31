@@ -6,10 +6,8 @@ options:
 chapters:
 - file: content/01_installation
 - file: content/02_creation
-- file: content/04_index
-- file: content/05_agreg
-- file: content/06_modif
-- file: content/07_scripts
+- file: content/03_lecture
   sections:
-  - file: content/07_scripts_py
-  - file: content/07_scripts_R
+  - file: content/03_lecture_simple
+  - file: content/03_lecture_operateurs
+  - file: content/03_lecture_agregation
