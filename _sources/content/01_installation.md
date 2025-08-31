@@ -26,7 +26,7 @@ Suivez les étapes suivantes pour télécharger et installer MongoDB Community E
 :::::{tab-item} Windows
 :sync: key1
 
-À FAIRE
+(à venir)
 :::::
 
 :::::{tab-item} Linux - Ubuntu
@@ -94,7 +94,7 @@ MongoDB Shell est un outil en ligne de commande qui permet d'intéragir avec les
 
 MongoDB Shell (`mongosh`) n'est pas installé par défaut avec MongoDB Community Server. Suivez les instructions suivantes pour télécharger et installer mongosh séparément.
 
-À FAIRE
+(à venir)
 :::::
 
 :::::{tab-item} Linux - Ubuntu
@@ -118,7 +118,7 @@ Afin de vérifier que tout fonctionne bien, suivez les étapes suivantes.
 :::::{tab-item} Windows
 :sync: key1
 
-À FAIRE
+(à venir)
 :::::
 
 :::::{tab-item} Linux - Ubuntu

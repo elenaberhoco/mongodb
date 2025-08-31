@@ -402,9 +402,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="requete-simple">
 <h1><span class="section-number">3.1. </span>Requête simple<a class="headerlink" href="#requete-simple" title="Link to this heading">#</a></h1>
-<p>La méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code> permet de <strong>sélectionner des documents en fonction de critères de filtrage</strong>. Elle renvoie un <strong>curseur</strong>, c’est-à-dire un pointeur vers les résultats d’une requête. Les curseurs permettent d’itérer sur les résultats <strong>un lot à la fois</strong>.<br />
-La syntaxe de la méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code> est la suivante :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.&lt;</span><span class="n">collection</span><span class="o">&gt;.</span><span class="n">find</span><span class="p">(</span><span class="o">&lt;</span><span class="n">filtre</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">projection</span><span class="o">&gt;</span><span class="p">)</span> 
+<p>La méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code> permet de <strong>sélectionner des documents en fonction de critères de filtrage</strong>. Elle renvoie un <strong>curseur</strong>, c’est-à-dire un pointeur vers les résultats d’une requête. Le curseur permet d’itérer sur les résultats <strong>un lot à la fois</strong>. La syntaxe de la méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code> est la suivante :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.&lt;</span><span class="n">collection</span><span class="o">&gt;.</span><span class="n">find</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">filter</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">projection</span><span class="o">&gt;</span><span class="p">)</span> 
 </pre></div>
 </div>
 <div class="tip admonition">
@@ -417,6 +416,7 @@ La syntaxe de la méthode <code class="docutils literal notranslate"><span class
                     <span class="s2">&quot;ingredients&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;aubergine&quot;</span><span class="p">,</span> <span class="s2">&quot;courgette&quot;</span><span class="p">,</span> <span class="s2">&quot;poivron&quot;</span><span class="p">,</span> <span class="s2">&quot;tomate&quot;</span><span class="p">,</span> <span class="s2">&quot;oignon&quot;</span><span class="p">,</span><span class="s2">&quot;ail&quot;</span><span class="p">],</span>
                     <span class="s2">&quot;origine&quot;</span><span class="p">:{</span><span class="s2">&quot;pays&quot;</span><span class="p">:</span><span class="s2">&quot;France&quot;</span><span class="p">,</span><span class="s2">&quot;region&quot;</span><span class="p">:</span><span class="s2">&quot;Provence&quot;</span><span class="p">}</span>
                     <span class="p">})</span>  
+
 <span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span>
                     <span class="s2">&quot;nom&quot;</span><span class="p">:</span><span class="s2">&quot;Tiramisu&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;dessert&quot;</span><span class="p">,</span>
@@ -431,17 +431,20 @@ La syntaxe de la méthode <code class="docutils literal notranslate"><span class
                         <span class="p">{</span> <span class="s2">&quot;numero&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Réfrigérer au moins 4 h. Saupoudrer de cacao avant de servir.&quot;</span> <span class="p">}</span> 
                     <span class="p">]</span>
                     <span class="p">})</span>  
+
 <span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span>
                     <span class="s2">&quot;nom&quot;</span><span class="p">:</span><span class="s2">&quot;Soupe à l&#39;oignon&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;entrée&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;ingredients&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;oignon&quot;</span><span class="p">,</span><span class="s2">&quot;vin&quot;</span><span class="p">,</span><span class="s2">&quot;gruyère&quot;</span><span class="p">,</span><span class="s2">&quot;beurre&quot;</span><span class="p">]</span>
                     <span class="p">})</span>  
+
 <span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span>
                     <span class="s2">&quot;nom&quot;</span><span class="p">:</span><span class="s2">&quot;Quiche lorraine&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;plat principal&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;ingredients&quot;</span><span class="p">:[</span><span class="s2">&quot;pâte brisée&quot;</span><span class="p">,</span> <span class="s2">&quot;oeufs&quot;</span><span class="p">,</span> <span class="s2">&quot;crème fraîche&quot;</span><span class="p">,</span> <span class="s2">&quot;lardons&quot;</span><span class="p">,</span> <span class="s2">&quot;gruyère&quot;</span><span class="p">],</span>
                     <span class="s2">&quot;origine&quot;</span><span class="p">:{</span><span class="s2">&quot;pays&quot;</span><span class="p">:</span><span class="s2">&quot;France&quot;</span><span class="p">,</span><span class="s2">&quot;region&quot;</span><span class="p">:</span><span class="s2">&quot;Lorraine&quot;</span><span class="p">}</span>
                     <span class="p">})</span>  
+
 <span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span>
                     <span class="s2">&quot;nom&quot;</span><span class="p">:</span><span class="s2">&quot;Mousse au chocolat&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;dessert&quot;</span><span class="p">,</span>
@@ -452,7 +455,7 @@ La syntaxe de la méthode <code class="docutils literal notranslate"><span class
 </div>
 <section id="requete-sans-condition">
 <h2><span class="section-number">3.1.1. </span>Requête sans condition<a class="headerlink" href="#requete-sans-condition" title="Link to this heading">#</a></h2>
-<p>Pour <strong>lister l’ensemble des documents de la collection</strong>, il suffit d’utiliser <code class="docutils literal notranslate"><span class="pre">find()</span></code> sans spécifier de conditions.</p>
+<p>Pour <strong>lister l’ensemble des documents de la collection</strong>, il suffit d’utiliser <code class="docutils literal notranslate"><span class="pre">find()</span></code> sans spécifier de conditions. S’il y a plus de documents que ce qui peut être renvoyé en une fois (taille du lot), il faudra taper <code class="docutils literal notranslate"><span class="pre">it</span></code> (<em>iterate</em>) une ou plusieurs fois pour accéder aux documents suivants.</p>
 <div class="tip admonition">
 <p class="admonition-title">Example</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">find</span><span class="p">()</span>  
@@ -495,6 +498,19 @@ La syntaxe de la méthode <code class="docutils literal notranslate"><span class
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;ingredients&quot;</span><span class="p">:</span><span class="s2">&quot;oeufs&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
+<p>Notez que cette commande n’est pas équivalente à :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;ingredients&quot;</span><span class="p">:[</span><span class="s2">&quot;oeufs&quot;</span><span class="p">]})</span>
+</pre></div>
+</div>
+<p>Dans ce cas, aucun document n’est retourné car aucun document n’a un champ <code class="docutils literal notranslate"><span class="pre">ingredients</span></code> <em>exactement</em> égal à <code class="docutils literal notranslate"><span class="pre">[&quot;oeufs&quot;]</span></code>. Ils contiennent tous des ingrédients supplémentaires.</p>
+</div>
+<p>Il est possible de spécifier plusieurs filtres en les séparant par une virgule. Dans ce cas, seuls les documents vérifiant l’ensemble des conditions d’égalité seront retournés (ET logique).</p>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>Pour récupérer tous les plats principaux contenant des oeufs il faut donc taper :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;plat principal&quot;</span><span class="p">,</span><span class="s2">&quot;ingredients&quot;</span><span class="p">:</span><span class="s2">&quot;oeufs&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
 </div>
 <p>La syntaxe <code class="docutils literal notranslate"><span class="pre">&lt;embedded_object&gt;.&lt;embedded_key&gt;</span></code> permet d’accéder aux attributs d’un <strong>document imbriqué</strong> ou aux valeurs d’une <strong>liste</strong>. Il devient alors possible d’extraire des documents <strong>en fonction du contenu</strong> de ces objets.</p>
 <div class="tip admonition">
@@ -526,18 +542,18 @@ La syntaxe de la méthode <code class="docutils literal notranslate"><span class
 <h3><span class="section-number">3.1.2.2. </span>Projection<a class="headerlink" href="#projection" title="Link to this heading">#</a></h3>
 <p>La plupart du temps, seule une partie de l’information contenue dans les documents nous intéresse. Le second argument de la fonction <code class="docutils literal notranslate"><span class="pre">find()</span></code>, appelé <strong>projection</strong>, permet de <strong>spécifier les clés à renvoyer</strong> dans les documents qui correspondent au filtre de requête. Pour ce faire, vous pouvez :</p>
 <ul class="simple">
-<li><p>soit indiquer les champs que vous souhaitez inclure : <code class="docutils literal notranslate"><span class="pre">{&lt;key&gt;:&lt;1_or_true&gt;}</span></code></p></li>
-<li><p>soit indiquer les champs que vous souhaitez exclure : <code class="docutils literal notranslate"><span class="pre">{&lt;key&gt;:&lt;0_or_false&gt;}</span></code></p></li>
+<li><p>Indiquer les champs que vous souhaitez <strong>inclure</strong> : <code class="docutils literal notranslate"><span class="pre">{&lt;key&gt;:&lt;1_or_true&gt;}</span></code></p></li>
+<li><p>Indiquer les champs que vous souhaitez <strong>exclure</strong> : <code class="docutils literal notranslate"><span class="pre">{&lt;key&gt;:&lt;0_or_false&gt;}</span></code></p></li>
 </ul>
-<p>Vous ne pouvez pas faire les deux à la fois. La seule exception est <code class="docutils literal notranslate"><span class="pre">_id</span></code> que vous pouvez explicitement exclure tout en listant des champs à inclure. L’attribut <code class="docutils literal notranslate"><span class="pre">_id</span></code> est inclus par défaut dans les documents renvoyés.</p>
+<p>Vous ne pouvez <strong>pas</strong> faire <strong>les deux à la fois</strong>. La seule exception est <code class="docutils literal notranslate"><span class="pre">_id</span></code> que vous pouvez explicitement exclure tout en listant des champs à inclure. L’attribut <code class="docutils literal notranslate"><span class="pre">_id</span></code> est inclus par défaut dans les documents renvoyés.</p>
 <div class="tip admonition">
 <p class="admonition-title">Example</p>
-<p>Pour extraire le nom et le type de tous les plats contenant des oeufs, et exclure le champ <code class="docutils literal notranslate"><span class="pre">_id</span></code> des résultats, il suffit de taper :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;ingredients&quot;</span><span class="p">:</span><span class="s2">&quot;oeufs&quot;</span><span class="p">},{</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span><span class="s2">&quot;_id&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">})</span>
+<p>Afin de tenir compte des allergies, nous voudrions extraire le nom et le type de toutes les recettes contenant des oeufs. Voici la commande :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;ingredients&quot;</span><span class="p">:</span><span class="s2">&quot;oeufs&quot;</span><span class="p">},{</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">})</span>
 </pre></div>
 </div>
-<p>Pour trouver la région d’origine de la Ratatouille, il suffit de taper :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span><span class="s2">&quot;Ratatouille&quot;</span><span class="p">},{</span><span class="s2">&quot;origine.region&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+<p>Pour trouver la région d’origine de la Ratatouille et exclure le champ <code class="docutils literal notranslate"><span class="pre">_id</span></code> des résultats, il suffit de taper :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span><span class="s2">&quot;Ratatouille&quot;</span><span class="p">},{</span><span class="s2">&quot;origine.region&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;_id&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>Pour connaître le nom de tous les plats disponibles dans notre collection de recettes, il suffit de ne fixer aucune condition sur les documents :</p>
@@ -549,13 +565,63 @@ La syntaxe de la méthode <code class="docutils literal notranslate"><span class
 </section>
 <section id="modification-du-curseur">
 <h2><span class="section-number">3.1.3. </span>Modification du curseur<a class="headerlink" href="#modification-du-curseur" title="Link to this heading">#</a></h2>
+<p>Certaines méthodes modifient la manière dont la requête sous-jacente est exécutée. La syntaxe est la suivante:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.&lt;</span><span class="n">collection</span><span class="o">&gt;.</span><span class="n">find</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">filter</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">projection</span><span class="o">&gt;</span><span class="p">)</span><span class="o">.&lt;</span><span class="n">cursor_modifier</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">count()</span></code> modifie le curseur afin qu’il renvoie le nombre de documents qui correspondent au filtre de requête plutôt que les documents eux-mêmes.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>Combien y a-t-il de recettes contenant du gruyère ?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;ingredients&quot;</span><span class="p">:</span><span class="s2">&quot;gruyère&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sort()</span></code> renvoie les documents triés dans l’ordre croissant (1) ou décroissant (-1) en fonction du ou des champs spécifiés. La syntaxe est la suivante :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.&lt;</span><span class="n">collection</span><span class="o">&gt;.</span><span class="n">find</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">filter</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">projection</span><span class="o">&gt;</span><span class="p">)</span><span class="o">.</span><span class="n">sort</span><span class="p">({</span><span class="o">&lt;</span><span class="n">key1</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="mi">1</span><span class="n">_or_</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">key2</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="mi">1</span><span class="n">_or_</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span> <span class="o">...</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>Pour trier les recettes par <code class="docutils literal notranslate"><span class="pre">type</span></code> dans l’ordre inverse de l’ordre alphabétique, <em>puis</em> par <code class="docutils literal notranslate"><span class="pre">nom</span></code> dans l’ordre alphabétique :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">find</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">limit()</span></code> limite le nombre de documents renvoyés.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>Trouvons une idée de dessert à cuisiner :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;dessert&quot;</span><span class="p">},{</span><span class="s2">&quot;_id&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </section>
 <section id="exercice">
 <h2><span class="section-number">3.1.4. </span>Exercice<a class="headerlink" href="#exercice" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Téléchargez le jeu de données <code class="docutils literal notranslate"><span class="pre">movies.json</span></code>.</p></li>
+<li><p>Affichez le premier document pour vous familiariser avec le nom des clés. Dans ce jeu de données, tous les documents ont les mêmes clés.</p></li>
+<li><p>Récupérez les informations du film <code class="docutils literal notranslate"><span class="pre">Blade</span> <span class="pre">Runner</span></code>.<br />
+<strong>Aide</strong> : en anglais, <em>titre</em> se dit <em>title</em>.</p></li>
+<li><p>Récupérez le titre des films du <code class="docutils literal notranslate"><span class="pre">genre</span></code> <code class="docutils literal notranslate"><span class="pre">drama</span></code>. Que signifie le message qui apparait en bas de votre écran: <code class="docutils literal notranslate"><span class="pre">Type</span> <span class="pre">&quot;it&quot;</span> <span class="pre">for</span> <span class="pre">more</span></code> ?</p></li>
+<li><p>Récupérez le nom et le prénom du réalisateur de <code class="docutils literal notranslate"><span class="pre">Kill</span> <span class="pre">Bill</span></code>.<br />
+<strong>Aide</strong> : En anglais, <em>nom de famille</em> se dit <em>last name</em>, <em>prénom</em> se dit <em>first name</em>, et <em>réalisateur</em> se dit <em>director</em>.</p></li>
+<li><p>Combien y a-t-il de films français (<code class="docutils literal notranslate"><span class="pre">FR</span></code>) dans la base de données ?<br />
+<strong>Aide</strong> : En anglais, <em>pays</em> se dit <em>country</em>.</p></li>
+<li><p>Lister les films sortis en <code class="docutils literal notranslate"><span class="pre">1995</span></code> par ordre alphabétique. Quel est le premier ?<br />
+<strong>Aide</strong> : En anglais <em>année</em> se dit <em>year</em>.</p></li>
+<li><p>Dans quels films l’acteur <code class="docutils literal notranslate"><span class="pre">Bruce</span> <span class="pre">Willis</span></code> a-t-il joué ? Retournez le titre et le genre des films.</p></li>
+</ol>
+<p>Avec des requêtes simples, on peut déjà extraire beaucoup d’informations intéressantes !</p>
 </section>
 <section id="en-resume">
 <h2><span class="section-number">3.1.5. </span>En résumé<a class="headerlink" href="#en-resume" title="Link to this heading">#</a></h2>
-<p>Encore un joli tableau !</p>
+<p>Dans ce chapitre vous avez appris que :</p>
+<ul class="simple">
+<li><p>Les <strong>valeurs</strong> des paires clé-valeur sont <strong>consultables</strong> : elles sont accessibles et peuvent être utilisées pour filtrer les documents.</p></li>
+</ul>
+<p>Dans ce chapitre vous avez manipulé les fonctions suivantes :</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Objectif</p></th>
@@ -563,35 +629,33 @@ La syntaxe de la méthode <code class="docutils literal notranslate"><span class
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Récupérer toutes les occurrences de la collection</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.find({})</span></code></p></td>
+<tr class="row-even"><td><p>Récupérer tous les documents d’une collection</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find()</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>Récupérer la première occurrence de la collection</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.findOne({})</span></code></p></td>
+<tr class="row-odd"><td><p>Récupérer le premier document d’une collection</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.findOne()</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>Filtrer les données</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.find({&quot;x&quot;:</span> <span class="pre">valeur})</span></code></p></td>
+<tr class="row-even"><td><p>Filtrer les documents en fonction d’une ou plusieurs conditions d’égalité</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find({&lt;key&gt;:&lt;value&gt;,...})</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>Limiter l’affichage des clés</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.find({},</span> <span class="pre">{&quot;key&quot;:</span> <span class="pre">true})</span> </code></p></td>
+<tr class="row-odd"><td><p>Récupérer tous les champs spécifiés dans la projection, pour tous les documents qui répondent aux critères de recherche</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;)</span></code> où <code class="docutils literal notranslate"><span class="pre">&lt;projection&gt;</span> <span class="pre">=</span> <span class="pre">{&lt;key&gt;:&lt;0_or_1&gt;,...}</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>Formater les documents de sortie</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.find({}).pretty()</span></code></p></td>
+<tr class="row-even"><td><p>Compter le nombre de documents qui répondent aux critères de recherche</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;).count()</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>Trier les documents de sortie</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.find().sort({&quot;key&quot;</span> <span class="pre">:</span> <span class="pre">1})</span></code></p></td>
+<tr class="row-odd"><td><p>Trier les documents qui répondent aux critères de recherche</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;).sort(&lt;condition&gt;)</span></code> où <code class="docutils literal notranslate"><span class="pre">&lt;condition&gt;</span> <span class="pre">=</span> <span class="pre">{&lt;key&gt;:&lt;1_or_-1&gt;,...}</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>Compter les documents de sortie</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.find({}).count()</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Limiter les documents de sortie</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.find({}).limit(2)</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Valeurs distinctes d’un champ</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.collectionName.distinct(champ,</span> <span class="pre">{})</span></code></p></td>
+<tr class="row-even"><td><p>Limiter le nombre de documents qui répondent aux critères de recherche à renvoyer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;).limit(&lt;n&gt;)</span></code></p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;)</span></code> peut se comprendre ainsi : “je veux extraire les documents de la <code class="docutils literal notranslate"><span class="pre">&lt;collection&gt;</span></code> qui vérifient les conditions suivantes : <code class="docutils literal notranslate"><span class="pre">&lt;filter&gt;</span></code>, et pour ces documents je veux récupérer les informations suivantes : <code class="docutils literal notranslate"><span class="pre">&lt;projection&gt;</span></code>.”</p>
 </div>
 </section>
 </section>
