@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6.2. Requêtes depuis R : mongolite &#8212; MongoDB</title>
+    <title>7.2. Requêtes depuis R : mongolite &#8212; MongoDB</title>
   
   
   
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/07_scripts_R';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="6.1. Requêtes depuis Python : pymongo" href="07_scripts_py.html" />
+    <link rel="prev" title="7.1. Requêtes depuis Python : pymongo" href="07_scripts_py.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,13 +177,14 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_installation.html">1. Installation de MongoDB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_creation.html">2. Créer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_index.html">3. Titre 3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">4. Titre 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_modif.html">5. Titre 5</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="07_scripts.html">6. Effectuer des requêtes depuis des programmes Python ou R</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">6.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">6.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_creation.html">2. <strong>C</strong>RUD : Création</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_lecture.html">3. C<strong>R</strong>UD : Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_index.html">4. Titre 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">5. Titre 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modif.html">6. Titre 5</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="07_scripts.html">7. Effectuer des requêtes depuis des programmes Python ou R</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">7.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">7.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
 </ul>
 </details></li>
 </ul>
@@ -381,34 +382,34 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-du-package-mongolite-et-connexion-a-un-serveur-mongodb">6.2.1. Installation du package mongolite et connexion à un serveur MongoDB</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-et-chargement-du-package-mongolite">6.2.1.1. Installation et chargement du package mongolite</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connexion-a-une-collection-d-une-base-de-donnees-presente-sur-un-serveur-mongodb">6.2.1.2. Connexion à une collection d’une base de données présente sur un serveur MongoDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-du-package-mongolite-et-connexion-a-un-serveur-mongodb">7.2.1. Installation du package mongolite et connexion à un serveur MongoDB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-et-chargement-du-package-mongolite">7.2.1.1. Installation et chargement du package mongolite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connexion-a-une-collection-d-une-base-de-donnees-presente-sur-un-serveur-mongodb">7.2.1.2. Connexion à une collection d’une base de données présente sur un serveur MongoDB</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-de-donnees">6.2.2. Requêtes de données</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-count">6.2.2.1. Méthode count</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-find">6.2.2.2. Méthode find</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-iterate">6.2.2.3. Méthode iterate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-distinct">6.2.2.4. Méthode distinct</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selectionner-par-date">6.2.2.5. Sélectionner par date</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-de-donnees">7.2.2. Requêtes de données</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-count">7.2.2.1. Méthode count</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-find">7.2.2.2. Méthode find</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-iterate">7.2.2.3. Méthode iterate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-distinct">7.2.2.4. Méthode distinct</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selectionner-par-date">7.2.2.5. Sélectionner par date</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregations">6.2.3. Aggrégations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulation-de-donnees">6.2.4. Manipulation de données</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-insert">6.2.4.1. Méthode insert</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-remove">6.2.4.2. Méthode remove</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methodes-update-upsert">6.2.4.3. Méthodes update/upsert</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregations">7.2.3. Aggrégations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulation-de-donnees">7.2.4. Manipulation de données</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-insert">7.2.4.1. Méthode insert</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-remove">7.2.4.2. Méthode remove</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methodes-update-upsert">7.2.4.3. Méthodes update/upsert</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-et-export-de-donnees">6.2.5. Import et export de données</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-methode-export-import-pour-json">6.2.5.1. La méthode export/import pour JSON</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-formats-d-export-jsonlite-bjson">6.2.5.2. Autres formats d’export (jsonlite/bjson/…)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-et-export-de-donnees">7.2.5. Import et export de données</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-methode-export-import-pour-json">7.2.5.1. La méthode export/import pour JSON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-formats-d-export-jsonlite-bjson">7.2.5.2. Autres formats d’export (jsonlite/bjson/…)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">6.2.6. Exercices</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consignes">6.2.6.1. Consignes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correction">6.2.6.2. Correction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">7.2.6. Exercices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consignes">7.2.6.1. Consignes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correction">7.2.6.2. Correction</a></li>
 </ul>
 </li>
 </ul>
@@ -423,15 +424,15 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="requetes-depuis-r-mongolite">
-<span id="sec-mongolite"></span><h1><span class="section-number">6.2. </span>Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code><a class="headerlink" href="#requetes-depuis-r-mongolite" title="Link to this heading">#</a></h1>
+<span id="sec-mongolite"></span><h1><span class="section-number">7.2. </span>Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code><a class="headerlink" href="#requetes-depuis-r-mongolite" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Auteurs/trices : <strong>Faisal JAYOUZI, Paul LANCELIN, Yolan PERONNET</strong></p></li>
 </ul>
 <p>Le chapitre suivant a pour objectif d’explorer le package mongolite permettant d’effectuer des requêtes MongoDB depuis R. La rédaction du tutoriel suivant trouve sa source dans la documentation rédigée par l’auteur du package mongolite, Jeroen Ooms. Celle-ci est accessible à l’adresse suivante : <a class="reference external" href="https://jeroen.github.io/mongolite/" title="Documentation de mongolite (R)">https://jeroen.github.io/mongolite/</a></p>
 <section id="installation-du-package-mongolite-et-connexion-a-un-serveur-mongodb">
-<h2><span class="section-number">6.2.1. </span>Installation du package mongolite et connexion à un serveur MongoDB<a class="headerlink" href="#installation-du-package-mongolite-et-connexion-a-un-serveur-mongodb" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.2.1. </span>Installation du package mongolite et connexion à un serveur MongoDB<a class="headerlink" href="#installation-du-package-mongolite-et-connexion-a-un-serveur-mongodb" title="Link to this heading">#</a></h2>
 <section id="installation-et-chargement-du-package-mongolite">
-<h3><span class="section-number">6.2.1.1. </span>Installation et chargement du package mongolite<a class="headerlink" href="#installation-et-chargement-du-package-mongolite" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.1.1. </span>Installation et chargement du package mongolite<a class="headerlink" href="#installation-et-chargement-du-package-mongolite" title="Link to this heading">#</a></h3>
 <p>Les packages binaires de mongolite peuvent être installés directement depuis le CRAN via la manipulation suivante à partir de la barre d’outils de RStudio :</p>
 <hr class="docutils" />
 <p><strong>Tools -&gt; Install Packages -&gt; mongolite -&gt; Install</strong></p>
@@ -454,7 +455,7 @@ document.write(`
 </div>
 </section>
 <section id="connexion-a-une-collection-d-une-base-de-donnees-presente-sur-un-serveur-mongodb">
-<h3><span class="section-number">6.2.1.2. </span>Connexion à une collection d’une base de données présente sur un serveur MongoDB<a class="headerlink" href="#connexion-a-une-collection-d-une-base-de-donnees-presente-sur-un-serveur-mongodb" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.1.2. </span>Connexion à une collection d’une base de données présente sur un serveur MongoDB<a class="headerlink" href="#connexion-a-une-collection-d-une-base-de-donnees-presente-sur-un-serveur-mongodb" title="Link to this heading">#</a></h3>
 <p>Après avoir chargé les packages nécessaires dans votre environnement R, vous pourrez vous connecter à une collection d’une base de données présente sur un serveur MongoDB à partir d’un lien URI, du nom de la base de données, et du nom de la collection à laquelle vous souhaitez accéder. Pour ce faire, il suffit d’utiliser la fonction <code class="docutils literal notranslate"><span class="pre">mongo()</span></code> de la librairie <em>mongolite</em> de la manière suivante :</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">coll</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mongo</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="s">&quot;ma_collection&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">db</span><span class="o">=</span><span class="s">&quot;ma_BDD&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="n">url</span><span class="o">=</span><span class="s">&quot;mon_uri&quot;</span><span class="p">,</span>
@@ -511,10 +512,10 @@ document.write(`
 </section>
 </section>
 <section id="requetes-de-donnees">
-<h2><span class="section-number">6.2.2. </span>Requêtes de données<a class="headerlink" href="#requetes-de-donnees" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.2.2. </span>Requêtes de données<a class="headerlink" href="#requetes-de-donnees" title="Link to this heading">#</a></h2>
 <p><em>Mongolite</em> utilise une syntaxe JSON dans les arguments de ses méthodes pour interroger des collections. Cette syntaxe JSON devra être spécifiée sous forme de chaîne de caractère dans R. Ces différentes chaînes feront alors l’objet de divers paramètres pour les méthodes présentées dans ce chapitre.</p>
 <section id="methode-count">
-<h3><span class="section-number">6.2.2.1. </span>Méthode count<a class="headerlink" href="#methode-count" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.2.1. </span>Méthode count<a class="headerlink" href="#methode-count" title="Link to this heading">#</a></h3>
 <p>Tout comme le <code class="docutils literal notranslate"><span class="pre">.count()</span></code> en MongoDB (<span class="xref myst">plus de précisions ici</span>), la méthode <code class="docutils literal notranslate"><span class="pre">count()</span></code> nous permet de calculer le nombre de résultats d’une collection, ou encore le nombre de résultats d’une certaine requête. Cette méthode n’a qu’un seul argument (query) et sa valeur par défaut est “{}”. Elle renvoie un entier.</p>
 <p><strong>Exemples :</strong></p>
 <p>Afficher le nombre de résultats de la base NYfood par exemple :</p>
@@ -530,7 +531,7 @@ document.write(`
 <p>Et pour afficher le nombre de restaurants chinois :</p>
 </section>
 <section id="methode-find">
-<h3><span class="section-number">6.2.2.2. </span>Méthode find<a class="headerlink" href="#methode-find" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.2.2. </span>Méthode find<a class="headerlink" href="#methode-find" title="Link to this heading">#</a></h3>
 <p>La méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code> permet, à l’instar du <code class="docutils literal notranslate"><span class="pre">.find</span></code> en MongoDB (<span class="xref myst">plus de précisions ici</span>), d’interroger une collection en filtrant les documents et les champs. De plus, cette méthode intègre la possibilité de limiter, trier et skiper les documents d’un résultat. Autrement dit, cette méthode comprends en ses arguments le <code class="docutils literal notranslate"><span class="pre">.limit</span></code>, le <code class="docutils literal notranslate"><span class="pre">.sort</span></code> et le <code class="docutils literal notranslate"><span class="pre">.skip</span></code> de MongoDB. Présentons alors les 5 arguments de cette méthode :</p>
 <ul class="simple">
 <li><p>query : correspond à la requête de filtrage des documents passée en premier agument d’un <code class="docutils literal notranslate"><span class="pre">.find</span></code> en MongoDB ; ‘{}’ est la valeur par défaut</p></li>
@@ -577,7 +578,7 @@ document.write(`
 <p>Pour ce qui est des requêtes géospatiales, la syntaxe entre simples <em>quotes</em> est la même que pour les requêtes géo-spatiales en MongoDB (<a class="reference internal" href="04_index.html"><span class="std std-doc">plus de précisions ici</span></a>).</p>
 </section>
 <section id="methode-iterate">
-<h3><span class="section-number">6.2.2.3. </span>Méthode iterate<a class="headerlink" href="#methode-iterate" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.2.3. </span>Méthode iterate<a class="headerlink" href="#methode-iterate" title="Link to this heading">#</a></h3>
 <p>Nous avons vu précedemment que le renvoi d’une requête dans un dataframe R à l’aide de la méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code> pouvait être problématique pour de grands volumes de données. La méthode <code class="docutils literal notranslate"><span class="pre">iterate()</span></code> permet de s’affranchir de ce problème. Celle-ci fonctionne exactement de la même manière que la méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code> mais renvoie le résultat d’une requête non pas dans un dataframe mais dans un objet propre à <em>mongolite</em>, un <em>Mongo iterator</em>. Cet objet va permettre de ne pas stocker toutes les documents de la requête en mémoire mais de les lire un par un. Pour ce faire, il existe 4 méthodes applicables à un <em>Mongo iterator</em> :</p>
 <ul class="simple">
 <li><p>batch(n) : permet de parcourir n documents à la fois</p></li>
@@ -615,7 +616,7 @@ document.write(`
 </div>
 </section>
 <section id="methode-distinct">
-<h3><span class="section-number">6.2.2.4. </span>Méthode distinct<a class="headerlink" href="#methode-distinct" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.2.4. </span>Méthode distinct<a class="headerlink" href="#methode-distinct" title="Link to this heading">#</a></h3>
 <p>Tout comme le <code class="docutils literal notranslate"><span class="pre">.distinct()</span></code> en MongoDB (<span class="xref myst">plus de précisions ici</span>), la méthode <code class="docutils literal notranslate"><span class="pre">distinct()</span></code> nous renvoie les valeurs distinctes d’un champ.</p>
 <p><strong>Exemple :</strong></p>
 <p>Affichez la liste des notes existant dans la base :</p>
@@ -629,7 +630,7 @@ document.write(`
 <p>Nous pouvons également noter l’équivalent en MongoDB :</p>
 </section>
 <section id="selectionner-par-date">
-<h3><span class="section-number">6.2.2.5. </span>Sélectionner par date<a class="headerlink" href="#selectionner-par-date" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.2.5. </span>Sélectionner par date<a class="headerlink" href="#selectionner-par-date" title="Link to this heading">#</a></h3>
 <p>Le traitement des dates avec <em>mongolite</em> mérite une attention particulière. En effet, lorsque l’on souhaite intéragir avec une collection sur un champ de type <em>date</em>, la syntaxe sera relativement différente de celle que l’on peut utiliser en <em>MongoDB</em> (<a class="reference internal" href="#03_dates.md"><span class="xref myst">plus de précisions ici</span></a>) ou avec <em>pymongo</em>. En raison de la classe d’une requête en mongolite (chaîne de caractère), on ne pourra pas utiliser d’objet R spécifique aux dates (comme les datetimes en python par exemple). Ainsi, toutes les dates définies dans une requête en mongolite devront être spécifiées dans un format purement JSON intégrant un opérateur <code class="docutils literal notranslate"><span class="pre">$date</span></code> et une syntaxe UTC. Concrètement, ce format sera du type :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;$date&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;AAAA-MM-JJThh:mm:ssZ&quot;</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
@@ -649,7 +650,7 @@ document.write(`
 </section>
 </section>
 <section id="aggregations">
-<h2><span class="section-number">6.2.3. </span>Aggrégations<a class="headerlink" href="#aggregations" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.2.3. </span>Aggrégations<a class="headerlink" href="#aggregations" title="Link to this heading">#</a></h2>
 <p>Nous nous proposons dans ce paragraphe de traiter de la méthode <code class="docutils literal notranslate"><span class="pre">aggregate()</span></code> de mongolite qui permet d’éxécuter, à l’instar de d’un <code class="docutils literal notranslate"><span class="pre">.aggregate</span></code> en MongoDB, une pipeline d’aggrégation qui n’est rien d’autre qu’une succession de plusieurs étapes d’aggrégation. La méthode <code class="docutils literal notranslate"><span class="pre">aggregate()</span></code> prend comme argument une liste de dictionnaires que l’on met entre simples <em>quotes</em>. La syntaxe a utiliser pour cette liste de dictionnaires est la même que pour le <code class="docutils literal notranslate"><span class="pre">.aggregate</span></code> de MongoDB (nous vous renvoyons au chapitre sur <a class="reference internal" href="05_agreg.html"><span class="std std-doc">les requêtes d’aggrégations</span></a> pour plus de précisions). Tout comme la méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code>, la méthode aggregate renvoie un <em>dataframe</em>.</p>
 <p><strong>Exemple :</strong></p>
 <p>Prenons un exemple : dans la collection NYfood, le pipeline ci-dessous retourne le nombre de restaurants par arrondissement (borough).</p>
@@ -675,9 +676,9 @@ document.write(`
 </div>
 </section>
 <section id="manipulation-de-donnees">
-<h2><span class="section-number">6.2.4. </span>Manipulation de données<a class="headerlink" href="#manipulation-de-donnees" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.2.4. </span>Manipulation de données<a class="headerlink" href="#manipulation-de-donnees" title="Link to this heading">#</a></h2>
 <section id="methode-insert">
-<h3><span class="section-number">6.2.4.1. </span>Méthode insert<a class="headerlink" href="#methode-insert" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.4.1. </span>Méthode insert<a class="headerlink" href="#methode-insert" title="Link to this heading">#</a></h3>
 <p>La méthode <code class="docutils literal notranslate"><span class="pre">insert()</span></code> permet, à l’instar du <code class="docutils literal notranslate"><span class="pre">.insert</span></code> en MongoDB (<a class="reference internal" href="06_modif.html"><span class="std std-doc">plus de précisions ici</span></a>), d’ajouter des données à une collection.
 La méthode la plus simple, est d’insérer des données à partir d’un data frame R. Les colonnes du data frame seront automatiquement transformées en clées d’enregistrement JSON.</p>
 <div class="cell docutils container">
@@ -721,7 +722,7 @@ A noter qu’ici la méthode <code class="docutils literal notranslate"><span cl
 <p>Nous pouvons également noter l’équivalent en MongoDB :</p>
 </section>
 <section id="methode-remove">
-<h3><span class="section-number">6.2.4.2. </span>Méthode remove<a class="headerlink" href="#methode-remove" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.4.2. </span>Méthode remove<a class="headerlink" href="#methode-remove" title="Link to this heading">#</a></h3>
 <p>La même syntaxe que nous utilisons dans <code class="docutils literal notranslate"><span class="pre">find()</span></code> pour sélectionner les enregistrements à lire, peut également être utilisée pour sélectionner les enregistrements à supprimer :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -769,7 +770,7 @@ A noter qu’ici la méthode <code class="docutils literal notranslate"><span cl
 <p>Nous pouvons noter l’équivalent en MongoDB :</p>
 </section>
 <section id="methodes-update-upsert">
-<h3><span class="section-number">6.2.4.3. </span>Méthodes update/upsert<a class="headerlink" href="#methodes-update-upsert" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.4.3. </span>Méthodes update/upsert<a class="headerlink" href="#methodes-update-upsert" title="Link to this heading">#</a></h3>
 <p>Pour modifier des enregistrements existants, utilisez l’opérateur <code class="docutils literal notranslate"><span class="pre">update()</span></code> :</p>
 <p><strong>Modification d’un document :</strong></p>
 <div class="cell docutils container">
@@ -838,9 +839,9 @@ A noter qu’ici la méthode <code class="docutils literal notranslate"><span cl
 </section>
 </section>
 <section id="import-et-export-de-donnees">
-<h2><span class="section-number">6.2.5. </span>Import et export de données<a class="headerlink" href="#import-et-export-de-donnees" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.2.5. </span>Import et export de données<a class="headerlink" href="#import-et-export-de-donnees" title="Link to this heading">#</a></h2>
 <section id="la-methode-export-import-pour-json">
-<h3><span class="section-number">6.2.5.1. </span>La méthode export/import pour JSON<a class="headerlink" href="#la-methode-export-import-pour-json" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.5.1. </span>La méthode export/import pour JSON<a class="headerlink" href="#la-methode-export-import-pour-json" title="Link to this heading">#</a></h3>
 <p>Le format par défaut JSON est celui d’une ligne par document.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -876,14 +877,14 @@ A noter qu’ici la méthode <code class="docutils literal notranslate"><span cl
 </div>
 </section>
 <section id="autres-formats-d-export-jsonlite-bjson">
-<h3><span class="section-number">6.2.5.2. </span>Autres formats d’export (jsonlite/bjson/…)<a class="headerlink" href="#autres-formats-d-export-jsonlite-bjson" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.5.2. </span>Autres formats d’export (jsonlite/bjson/…)<a class="headerlink" href="#autres-formats-d-export-jsonlite-bjson" title="Link to this heading">#</a></h3>
 <p>Pour ces autres formats ou package concernant les méthodes <code class="docutils literal notranslate"><span class="pre">import()</span></code> et <code class="docutils literal notranslate"><span class="pre">export()</span></code>, nous vous renvoyons <a class="reference external" href="https://jeroen.github.io/mongolite/import-export.html">à la page de Jeroen Ooms</a>.</p>
 </section>
 </section>
 <section id="exercices">
-<h2><span class="section-number">6.2.6. </span>Exercices<a class="headerlink" href="#exercices" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.2.6. </span>Exercices<a class="headerlink" href="#exercices" title="Link to this heading">#</a></h2>
 <section id="consignes">
-<h3><span class="section-number">6.2.6.1. </span>Consignes<a class="headerlink" href="#consignes" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.6.1. </span>Consignes<a class="headerlink" href="#consignes" title="Link to this heading">#</a></h3>
 <p><strong>Exercice 1 :</strong></p>
 <ol class="arabic simple">
 <li><p>A l’aide d’une requête d’aggrégation, récupérer le nombre de restaurants par quatier dans la collection NYfood.</p></li>
@@ -898,7 +899,7 @@ A noter qu’ici la méthode <code class="docutils literal notranslate"><span cl
 </ol>
 </section>
 <section id="correction">
-<h3><span class="section-number">6.2.6.2. </span>Correction<a class="headerlink" href="#correction" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.2.6.2. </span>Correction<a class="headerlink" href="#correction" title="Link to this heading">#</a></h3>
 <p><strong>Exercice 1 :</strong></p>
 <p><strong>Question 1 :</strong></p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;[{&quot;$group&quot;:{&quot;_id&quot;:&quot;$borough&quot;,&quot;nb_restos&quot;:{&quot;$sum&quot;:1}}}]&#39;</span><span class="w"> </span>
@@ -991,7 +992,7 @@ A noter qu’ici la méthode <code class="docutils literal notranslate"><span cl
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">6.1. </span>Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></p>
+        <p class="prev-next-title"><span class="section-number">7.1. </span>Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></p>
       </div>
     </a>
 </div>
@@ -1010,34 +1011,34 @@ A noter qu’ici la méthode <code class="docutils literal notranslate"><span cl
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-du-package-mongolite-et-connexion-a-un-serveur-mongodb">6.2.1. Installation du package mongolite et connexion à un serveur MongoDB</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-et-chargement-du-package-mongolite">6.2.1.1. Installation et chargement du package mongolite</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connexion-a-une-collection-d-une-base-de-donnees-presente-sur-un-serveur-mongodb">6.2.1.2. Connexion à une collection d’une base de données présente sur un serveur MongoDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-du-package-mongolite-et-connexion-a-un-serveur-mongodb">7.2.1. Installation du package mongolite et connexion à un serveur MongoDB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-et-chargement-du-package-mongolite">7.2.1.1. Installation et chargement du package mongolite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connexion-a-une-collection-d-une-base-de-donnees-presente-sur-un-serveur-mongodb">7.2.1.2. Connexion à une collection d’une base de données présente sur un serveur MongoDB</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-de-donnees">6.2.2. Requêtes de données</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-count">6.2.2.1. Méthode count</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-find">6.2.2.2. Méthode find</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-iterate">6.2.2.3. Méthode iterate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-distinct">6.2.2.4. Méthode distinct</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selectionner-par-date">6.2.2.5. Sélectionner par date</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-de-donnees">7.2.2. Requêtes de données</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-count">7.2.2.1. Méthode count</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-find">7.2.2.2. Méthode find</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-iterate">7.2.2.3. Méthode iterate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-distinct">7.2.2.4. Méthode distinct</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selectionner-par-date">7.2.2.5. Sélectionner par date</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregations">6.2.3. Aggrégations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulation-de-donnees">6.2.4. Manipulation de données</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-insert">6.2.4.1. Méthode insert</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-remove">6.2.4.2. Méthode remove</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methodes-update-upsert">6.2.4.3. Méthodes update/upsert</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregations">7.2.3. Aggrégations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulation-de-donnees">7.2.4. Manipulation de données</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-insert">7.2.4.1. Méthode insert</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-remove">7.2.4.2. Méthode remove</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methodes-update-upsert">7.2.4.3. Méthodes update/upsert</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-et-export-de-donnees">6.2.5. Import et export de données</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-methode-export-import-pour-json">6.2.5.1. La méthode export/import pour JSON</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-formats-d-export-jsonlite-bjson">6.2.5.2. Autres formats d’export (jsonlite/bjson/…)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-et-export-de-donnees">7.2.5. Import et export de données</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-methode-export-import-pour-json">7.2.5.1. La méthode export/import pour JSON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-formats-d-export-jsonlite-bjson">7.2.5.2. Autres formats d’export (jsonlite/bjson/…)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">6.2.6. Exercices</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consignes">6.2.6.1. Consignes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correction">6.2.6.2. Correction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">7.2.6. Exercices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consignes">7.2.6.1. Consignes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correction">7.2.6.2. Correction</a></li>
 </ul>
 </li>
 </ul>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3. Titre 3 &#8212; MongoDB</title>
+    <title>4. Titre 3 &#8212; MongoDB</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/04_index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. Titre 4" href="05_agreg.html" />
-    <link rel="prev" title="2. Créer" href="02_creation.html" />
+    <link rel="next" title="5. Titre 4" href="05_agreg.html" />
+    <link rel="prev" title="3. CRUD : Lecture" href="03_lecture.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,13 +178,14 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_installation.html">1. Installation de MongoDB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_creation.html">2. Créer</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Titre 3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">4. Titre 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_modif.html">5. Titre 5</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">6. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">6.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">6.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_creation.html">2. <strong>C</strong>RUD : Création</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_lecture.html">3. C<strong>R</strong>UD : Lecture</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Titre 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_agreg.html">5. Titre 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modif.html">6. Titre 5</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_scripts.html">7. Effectuer des requêtes depuis des programmes Python ou R</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_py.html">7.1. Requêtes depuis Python : <code class="docutils literal notranslate"><span class="pre">pymongo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_scripts_R.html">7.2. Requêtes depuis R : <code class="docutils literal notranslate"><span class="pre">mongolite</span></code></a></li>
 </ul>
 </details></li>
 </ul>
@@ -382,7 +383,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-et-index-textuels">3.1. Requêtes et Index textuels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-et-index-textuels">4.1. Requêtes et Index textuels</a></li>
 </ul>
             </nav>
         </div>
@@ -395,10 +396,10 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="titre-3">
-<h1><span class="section-number">3. </span>Titre 3<a class="headerlink" href="#titre-3" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">4. </span>Titre 3<a class="headerlink" href="#titre-3" title="Link to this heading">#</a></h1>
 <p>INTÉRESSANT</p>
 <section id="requetes-et-index-textuels">
-<h2><span class="section-number">3.1. </span>Requêtes et Index textuels<a class="headerlink" href="#requetes-et-index-textuels" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.1. </span>Requêtes et Index textuels<a class="headerlink" href="#requetes-et-index-textuels" title="Link to this heading">#</a></h2>
 <p>Lorsque l’on veut interroger notre base de données sur un champ de type “chaîne de caractères”, deux méthodes s’offrent à nous : on peut utiliser soit des requêtes régulières, soit un index textuel qui a été créé sur-le-champ. L’avantage de la première méthode est une très grande précision, et on l’utilisera donc lorsque l’on recherchera du texte très précis, tandis que la seconde méthode utilise la puissance de l’index pour effectuer une recherche de type “moteur de recherche”, renvoyant des résultats proches de ce qui a été demandé. Ici, comme on s’intéresse uniquement au index, nous ne développerons que la seconde méthode.</p>
 <ul class="simple">
 <li><p>Création d’un index textuel</p></li>
@@ -492,12 +493,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="02_creation.html"
+       href="03_lecture.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Créer</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>C<strong>R</strong>UD : Lecture</p>
       </div>
     </a>
     <a class="right-next"
@@ -505,7 +506,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Titre 4</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Titre 4</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -525,7 +526,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-et-index-textuels">3.1. Requêtes et Index textuels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-et-index-textuels">4.1. Requêtes et Index textuels</a></li>
 </ul>
   </nav></div>
 

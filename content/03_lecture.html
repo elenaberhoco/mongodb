@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>MongoDB : Base de données NoSQL orientée documents &#8212; MongoDB</title>
+    <title>3. CRUD : Lecture &#8212; MongoDB</title>
   
   
   
@@ -59,10 +59,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/00_intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/03_lecture';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Installation de MongoDB" href="01_installation.html" />
+    <link rel="next" title="3.1. Requête simple" href="03_lecture_simple.html" />
+    <link rel="prev" title="2. CRUD : Création" href="02_creation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,8 +126,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -145,7 +144,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="00_intro.html">
   
   
   
@@ -170,17 +169,17 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_intro.html">
                     MongoDB : Base de données NoSQL orientée documents
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_installation.html">1. Installation de MongoDB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_creation.html">2. <strong>C</strong>RUD : Création</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="03_lecture.html">3. C<strong>R</strong>UD : Lecture</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">3. C<strong>R</strong>UD : Lecture</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="03_lecture_simple.html">3.1. Requête simple</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_lecture_operateurs.html">3.2. Requête avec opérateurs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_lecture_agregation.html">3.3. Requête d’aggrégation</a></li>
@@ -257,7 +256,7 @@
       
       
       
-      <li><a href="https://github.com/elenaberhoco/mongodb-trash/issues/new?title=Issue%20on%20page%20%2Fcontent/00_intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/elenaberhoco/mongodb-trash/issues/new?title=Issue%20on%20page%20%2Fcontent/03_lecture.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -287,7 +286,7 @@
       
       
       
-      <li><a href="../_sources/content/00_intro.md" target="_blank"
+      <li><a href="../_sources/content/03_lecture.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -369,7 +368,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>MongoDB : Base de données NoSQL orientée documents</h1>
+    <h1>CRUD : Lecture</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -383,16 +382,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="mongodb-base-de-donnees-nosql-orientee-documents">
-<h1>MongoDB : Base de données NoSQL orientée documents<a class="headerlink" href="#mongodb-base-de-donnees-nosql-orientee-documents" title="Link to this heading">#</a></h1>
-<p>Ce cours est une introduction à MongoDB, une base de données NoSQL orientée documents.</p>
-<p>Il est organisé selon les quatre grandes catégories d’interaction que l’on peut avoir avec une base de données, résumées par l’acronyme <strong>CRUD</strong> :</p>
-<ul class="simple">
-<li><p><strong>C</strong>reate (Créer) : Toute opération qui consiste à ajouter de nouveaux enregistrements à la base de données.</p></li>
-<li><p><strong>R</strong>ead (Lire) : Toute opération qui consiste à récupérer certaines informations en fonction des critères de recherche spécifiés.</p></li>
-<li><p><strong>U</strong>pdate (Mettre à jour) : Toute opération qui consiste à modifier des enregistrements de la base de données.</p></li>
-<li><p><strong>D</strong>elete (Supprimer) : Toute opération qui consiste à supprimer des enregistrements de la base de données, voire la base de données elle-même.</p></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="crud-lecture">
+<h1><span class="section-number">3. </span>C<strong>R</strong>UD : Lecture<a class="headerlink" href="#crud-lecture" title="Link to this heading">#</a></h1>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-g-1 sd-g-xs-1 sd-g-sm-1 sd-g-md-1 sd-g-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Objectif</div>
+<p class="sd-card-text">Dans ce chapitre vous apprendrez à interroger et filtrer une base de données MongoDB.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -427,12 +431,21 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="02_creation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span><strong>C</strong>RUD : Création</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="01_installation.html"
+       href="03_lecture_simple.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Installation de MongoDB</p>
+        <p class="prev-next-title"><span class="section-number">3.1. </span>Requête simple</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

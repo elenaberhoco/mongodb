@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>MongoDB : Base de données NoSQL orientée documents &#8212; MongoDB</title>
+    <title>3.2. Requête avec opérateurs &#8212; MongoDB</title>
   
   
   
@@ -59,10 +59,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/00_intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/03_lecture_operateurs';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Installation de MongoDB" href="01_installation.html" />
+    <link rel="next" title="3.3. Requête d’aggrégation" href="03_lecture_agregation.html" />
+    <link rel="prev" title="3.1. Requête simple" href="03_lecture_simple.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,8 +126,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -145,7 +144,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="00_intro.html">
   
   
   
@@ -170,19 +169,19 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_intro.html">
                     MongoDB : Base de données NoSQL orientée documents
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapitres</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_installation.html">1. Installation de MongoDB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_creation.html">2. <strong>C</strong>RUD : Création</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="03_lecture.html">3. C<strong>R</strong>UD : Lecture</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="03_lecture.html">3. C<strong>R</strong>UD : Lecture</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="03_lecture_simple.html">3.1. Requête simple</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_lecture_operateurs.html">3.2. Requête avec opérateurs</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.2. Requête avec opérateurs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_lecture_agregation.html">3.3. Requête d’aggrégation</a></li>
 </ul>
 </details></li>
@@ -257,7 +256,7 @@
       
       
       
-      <li><a href="https://github.com/elenaberhoco/mongodb-trash/issues/new?title=Issue%20on%20page%20%2Fcontent/00_intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/elenaberhoco/mongodb-trash/issues/new?title=Issue%20on%20page%20%2Fcontent/03_lecture_operateurs.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -287,7 +286,7 @@
       
       
       
-      <li><a href="../_sources/content/00_intro.md" target="_blank"
+      <li><a href="../_sources/content/03_lecture_operateurs.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -358,7 +357,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -369,11 +370,24 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>MongoDB : Base de données NoSQL orientée documents</h1>
+    <h1>Requête avec opérateurs</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-de-comparaison">3.2.1. Opérateurs de comparaison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-logique">3.2.2. Opérateurs logique</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requete-sur-des-listes">3.2.3. Requête sur des listes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#titre-1-2-1">3.2.3.1. Titre 1.2.1</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -383,18 +397,166 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="mongodb-base-de-donnees-nosql-orientee-documents">
-<h1>MongoDB : Base de données NoSQL orientée documents<a class="headerlink" href="#mongodb-base-de-donnees-nosql-orientee-documents" title="Link to this heading">#</a></h1>
-<p>Ce cours est une introduction à MongoDB, une base de données NoSQL orientée documents.</p>
-<p>Il est organisé selon les quatre grandes catégories d’interaction que l’on peut avoir avec une base de données, résumées par l’acronyme <strong>CRUD</strong> :</p>
-<ul class="simple">
-<li><p><strong>C</strong>reate (Créer) : Toute opération qui consiste à ajouter de nouveaux enregistrements à la base de données.</p></li>
-<li><p><strong>R</strong>ead (Lire) : Toute opération qui consiste à récupérer certaines informations en fonction des critères de recherche spécifiés.</p></li>
-<li><p><strong>U</strong>pdate (Mettre à jour) : Toute opération qui consiste à modifier des enregistrements de la base de données.</p></li>
-<li><p><strong>D</strong>elete (Supprimer) : Toute opération qui consiste à supprimer des enregistrements de la base de données, voire la base de données elle-même.</p></li>
-</ul>
-<div class="toctree-wrapper compound">
+  <section class="tex2jax_ignore mathjax_ignore" id="requete-avec-operateurs">
+<h1><span class="section-number">3.2. </span>Requête avec opérateurs<a class="headerlink" href="#requete-avec-operateurs" title="Link to this heading">#</a></h1>
+<section id="operateurs-de-comparaison">
+<h2><span class="section-number">3.2.1. </span>Opérateurs de comparaison<a class="headerlink" href="#operateurs-de-comparaison" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Opérateur logique</p></th>
+<th class="head"><p>Mot clé en MongoDB</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>=</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$eq</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>≠</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$ne</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$lt</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$gt</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>≤</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$lte</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>≥</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$gte</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>∈</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$in</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>∉</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$nin</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>clé existante</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$exists</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>|.|</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$size</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
+</section>
+<section id="operateurs-logique">
+<h2><span class="section-number">3.2.2. </span>Opérateurs logique<a class="headerlink" href="#operateurs-logique" title="Link to this heading">#</a></h2>
+</section>
+<section id="requete-sur-des-listes">
+<h2><span class="section-number">3.2.3. </span>Requête sur des listes<a class="headerlink" href="#requete-sur-des-listes" title="Link to this heading">#</a></h2>
+<div class="admonition-remarque admonition">
+<p class="admonition-title">Remarque</p>
+<p>Remarque !</p>
+</div>
+<section id="titre-1-2-1">
+<h3><span class="section-number">3.2.3.1. </span>Titre 1.2.1<a class="headerlink" href="#titre-1-2-1" title="Link to this heading">#</a></h3>
+<p>Text text text</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Retourner toutes les occurences d’une collection avec find()</div>
+<p class="sd-card-text">BLI ?</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Retourner uniquement la première occurence d’une collection avec findOne()</div>
+<p class="sd-card-text">BLO ?</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Text</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">code</span>
+</pre></div>
+</div>
+<p>Text</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Onglet 1</label><div class="sd-tab-content docutils">
+<p>Blu</p>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Onglet 2</label><div class="sd-tab-content docutils">
+<p>Blo</p>
+</div>
+</div>
+<p>Text Text</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+Tab 1 title</label><div class="sd-tab-content docutils">
+<p>My first tab</p>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
+Tab 2 title</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<p>bli</p>
+</div>
+</div>
+<p>MORE TABS !!</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Python</label><div class="tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">C++</label><div class="tab-content docutils">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">On peut mettre ce qu’on veut !</p>
+<p>Et tout plein de texte là</p>
+</div>
+<p>Encore plus d’onglets :</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" data-sync-group="category" data-sync-id="key1" for="sd-tab-item-4">
+Label1</label><div class="sd-tab-content docutils">
+<p>Content 1</p>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" data-sync-group="category" data-sync-id="key2" for="sd-tab-item-5">
+Label2</label><div class="sd-tab-content docutils">
+<p>Content 2</p>
+</div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" data-sync-group="category" data-sync-id="key1" for="sd-tab-item-6">
+Label1</label><div class="sd-tab-content docutils">
+<p>Content 1</p>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" data-sync-group="category" data-sync-id="key2" for="sd-tab-item-7">
+Label2</label><div class="sd-tab-content docutils">
+<p>Content 2</p>
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -427,12 +589,21 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="03_lecture_simple.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3.1. </span>Requête simple</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="01_installation.html"
+       href="03_lecture_agregation.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Installation de MongoDB</p>
+        <p class="prev-next-title"><span class="section-number">3.3. </span>Requête d’aggrégation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -442,6 +613,26 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-de-comparaison">3.2.1. Opérateurs de comparaison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-logique">3.2.2. Opérateurs logique</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requete-sur-des-listes">3.2.3. Requête sur des listes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#titre-1-2-1">3.2.3.1. Titre 1.2.1</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

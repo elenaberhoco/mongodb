@@ -19,7 +19,7 @@ kernelspec:
 ## MongoDB Community Edition
 
 Suivez les étapes suivantes pour télécharger et installer MongoDB Community Edition.
-
+   
 ::::::{tab-set}
 :sync-group: category
 
