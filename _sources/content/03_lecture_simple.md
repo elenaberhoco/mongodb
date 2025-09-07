@@ -18,13 +18,13 @@ kernelspec:
 La méthode `find()` permet de **sélectionner des documents en fonction de critères de filtrage**. Elle renvoie un **curseur**, c'est-à-dire un pointeur vers les résultats d'une requête. Le curseur permet d'itérer sur les résultats **un lot à la fois**. La syntaxe de la méthode `find()` est la suivante :    
 
 ```
-db.<collection>.find(<filter>, <projection>) 
+db.<collection>.find(<filter>, <projection>)   
 ```
 
 ````{admonition} Example
 :class: tip
 
-Dans la suite, on utilisera la base de données suivante :
+Dans la suite, nous utiliserons la base de données suivante :
 ```
 use Cuisine
 db.recettes.insert({
@@ -172,7 +172,7 @@ db.recettes.find({"etapes.numero":3})
 
 ### Projection
 
-La plupart du temps, seule une partie de l'information contenue dans les documents nous intéresse. Le second argument de la fonction `find()`, appelé **projection**, permet de **spécifier les clés à renvoyer** dans les documents qui correspondent au filtre de requête. Pour ce faire, vous pouvez :
+La plupart du temps, seule une partie de l'information contenue dans les documents nous intéresse. Le second argument de la fonction `find()`, appelé **projection**, permet de **spécifier les champs à renvoyer** dans les documents qui correspondent au filtre de requête. Pour ce faire, vous pouvez :
 - Indiquer les champs que vous souhaitez **inclure** : `{<key>:<1_or_true>}`  
 - Indiquer les champs que vous souhaitez **exclure** : `{<key>:<0_or_false>}`   
 
@@ -259,15 +259,15 @@ Dans ce chapitre vous avez appris que :
 
 Dans ce chapitre vous avez manipulé les fonctions suivantes :  
 
-Objectif | Syntaxe
+Syntaxe | Description
 --- | ---
-Récupérer tous les documents d'une collection | `db.<collection>.find()`  
-Récupérer le premier document d'une collection | `db.<collection>.findOne()`  
-Filtrer les documents en fonction d'une ou plusieurs conditions d'égalité | `db.<collection>.find({<key>:<value>,...})`  
-Récupérer tous les champs spécifiés dans la projection, pour tous les documents qui répondent aux critères de recherche | `db.<collection>.find(<filter>,<projection>)` où `<projection> = {<key>:<0_or_1>,...}`  
-Compter le nombre de documents qui répondent aux critères de recherche | `db.<collection>.find(<filter>,<projection>).count()`   
-Trier les documents qui répondent aux critères de recherche | `db.<collection>.find(<filter>,<projection>).sort(<condition>)` où `<condition> = {<key>:<1_or_-1>,...}`
-Limiter le nombre de documents qui répondent aux critères de recherche à renvoyer | `db.<collection>.find(<filter>,<projection>).limit(<n>)`
+`db.<collection>.find()` | Récupérer tous les documents d'une collection  
+`db.<collection>.findOne()` | Récupérer le premier document d'une collection  
+`db.<collection>.find({<key>:<value>,...})` | Filtrer les documents en fonction d'une ou plusieurs conditions d'égalité  
+`db.<collection>.find(<filter>,<projection>)` où `<projection> = {<key>:<0_or_1>,...}` | Récupérer tous les champs spécifiés dans la projection, pour tous les documents qui répondent aux critères de recherche  
+`db.<collection>.find(<filter>,<projection>).count()` | Compter le nombre de documents qui répondent aux critères de recherche   
+`db.<collection>.find(<filter>,<projection>).sort(<condition>)` où `<condition> = {<key>:<1_or_-1>,...}` | Trier les documents qui répondent aux critères de recherche
+`db.<collection>.find(<filter>,<projection>).limit(<n>)` | Limiter le nombre de documents qui répondent aux critères de recherche à renvoyer
 
 ````{admonition} Tip
 :class: note

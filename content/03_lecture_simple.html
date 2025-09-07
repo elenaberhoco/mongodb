@@ -182,9 +182,11 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="03_lecture.html">3. C<strong>R</strong>UD : Lecture</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">3.1. Requête simple</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_lecture_operateurs.html">3.2. Requête avec opérateurs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_lecture_agregation.html">3.3. Requête d’aggrégation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_lecture_agregation.html">3.3. Requête d’agrégation</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="04_modification.html">4. CR<strong>U</strong>D : Modification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_suppression.html">5. CRU<strong>D</strong> : Suppression</a></li>
 </ul>
 
     </div>
@@ -403,12 +405,12 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="requete-simple">
 <h1><span class="section-number">3.1. </span>Requête simple<a class="headerlink" href="#requete-simple" title="Link to this heading">#</a></h1>
 <p>La méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code> permet de <strong>sélectionner des documents en fonction de critères de filtrage</strong>. Elle renvoie un <strong>curseur</strong>, c’est-à-dire un pointeur vers les résultats d’une requête. Le curseur permet d’itérer sur les résultats <strong>un lot à la fois</strong>. La syntaxe de la méthode <code class="docutils literal notranslate"><span class="pre">find()</span></code> est la suivante :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.&lt;</span><span class="n">collection</span><span class="o">&gt;.</span><span class="n">find</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">filter</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">projection</span><span class="o">&gt;</span><span class="p">)</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.&lt;</span><span class="n">collection</span><span class="o">&gt;.</span><span class="n">find</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">filter</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">projection</span><span class="o">&gt;</span><span class="p">)</span>   
 </pre></div>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Example</p>
-<p>Dans la suite, on utilisera la base de données suivante :</p>
+<p>Dans la suite, nous utiliserons la base de données suivante :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">Cuisine</span>
 <span class="n">db</span><span class="o">.</span><span class="n">recettes</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span>
                     <span class="s2">&quot;nom&quot;</span><span class="p">:</span><span class="s2">&quot;Ratatouille&quot;</span><span class="p">,</span>
@@ -540,7 +542,7 @@ document.write(`
 </section>
 <section id="projection">
 <h3><span class="section-number">3.1.2.2. </span>Projection<a class="headerlink" href="#projection" title="Link to this heading">#</a></h3>
-<p>La plupart du temps, seule une partie de l’information contenue dans les documents nous intéresse. Le second argument de la fonction <code class="docutils literal notranslate"><span class="pre">find()</span></code>, appelé <strong>projection</strong>, permet de <strong>spécifier les clés à renvoyer</strong> dans les documents qui correspondent au filtre de requête. Pour ce faire, vous pouvez :</p>
+<p>La plupart du temps, seule une partie de l’information contenue dans les documents nous intéresse. Le second argument de la fonction <code class="docutils literal notranslate"><span class="pre">find()</span></code>, appelé <strong>projection</strong>, permet de <strong>spécifier les champs à renvoyer</strong> dans les documents qui correspondent au filtre de requête. Pour ce faire, vous pouvez :</p>
 <ul class="simple">
 <li><p>Indiquer les champs que vous souhaitez <strong>inclure</strong> : <code class="docutils literal notranslate"><span class="pre">{&lt;key&gt;:&lt;1_or_true&gt;}</span></code></p></li>
 <li><p>Indiquer les champs que vous souhaitez <strong>exclure</strong> : <code class="docutils literal notranslate"><span class="pre">{&lt;key&gt;:&lt;0_or_false&gt;}</span></code></p></li>
@@ -624,31 +626,31 @@ document.write(`
 <p>Dans ce chapitre vous avez manipulé les fonctions suivantes :</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Objectif</p></th>
-<th class="head"><p>Syntaxe</p></th>
+<tr class="row-odd"><th class="head"><p>Syntaxe</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Récupérer tous les documents d’une collection</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find()</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find()</span></code></p></td>
+<td><p>Récupérer tous les documents d’une collection</p></td>
 </tr>
-<tr class="row-odd"><td><p>Récupérer le premier document d’une collection</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.findOne()</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.findOne()</span></code></p></td>
+<td><p>Récupérer le premier document d’une collection</p></td>
 </tr>
-<tr class="row-even"><td><p>Filtrer les documents en fonction d’une ou plusieurs conditions d’égalité</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find({&lt;key&gt;:&lt;value&gt;,...})</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find({&lt;key&gt;:&lt;value&gt;,...})</span></code></p></td>
+<td><p>Filtrer les documents en fonction d’une ou plusieurs conditions d’égalité</p></td>
 </tr>
-<tr class="row-odd"><td><p>Récupérer tous les champs spécifiés dans la projection, pour tous les documents qui répondent aux critères de recherche</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;)</span></code> où <code class="docutils literal notranslate"><span class="pre">&lt;projection&gt;</span> <span class="pre">=</span> <span class="pre">{&lt;key&gt;:&lt;0_or_1&gt;,...}</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;)</span></code> où <code class="docutils literal notranslate"><span class="pre">&lt;projection&gt;</span> <span class="pre">=</span> <span class="pre">{&lt;key&gt;:&lt;0_or_1&gt;,...}</span></code></p></td>
+<td><p>Récupérer tous les champs spécifiés dans la projection, pour tous les documents qui répondent aux critères de recherche</p></td>
 </tr>
-<tr class="row-even"><td><p>Compter le nombre de documents qui répondent aux critères de recherche</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;).count()</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;).count()</span></code></p></td>
+<td><p>Compter le nombre de documents qui répondent aux critères de recherche</p></td>
 </tr>
-<tr class="row-odd"><td><p>Trier les documents qui répondent aux critères de recherche</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;).sort(&lt;condition&gt;)</span></code> où <code class="docutils literal notranslate"><span class="pre">&lt;condition&gt;</span> <span class="pre">=</span> <span class="pre">{&lt;key&gt;:&lt;1_or_-1&gt;,...}</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;).sort(&lt;condition&gt;)</span></code> où <code class="docutils literal notranslate"><span class="pre">&lt;condition&gt;</span> <span class="pre">=</span> <span class="pre">{&lt;key&gt;:&lt;1_or_-1&gt;,...}</span></code></p></td>
+<td><p>Trier les documents qui répondent aux critères de recherche</p></td>
 </tr>
-<tr class="row-even"><td><p>Limiter le nombre de documents qui répondent aux critères de recherche à renvoyer</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;).limit(&lt;n&gt;)</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">db.&lt;collection&gt;.find(&lt;filter&gt;,&lt;projection&gt;).limit(&lt;n&gt;)</span></code></p></td>
+<td><p>Limiter le nombre de documents qui répondent aux critères de recherche à renvoyer</p></td>
 </tr>
 </tbody>
 </table>

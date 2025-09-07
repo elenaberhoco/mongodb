@@ -17,7 +17,7 @@ kernelspec:
 
 ::::{grid}
 :gutter: 1
-
+  
 :::{grid-item-card} Objectif
 Dans ce chapitre vous apprendrez à créer une base de données MongoDB, à y ajouter des collections, puis à y insérer des documents. Vous découvrirez aussi que MongoDB prend en charge divers types de données.  
 :::
