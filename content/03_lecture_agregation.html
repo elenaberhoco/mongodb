@@ -385,7 +385,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-de-documents">3.3.1. Sélection de documents</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formatage-de-documents">3.3.2. Formatage de documents</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agregation-de-documents-group">3.3.3. Agrégation de documents : <code class="docutils literal notranslate"><span class="pre">$group</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-utiles-pour-l-agregation">3.3.4. Opérateurs utiles pour l’agrégation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-etapes-d-agregations-et-methodes">3.3.4. Autres étapes d’agrégations et méthodes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercice">3.3.5. Exercice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#en-resume">3.3.6. En résumé</a></li>
 </ul>
             </nav>
         </div>
@@ -398,16 +400,18 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="requete-d-agregation">
-<h1><span class="section-number">3.3. </span>Requête d’agrégation<a class="headerlink" href="#requete-d-agregation" title="Link to this heading">#</a></h1>
-<p>Un <strong>pipeline d’agrégation</strong> consiste en une succession d’opérations à appliquer aux données. La syntaxe est la suivante :</p>
+<span id="content-lecture-agregation"></span><h1><span class="section-number">3.3. </span>Requête d’agrégation<a class="headerlink" href="#requete-d-agregation" title="Link to this heading">#</a></h1>
+<p>Un <strong>pipeline d’agrégation</strong> consiste en une succession d’opérations à appliquer aux données. On parlera d’étapes d’agrégation. La syntaxe est la suivante :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.&lt;</span><span class="n">collection</span><span class="o">&gt;.</span><span class="n">aggregate</span><span class="p">([</span><span class="o">&lt;</span><span class="n">stage1</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">stage2</span><span class="o">&gt;...</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Example</p>
-<p>Dans la suite, nous utiliserons la base de données suivante :</p>
+<p>Dans la suite, nous utiliserons la base de données suivante conçue pour stocker des commandes :</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">use</span><span class="w"> </span><span class="nx">Sales</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">orders</span><span class="p">.</span><span class="nx">insertMany</span><span class="p">([</span>
+</pre></div>
+</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">orders</span><span class="p">.</span><span class="nx">insertMany</span><span class="p">([</span>
 <span class="w">  </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;customer_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;elise_smith@myemail.com&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;orderdate&quot;</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;2020-05-30T08:35:52Z&#39;</span><span class="p">),</span>
@@ -568,7 +572,7 @@ document.write(`
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">find</span><span class="p">({</span>
                  <span class="s2">&quot;orderdate&quot;</span><span class="p">:</span>
                      <span class="p">{</span><span class="s2">&quot;$gte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">),</span>
-                      <span class="s2">&quot;$lte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">)}</span>
+                      <span class="s2">&quot;$lt&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">)}</span>
                <span class="p">})</span>
 </pre></div>
 </div>
@@ -580,13 +584,13 @@ document.write(`
 <code class="docutils literal notranslate"><span class="pre">$project</span></code> est équivalent à une combinaison de <code class="docutils literal notranslate"><span class="pre">$unset</span></code>, qui peut être utilisé pour <strong>supprimer</strong> certains <strong>champs</strong> du résultat, et <code class="docutils literal notranslate"><span class="pre">$set</span></code>, qui permet d’en <strong>renommer</strong> certains ou d’en <strong>ajouter</strong> de nouveaux.</p>
 <div class="tip admonition">
 <p class="admonition-title">Example</p>
-<p>Vous pouvez utilisez <code class="docutils literal notranslate"><span class="pre">$project</span></code> pour afficher les commandes passées en 2020 sans les adresses de livraison :</p>
+<p><strong>Exemple n°1.</strong> Vous pouvez utilisez <code class="docutils literal notranslate"><span class="pre">$project</span></code> pour afficher les commandes passées en 2020 sans les adresses de livraison :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span>
                       <span class="p">{</span>
                         <span class="s2">&quot;$match&quot;</span><span class="p">:</span> <span class="p">{</span>
                             <span class="s2">&quot;orderdate&quot;</span><span class="p">:</span>
                                 <span class="p">{</span><span class="s2">&quot;$gte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">),</span>
-                                 <span class="s2">&quot;$lte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">)}</span>
+                                 <span class="s2">&quot;$lt&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">)}</span>
                             <span class="p">}</span>
                       <span class="p">},</span>
                       <span class="p">{</span>
@@ -601,7 +605,7 @@ document.write(`
                         <span class="s2">&quot;$match&quot;</span><span class="p">:</span> <span class="p">{</span>
                             <span class="s2">&quot;orderdate&quot;</span><span class="p">:</span>
                                 <span class="p">{</span><span class="s2">&quot;$gte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">),</span>
-                                 <span class="s2">&quot;$lte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">)}</span>
+                                 <span class="s2">&quot;$lt&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">)}</span>
                             <span class="p">}</span>
                       <span class="p">},</span>
                       <span class="p">{</span><span class="s2">&quot;$unset&quot;</span><span class="p">:</span> <span class="s2">&quot;address&quot;</span><span class="p">}</span>
@@ -612,19 +616,19 @@ document.write(`
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">find</span><span class="p">({</span>
                  <span class="s2">&quot;orderdate&quot;</span><span class="p">:</span>
                      <span class="p">{</span><span class="s2">&quot;$gte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">),</span>
-                      <span class="s2">&quot;$lte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2020-12-31&quot;</span><span class="p">)}</span>
+                      <span class="s2">&quot;$lt&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">)}</span>
                <span class="p">},</span>
                <span class="p">{</span><span class="s2">&quot;address&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>Pour afficher <strong>uniquement</strong> l’adresse mail et le pays des commandes passées en 2020 dans un nouveau champ <code class="docutils literal notranslate"><span class="pre">customer_country</span></code>, utilisez <code class="docutils literal notranslate"><span class="pre">$project</span></code> :</p>
+<p><strong>Exemple n°2.</strong> Pour afficher <strong>uniquement</strong> l’adresse mail et le pays des commandes passées en 2020 dans un nouveau champ <code class="docutils literal notranslate"><span class="pre">customer_country</span></code>, utilisez <code class="docutils literal notranslate"><span class="pre">$project</span></code> :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span>
                       <span class="p">{</span>
                         <span class="s2">&quot;$match&quot;</span><span class="p">:</span> <span class="p">{</span>
                             <span class="s2">&quot;orderdate&quot;</span><span class="p">:</span>
                                 <span class="p">{</span><span class="s2">&quot;$gte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">),</span>
-                                 <span class="s2">&quot;$lte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2020-12-31&quot;</span><span class="p">)}</span>
+                                 <span class="s2">&quot;$lt&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">)}</span>
                             <span class="p">}</span>
                       <span class="p">},</span>
                       <span class="p">{</span>
@@ -639,20 +643,20 @@ document.write(`
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">find</span><span class="p">({</span>
                  <span class="s2">&quot;orderdate&quot;</span><span class="p">:</span> <span class="p">{</span>
                      <span class="s2">&quot;$gte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">),</span>
-                     <span class="s2">&quot;$lte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2020-12-31&quot;</span><span class="p">)</span>
+                     <span class="s2">&quot;$lt&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">)</span>
                  <span class="p">}</span>
                <span class="p">},</span>
                <span class="p">{</span><span class="s2">&quot;customer_country&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;$customer_id&quot;</span><span class="p">,</span> <span class="s2">&quot;$address.country&quot;</span><span class="p">]}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>Pour afficher toutes les informations associées aux commandes passées en 2020 tout en <strong>ajoutant</strong> le champ <code class="docutils literal notranslate"><span class="pre">customer_country</span></code>, utilisez <code class="docutils literal notranslate"><span class="pre">$set</span></code> :</p>
+<p><strong>Exemple n°3.</strong> Pour afficher toutes les informations associées aux commandes passées en 2020 tout en <strong>ajoutant</strong> le champ <code class="docutils literal notranslate"><span class="pre">customer_country</span></code>, utilisez <code class="docutils literal notranslate"><span class="pre">$set</span></code> :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span>
                       <span class="p">{</span>
                         <span class="s2">&quot;$match&quot;</span><span class="p">:</span> <span class="p">{</span>
                             <span class="s2">&quot;orderdate&quot;</span><span class="p">:</span>
                                 <span class="p">{</span><span class="s2">&quot;$gte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">),</span>
-                                 <span class="s2">&quot;$lte&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2020-12-31&quot;</span><span class="p">)}</span>
+                                 <span class="s2">&quot;$lt&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2021-01-01&quot;</span><span class="p">)}</span>
                             <span class="p">}</span>
                       <span class="p">},</span>
                       <span class="p">{</span>
@@ -710,10 +714,14 @@ document.write(`
 </pre></div>
 </div>
 <p>où <code class="docutils literal notranslate"><span class="pre">&lt;value&gt;</span></code> peut être une clé unique ou un document contenant plusieurs clés : <code class="docutils literal notranslate"><span class="pre">{&lt;new_key1&gt;:</span> <span class="pre">&lt;old_key1&gt;,</span> <span class="pre">...}</span></code>.</p>
-<p><strong>Attention</strong> : Seuls les éléments conservés dans <code class="docutils literal notranslate"><span class="pre">$group</span></code> sont accessibles à l’étape suivante du pipeline d’agrégation.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Un pipeline d’agrégation est une succession d’étapes. À chaque étape, seuls les éléments conservés à l’étape précédente sont accessibles.
+En particulier, seuls les champs spécifiés dans <code class="docutils literal notranslate"><span class="pre">$group</span></code> seront accessibles à l’étape suivante du pipeline.</p>
+</div>
 <div class="tip admonition">
 <p class="admonition-title">Example</p>
-<p>Quelle est le plus gros achat réalisé pour chaque client en 2020 ?</p>
+<p><strong>Exemple n°1.</strong> Quelle est le plus gros achat réalisé pour chaque client en 2020 ?</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span>
                       <span class="o">//</span> <span class="mf">1.</span> <span class="n">Commandes</span> <span class="n">réalisées</span> <span class="n">en</span> <span class="mi">2020</span>
                       <span class="p">{</span>
@@ -745,7 +753,7 @@ document.write(`
                     <span class="p">])</span>
 </pre></div>
 </div>
-<p>On peut spécifier plusieurs opérations d’agrégation dans <code class="docutils literal notranslate"><span class="pre">$group</span></code>. On peut par exemple créer une synthèse des achats réalisés par chaque client en 2020 :</p>
+<p><strong>Exemple n°2.</strong> On peut spécifier plusieurs opérations d’agrégation dans <code class="docutils literal notranslate"><span class="pre">$group</span></code>. On peut par exemple créer une synthèse des achats réalisés par chaque client en 2020 :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span>
                       <span class="o">//</span> <span class="mf">1.</span> <span class="n">Commandes</span> <span class="n">réalisées</span> <span class="n">en</span> <span class="mi">2020</span>
                       <span class="p">{</span>
@@ -784,7 +792,7 @@ document.write(`
                     <span class="p">])</span>
 </pre></div>
 </div>
-<p>On peut utiliser <code class="docutils literal notranslate"><span class="pre">$push</span></code> pour conserver l’historique des achats des clients dans la synthèse :</p>
+<p><strong>Exemple n°3.</strong> On peut utiliser <code class="docutils literal notranslate"><span class="pre">$push</span></code> pour conserver l’historique des achats des clients dans la synthèse :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span>
                       <span class="p">{</span>
                         <span class="s2">&quot;$match&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -815,7 +823,7 @@ document.write(`
                     <span class="p">])</span>
 </pre></div>
 </div>
-<p>Quel est le montant total des ventes en 2020 ?</p>
+<p><strong>Exemple n°4.</strong> Quel est le montant total des ventes en 2020 ?</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span>
                       <span class="o">//</span> <span class="mf">1.</span> <span class="n">Commandes</span> <span class="n">réalisées</span> <span class="n">en</span> <span class="mi">2020</span>
                       <span class="p">{</span>
@@ -841,8 +849,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="operateurs-utiles-pour-l-agregation">
-<h2><span class="section-number">3.3.4. </span>Opérateurs utiles pour l’agrégation<a class="headerlink" href="#operateurs-utiles-pour-l-agregation" title="Link to this heading">#</a></h2>
+<section id="autres-etapes-d-agregations-et-methodes">
+<h2><span class="section-number">3.3.4. </span>Autres étapes d’agrégations et méthodes<a class="headerlink" href="#autres-etapes-d-agregations-et-methodes" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">$unwind</span></code> décompose un champ de type liste en autant de documents qu’il y a d’éléments dans la liste. Tous les champs du document initial sont conservés, seule la valeur du champ de type liste est remplacée par l’un des éléments de la liste.
 La syntaxe est la suivante :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;$unwind&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">key</span><span class="o">&gt;</span><span class="p">}}</span>
@@ -851,8 +859,8 @@ La syntaxe est la suivante :</p>
 <p>Cette commande est utile lorsque l’agrégat ne correspond pas aux besoins.</p>
 <div class="tip admonition">
 <p class="admonition-title">Example</p>
-<p>Dans la base de données, un agrégat correspond à une commande. Si nous souhaitons avoir des informations sur les produits, quelques manipulations supplémentaires sont nécessaires.<br />
-Pour lister les catégories contenant des produits à plus de 50e et le nombre de produits à plus de 50e vendus pour chacune, on peut utiliser <code class="docutils literal notranslate"><span class="pre">$unwind</span></code> :</p>
+<p>Dans la base de données, un agrégat correspond à une commande. Si nous souhaitons avoir des informations sur les produits, quelques manipulations supplémentaires sont nécessaires.</p>
+<p><strong>Exemple n°1.</strong> Pour lister les catégories contenant des produits à plus de 50e et le nombre de produits à plus de 50e vendus pour chacune, on peut utiliser <code class="docutils literal notranslate"><span class="pre">$unwind</span></code> :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>db.orders.aggregate([
                       // 1. Décomposer le champ `products`
                       {
@@ -880,7 +888,7 @@ Pour lister les catégories contenant des produits à plus de 50e et le nombre d
                     ])
 </pre></div>
 </div>
-<p>Combien l’entreprise a-t-elle vendu de produits par tag ? Pour quelle somme totale ? Quels sont ces produits ?</p>
+<p><strong>Exemple n°2.</strong> Combien l’entreprise a-t-elle vendu de produits par tag ? Pour quelle somme totale ? Quels sont ces produits ?</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>db.orders.aggregate([
                       // 1. Décomposer le champ `products`
                       {
@@ -925,6 +933,116 @@ Pour lister les catégories contenant des produits à plus de 50e et le nombre d
                         
 </pre></div>
 </div>
+</div>
+<p>Voir aussi les étapes d’agrégation : <code class="docutils literal notranslate"><span class="pre">$count</span></code>, <code class="docutils literal notranslate"><span class="pre">$sort</span></code>, <code class="docutils literal notranslate"><span class="pre">$limit</span></code>, <code class="docutils literal notranslate"><span class="pre">$lookup</span></code>.</p>
+<p>Le méthode <code class="docutils literal notranslate"><span class="pre">distinct()</span></code> permet d’obtenir les valeurs uniques pour un champ donné. La syntaxe est la suivante :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.&lt;</span><span class="n">collection</span><span class="o">&gt;.</span><span class="n">distinct</span><span class="p">(</span><span class="o">&lt;</span><span class="n">key</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="exercice">
+<h2><span class="section-number">3.3.5. </span>Exercice<a class="headerlink" href="#exercice" title="Link to this heading">#</a></h2>
+<p>À partir du jeu de données <code class="docutils literal notranslate"><span class="pre">movies.json</span></code> :</p>
+<ol class="arabic simple">
+<li><p>Quels sont les différents genres représentés dans la base de données ?</p></li>
+<li><p>Combien y a-t-il de films par pays ?</p></li>
+<li><p>Combien y a-t-il de films par pays et par année ?</p></li>
+<li><p>Combien y a-t-il de films par pays et par année, triés par pays et par année (dans cet ordre) ?</p></li>
+<li><p>Retourner l’ensemble des films réalisés par réalisateur entre 1975 et 1985.</p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Aide</p>
+<p>Utilisez <code class="docutils literal notranslate"><span class="pre">$match</span></code>, <code class="docutils literal notranslate"><span class="pre">$group</span></code> et <code class="docutils literal notranslate"><span class="pre">$push</span></code>. Vous pouvez utiliser l’identifiant des réalisateurs pour le regroupement, mais dans ce cas, utilisez <code class="docutils literal notranslate"><span class="pre">$first</span></code> pour conserver l’information du prénom et du nom des réalisateurs.</p>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Quel réalisateur a le plus de films à son actif ?</p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Aide</p>
+<p>Utilisez <code class="docutils literal notranslate"><span class="pre">$group</span></code>, <code class="docutils literal notranslate"><span class="pre">$sort</span></code> et <code class="docutils literal notranslate"><span class="pre">$limit</span></code>.</p>
+</div>
+<ol class="arabic simple" start="7">
+<li><p>Listez les noms complets de tous les acteurs dont le prénom est <code class="docutils literal notranslate"><span class="pre">Robert</span></code>. Lorsque vous renvoyez les résultats, vous pouvez utilisez <code class="docutils literal notranslate"><span class="pre">$concat</span></code> pour concaténer le prénom et le nom de famille si vous le souhaitez.</p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Aide</p>
+<p>Utilisez <code class="docutils literal notranslate"><span class="pre">$unwind</span></code>, <code class="docutils literal notranslate"><span class="pre">$match</span></code> et <code class="docutils literal notranslate"><span class="pre">$group</span></code>.</p>
+</div>
+</section>
+<section id="en-resume">
+<h2><span class="section-number">3.3.6. </span>En résumé<a class="headerlink" href="#en-resume" title="Link to this heading">#</a></h2>
+<p>Dans ce chapitre vous avez appris que :</p>
+<ul class="simple">
+<li><p>Faire des <strong>requêtes</strong> qui <strong>ne correspondent pas</strong> aux cas d’usage en fonction desquels les <strong>agrégats</strong> ont été construits est <strong>plus laborieux</strong>. Cela nécessite des étapes supplémentaires (notamment l’utilisation de <code class="docutils literal notranslate"><span class="pre">$unwind</span></code> pour exploser les agrégats).</p></li>
+</ul>
+<p>Dans ce chapitre vous avez manipulé les fonctions suivantes :</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Étape d’agrégation</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$match</span></code></p></td>
+<td class="text-left"><p>Sélectionner des documents en fonction de certains critère. Idem <code class="docutils literal notranslate"><span class="pre">&lt;filter&gt;</span></code> de <code class="docutils literal notranslate"><span class="pre">find()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$project</span></code></p></td>
+<td class="text-left"><p>Sélectionner, exclure, renommer ou ajouter des champs. Idem <code class="docutils literal notranslate"><span class="pre">&lt;projection&gt;</span></code> de <code class="docutils literal notranslate"><span class="pre">find()</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$unset</span></code></p></td>
+<td class="text-left"><p>Supprimer des champs</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$set</span></code></p></td>
+<td class="text-left"><p>Renommer ou ajouter des champs</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$group</span></code></p></td>
+<td class="text-left"><p>Combiner plusieurs documents en fonction d’un ou plusieurs champs (ou d’une expression) et d’une méthode d’agrégation</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$count</span></code></p></td>
+<td class="text-left"><p>Retourner le nombre de documents</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$sort</span></code></p></td>
+<td class="text-left"><p>Trier les documents en fonction d’un ou plusieurs champs, par ordre croissant ou décroissant</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$limit</span></code></p></td>
+<td class="text-left"><p>Limiter le nombre de documents retournés</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$lookup</span></code></p></td>
+<td class="text-left"><p>Extraire les données d’une autre collection à partir d’une clé locale et d’une clé étrangère</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Opérateur d’accumulation</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$sum</span></code></p></td>
+<td class="text-left"><p>Somme des valeurs</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$max</span></code></p></td>
+<td class="text-left"><p>Valeur maximale</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$min</span></code></p></td>
+<td class="text-left"><p>Valeur minimale</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$avg</span></code></p></td>
+<td class="text-left"><p>Moyenne des valeurs (<strong>av</strong>era<strong>g</strong>e)</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$count</span></code></p></td>
+<td class="text-left"><p>Nombre de documents</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$first</span></code></p></td>
+<td class="text-left"><p>Première valeur</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">$push</span></code></p></td>
+<td class="text-left"><p>Création d’une liste à partir de valeurs</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
 </section>
@@ -996,7 +1114,9 @@ Pour lister les catégories contenant des produits à plus de 50e et le nombre d
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-de-documents">3.3.1. Sélection de documents</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formatage-de-documents">3.3.2. Formatage de documents</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agregation-de-documents-group">3.3.3. Agrégation de documents : <code class="docutils literal notranslate"><span class="pre">$group</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-utiles-pour-l-agregation">3.3.4. Opérateurs utiles pour l’agrégation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-etapes-d-agregations-et-methodes">3.3.4. Autres étapes d’agrégations et méthodes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercice">3.3.5. Exercice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#en-resume">3.3.6. En résumé</a></li>
 </ul>
   </nav></div>
 

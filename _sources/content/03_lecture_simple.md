@@ -27,46 +27,48 @@ db.<collection>.find(<filter>, <projection>)
 Dans la suite, nous utiliserons la base de données suivante :
 ```
 use Cuisine
-db.recettes.insert({
-                    "nom":"Ratatouille",
-                    "type":"plat principal",
-                    "ingredients": ["aubergine", "courgette", "poivron", "tomate", "oignon","ail"],
-                    "origine":{"pays":"France","region":"Provence"}
-                    })  
+```
+```
+db.recettes.insertOne({
+                       "nom":"Ratatouille",
+                       "type":"plat principal",
+                       "ingredients": ["aubergine", "courgette", "poivron", "tomate", "oignon","ail"],
+                       "origine":{"pays":"France","region":"Provence"}
+                     })  
 
-db.recettes.insert({
-                    "nom":"Tiramisu",
-                    "type":"dessert",
-                    "ingredients":["oeufs","sucre","mascarpone","boudoirs","café","cacao"],
-                    "origine":{"pays":"Italie","region":"Vénétie"},
-                    "etapes": [
-                        { "numero": 1, "description": "Séparer les blancs des jaunes. Fouetter les jaunes avec le sucre jusqu’à blanchiment." },
-                        { "numero": 2, "description": "Incorporer le mascarpone aux jaunes sucrés jusqu’à obtenir une crème lisse." },
-                        { "numero": 3, "description": "Monter les blancs en neige et les incorporer délicatement à la crème." },
-                        { "numero": 4, "description": "Tremper rapidement les biscuits dans le café froid et tapisser le fond du plat." },
-                        { "numero": 5, "description": "Alterner une couche de crème, une couche de biscuits. Terminer par de la crème." },
-                        { "numero": 6, "description": "Réfrigérer au moins 4 h. Saupoudrer de cacao avant de servir." } 
-                    ]
-                    })  
+db.recettes.insertOne({
+                       "nom":"Tiramisu",
+                       "type":"dessert",
+                       "ingredients":["oeufs","sucre","mascarpone","boudoirs","café","cacao"],
+                       "origine":{"pays":"Italie","region":"Vénétie"},
+                       "etapes": [
+                           { "numero": 1, "description": "Séparer les blancs des jaunes. Fouetter les jaunes avec le sucre jusqu’à blanchiment." },
+                           { "numero": 2, "description": "Incorporer le mascarpone aux jaunes sucrés jusqu’à obtenir une crème lisse." },
+                           { "numero": 3, "description": "Monter les blancs en neige et les incorporer délicatement à la crème." },
+                           { "numero": 4, "description": "Tremper rapidement les biscuits dans le café froid et tapisser le fond du plat." },
+                           { "numero": 5, "description": "Alterner une couche de crème, une couche de biscuits. Terminer par de la crème." },
+                           { "numero": 6, "description": "Réfrigérer au moins 4 h. Saupoudrer de cacao avant de servir." } 
+                       ]
+                     })  
 
-db.recettes.insert({
-                    "nom":"Soupe à l'oignon",
-                    "type":"entrée",
-                    "ingredients": ["oignon","vin","gruyère","beurre"]
-                    })  
+db.recettes.insertOne({
+                       "nom":"Soupe à l'oignon",
+                       "type":"entrée",
+                       "ingredients": ["oignon","vin","gruyère","beurre"]
+                     })  
 
-db.recettes.insert({
-                    "nom":"Quiche lorraine",
-                    "type":"plat principal",
-                    "ingredients":["pâte brisée", "oeufs", "crème fraîche", "lardons", "gruyère"],
-                    "origine":{"pays":"France","region":"Lorraine"}
-                    })  
+db.recettes.insertOne({
+                       "nom":"Quiche lorraine",
+                       "type":"plat principal",
+                       "ingredients":["pâte brisée", "oeufs", "crème fraîche", "lardons", "gruyère"],
+                       "origine":{"pays":"France","region":"Lorraine"}
+                     })  
 
-db.recettes.insert({
-                    "nom":"Mousse au chocolat",
-                    "type":"dessert",
-                    "ingredients": ["chocolat noir", "oeufs", "sucre"]
-                    })  
+db.recettes.insertOne({
+                       "nom":"Mousse au chocolat",
+                       "type":"dessert",
+                       "ingredients": ["chocolat noir", "oeufs", "sucre"]
+                     })  
 ```
 ````
 
@@ -144,7 +146,7 @@ La syntaxe `<embedded_object>.<embedded_key>` permet d'accéder aux attributs d'
 ````{admonition} Example
 :class: tip
 
-Que retourne la commande suivante ? 
+**Exemple n°1.** Que retourne la commande suivante ? 
 ```
 db.recettes.find({"origine.pays":"France"})
 ```
@@ -154,7 +156,7 @@ db.recettes.find({"origine":{"pays":"France"}})
 ```
 Dans ce cas, aucun document n'est retourné car aucun document n'a un champ `origine` *exactement* égal à `{"pays":"France"}`. Ils contiennent tous un champ imbriqué additionnel : `region`.   
 
-Que renvoie la commande suivante ?
+**Exemple n°2.** Que renvoie la commande suivante ?
 ```
 db.recettes.find({"ingredients.1":"oeufs"})
 ```
@@ -181,15 +183,15 @@ Vous ne pouvez **pas** faire **les deux à la fois**. La seule exception est `_i
 ````{admonition} Example
 :class: tip
 
-Afin de tenir compte des allergies, nous voudrions extraire le nom et le type de toutes les recettes contenant des oeufs. Voici la commande :
+**Exemple n°1.** Afin de tenir compte des allergies, nous voudrions extraire le nom et le type de toutes les recettes contenant des oeufs. Voici la commande :
 ```
 db.recettes.find({"ingredients":"oeufs"},{"nom":true,"type":true})
 ```
-Pour trouver la région d'origine de la Ratatouille et exclure le champ `_id` des résultats, il suffit de taper :
+**Exemple n°2.** Pour trouver la région d'origine de la Ratatouille et exclure le champ `_id` des résultats, il suffit de taper :
 ```
 db.recettes.find({"nom":"Ratatouille"},{"origine.region":1,"_id":0})
 ```
-Pour connaître le nom de tous les plats disponibles dans notre collection de recettes, il suffit de ne fixer aucune condition sur les documents :  
+**Exemple n°3.** Pour connaître le nom de tous les plats disponibles dans notre collection de recettes, il suffit de ne fixer aucune condition sur les documents :  
 ```
 db.recettes.find({},{"nom":true,"_id":false})
 ``` 
@@ -240,14 +242,30 @@ db.recettes.find({"type":"dessert"},{"_id":0}).limit(1)
 1. Téléchargez le jeu de données `movies.json`.
 2. Affichez le premier document pour vous familiariser avec le nom des clés. Dans ce jeu de données, tous les documents ont les mêmes clés.
 3. Récupérez les informations du film `Blade Runner`.   
-**Aide** : en anglais, *titre* se dit *title*.
+```{admonition} Aide (anglais)     
+:class: dropdown
+
+En anglais, *titre* se dit *title*.
+```
 4. Récupérez le titre des films du `genre` `drama`. Que signifie le message qui apparait en bas de votre écran: `Type "it" for more` ? 
 5. Récupérez le nom et le prénom du réalisateur de `Kill Bill`.  
-**Aide** : En anglais, *nom de famille* se dit *last name*, *prénom* se dit *first name*, et *réalisateur* se dit *director*.
+```{admonition} Aide (anglais)
+:class: dropdown
+
+En anglais, *nom de famille* se dit *last name*, *prénom* se dit *first name*, et *réalisateur* se dit *director*.
+```
 6. Combien y a-t-il de films français (`FR`) dans la base de données ?  
-**Aide** : En anglais, *pays* se dit *country*.
+```{admonition} Aide (anglais)
+:class: dropdown
+
+En anglais, *pays* se dit *country*.
+```
 7. Lister les films sortis en `1995` par ordre alphabétique. Quel est le premier ?   
-**Aide** : En anglais *année* se dit *year*.
+```{admonition} Aide (anglais)
+:class: dropdown
+
+En anglais *année* se dit *year*.
+```
 8. Dans quels films l'acteur `Bruce Willis` a-t-il joué ? Retournez le titre et le genre des films.    
 
 Avec des requêtes simples, on peut déjà extraire beaucoup d'informations intéressantes !
@@ -256,6 +274,7 @@ Avec des requêtes simples, on peut déjà extraire beaucoup d'informations int�
 
 Dans ce chapitre vous avez appris que :
 - Les **valeurs** des paires clé-valeur sont **consultables** : elles sont accessibles et peuvent être utilisées pour filtrer les documents.   
+- Sans documentation, il peut être difficile de comprendre la structure des données et donc de les utiliser.
 
 Dans ce chapitre vous avez manipulé les fonctions suivantes :  
 

@@ -13,6 +13,7 @@ kernelspec:
   name: python3
 ---
 
+(content:lecture)=
 # C**R**UD : Lecture
 
 ::::{grid}

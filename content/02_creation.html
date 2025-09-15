@@ -182,7 +182,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="03_lecture.html">3. C<strong>R</strong>UD : Lecture</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="03_lecture_simple.html">3.1. Requête simple</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_lecture_operateurs.html">3.2. Requête avec opérateurs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_lecture_agregation.html">3.3. Requête d’aggrégation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_lecture_agregation.html">3.3. Requête d’agrégation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="04_modification.html">4. CR<strong>U</strong>D : Modification</a></li>
@@ -466,7 +466,7 @@ Objectif</div>
 <h2><span class="section-number">2.1. </span>Démarrage<a class="headerlink" href="#demarrage" title="Link to this heading">#</a></h2>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>Avant de pouvoir travailler en Visual Studio Code, il faut démarrer une instance MongoDB.</p>
+<p>Avant de pouvoir travailler dans mongosh, il faut démarrer une instance MongoDB.</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Windows</label><div class="tab-content docutils">
 <p>(à venir)</p>
@@ -479,14 +479,24 @@ Objectif</div>
 </div>
 </div>
 </div>
-<p>Dans Visual Studio Code, cliquez sur l’icône MongoDB, puis sur <code class="docutils literal notranslate"><span class="pre">localhost:27017</span></code> pour établir la connection. Faites un clic droit sur <code class="docutils literal notranslate"><span class="pre">localhost:27017</span></code> et sélectionnez “Launch MongoDB Shell” (ou équivalent). Un terminal s’ouvre. Agrandissez le.</p>
+<p><strong>Dans un terminal</strong> : Ouvrez un terminal.<br />
+<strong>Dans Visual Studio Code</strong> : Cliquez sur l’icône MongoDB, puis sur <code class="docutils literal notranslate"><span class="pre">localhost:27017</span></code> pour établir la connection. Faites un clic droit sur <code class="docutils literal notranslate"><span class="pre">localhost:27017</span></code> et sélectionnez “Launch MongoDB Shell” (ou équivalent). Un terminal s’ouvre. Agrandissez le.</p>
+<p>Pour <strong>démarrez</strong> une session mongosh, tapez :</p>
+<ul class="simple">
+<li><p>Déploiement local sur le port par défaut :</p></li>
+</ul>
+<blockquote>
+<div><p>mongosh</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Déploiement Université de Lorraine :</p></li>
+</ul>
+<blockquote>
+<div><p>mongosh &lt;DNS_name&gt; -u root -p <password></p>
+</div></blockquote>
 <p>Pour <strong>quitter</strong> la session mongosh, tapez :</p>
 <blockquote>
 <div><p>exit</p>
-</div></blockquote>
-<p>Pour <strong>démarrez</strong> une session mongosh, tapez :</p>
-<blockquote>
-<div><p>mongosh</p>
 </div></blockquote>
 <p>Pour <strong>lister les bases de données</strong> présentes sur le serveur, tapez :</p>
 <blockquote>
