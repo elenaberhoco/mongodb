@@ -75,7 +75,7 @@ Notez qu'il n'y a pas d'attributs (ou *clés*) vides dans MongoDB : les *valeurs
 ## Démarrage
 
 :::{caution}
-Avant de pouvoir travailler en Visual Studio Code, il faut démarrer une instance MongoDB.
+Avant de pouvoir travailler dans mongosh, il faut démarrer une instance MongoDB.
 ````{tab} Windows
 (à venir)
 ````
@@ -87,13 +87,17 @@ sudo systemctl status mongod
 ````
 :::
 
-Dans Visual Studio Code, cliquez sur l'icône MongoDB, puis sur `localhost:27017` pour établir la connection. Faites un clic droit sur `localhost:27017` et sélectionnez "Launch MongoDB Shell" (ou équivalent). Un terminal s'ouvre. Agrandissez le.
+**Dans un terminal** : Ouvrez un terminal.    
+**Dans Visual Studio Code** : Cliquez sur l'icône MongoDB, puis sur `localhost:27017` pour établir la connection. Faites un clic droit sur `localhost:27017` et sélectionnez "Launch MongoDB Shell" (ou équivalent). Un terminal s'ouvre. Agrandissez le.
+
+Pour **démarrez** une session mongosh, tapez :
+- Déploiement local sur le port par défaut :
+> mongosh
+- Déploiement Université de Lorraine :
+> mongosh <DNS_name> -u root -p <password>
 
 Pour **quitter** la session mongosh, tapez :
 > exit
-
-Pour **démarrez** une session mongosh, tapez :
-> mongosh
 
 Pour **lister les bases de données** présentes sur le serveur, tapez :
 > show dbs
