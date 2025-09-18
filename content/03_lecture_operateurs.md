@@ -431,7 +431,7 @@ Que remarquez-vous ? Corrigez la commande.
 4. Listez le titre des films dans lesquels l'un des acteurs est né entre 1955 et 1958. Proposez deux façons d'obtenir cette information.  
 
 **Bonus**:  
-4. Dans quel film Anthony Hopkins et Jodie Foster ont-ils joué tous les deux ?  
+5. Dans quel film Anthony Hopkins et Jodie Foster ont-ils joué tous les deux ?  
 
 ## En résumé
 

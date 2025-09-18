@@ -94,7 +94,7 @@ Pour **démarrez** une session mongosh, tapez :
 - Déploiement local sur le port par défaut :
 > mongosh
 - Déploiement Université de Lorraine :
-> mongosh <DNS_name> -u root -p <password>
+> mongosh *DNS_name* -u root -p *password*  
 
 Pour **quitter** la session mongosh, tapez :
 > exit
