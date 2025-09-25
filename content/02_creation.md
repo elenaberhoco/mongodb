@@ -88,7 +88,8 @@ sudo systemctl status mongod
 :::
 
 **Dans un terminal** : Ouvrez un terminal.    
-**Dans Visual Studio Code** : Cliquez sur l'icône MongoDB, puis sur `localhost:27017` pour établir la connection. Faites un clic droit sur `localhost:27017` et sélectionnez "Launch MongoDB Shell" (ou équivalent). Un terminal s'ouvre. Agrandissez le.
+**Dans Visual Studio Code** : Cliquez sur l'icône MongoDB, puis sur `localhost:27017` pour établir la connexion. 
+Faites un clic droit sur `localhost:27017` et sélectionnez "Launch MongoDB Shell" (ou équivalent). Un terminal s'ouvre. Agrandissez le.
 
 Pour **démarrez** une session mongosh, tapez :
 - Déploiement local sur le port par défaut :

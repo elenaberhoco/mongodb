@@ -106,7 +106,9 @@ MongoDB Shell (mongosh) est installé par défaut avec MongoDB Community Server.
 
 ## Visual Studio Code
 
-Nous allons travailler dans Visual Studio Code. Dans l'onglet Extensions, téléchargez "MongoDB for VS Code". Une fois l'installation terminée, vous verrez apparaître une icône feuille à gauche de la fenêtre. Cliquez dessus pour commencer à travailler avec MongoDB.
+Pour travailler dans Visual Studio Code, suivez les instructions suivantes. 
+Dans l'onglet Extensions, téléchargez "MongoDB for VS Code". 
+Une fois l'installation terminée, vous verrez apparaître une icône feuille à gauche de la fenêtre. Cliquez dessus pour commencer à travailler avec MongoDB.
 
 ## Vérification
 
