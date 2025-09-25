@@ -413,12 +413,10 @@ Objectif</div>
 </div>
 </div>
 </div>
-<p>MongoDB est une <strong>base de données NoSQL orientée documents</strong>.</p>
-<p>Les données sont stockées selon un système de paires clé-valeur dans des <strong>documents</strong> semi-structurés. Contrairement aux <strong>bases de données clé-valeur</strong>, la valeur est consultable : il est possible d’interroger le contenu d’un document et de le modifier—totalement ou partiellement—sans avoir besoin de récupérer l’intégralité du document à l’aide de sa clé. Dans MongoDB, les documents sont stockés au format BSON (Binary JSON).</p>
-<p>Une <strong>collection</strong> est constituée de documents qui présentent des similarités sur le plan structurel et / ou conceptuel. Une base de données peut contenir plusieurs collections. Les collections sont comparables aux tables dans les <strong>bases de données relationnelles</strong>, la différence étant que tous les documents d’une collection n’ont pas nécessairement les mêmes champs (le <strong>schéma</strong> est <strong>flexible</strong>). Les bases de données orientées documents peuvent également stocker une plus grande variété de données que les bases de données relationnelles.</p>
 <div class="tip admonition">
 <p class="admonition-title">Example</p>
-<p>La base de données de l’université Prestige contient deux collections : une collection <code class="docutils literal notranslate"><span class="pre">Étudiants</span></code> pour les étudiants de l’université, et une collection <code class="docutils literal notranslate"><span class="pre">Employés</span></code> pour le personnel de l’université. Chaque document de la collection <code class="docutils literal notranslate"><span class="pre">Étudiants</span></code> contient des informations sur un étudiant de l’université : nom, prénom, âge, numéro étudiant, formation etc. Les documents de la collection <code class="docutils literal notranslate"><span class="pre">Étudiants</span></code> peuvent contenir des champs différents, par exemple :</p>
+<p>La base de données de l’université Prestige contient deux collections : une collection <code class="docutils literal notranslate"><span class="pre">Étudiants</span></code> pour les étudiants de l’université, et une collection <code class="docutils literal notranslate"><span class="pre">Employés</span></code> pour le personnel de l’université.
+Chaque document de la collection <code class="docutils literal notranslate"><span class="pre">Étudiants</span></code> contient des informations sur un étudiant de l’université : nom, prénom, âge, numéro étudiant, formation etc.</p>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
 <div class="sd-row sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
 <div class="sd-col sd-d-flex-row docutils">
@@ -460,7 +458,6 @@ Objectif</div>
 </div>
 </div>
 </div>
-<p>Notez qu’il n’y a pas d’attributs (ou <em>clés</em>) vides dans MongoDB : les <em>valeurs</em> nulles sont remplacées par l’absence des champs correspondant. Dans l’exemple ci-dessus : l’attribut <code class="docutils literal notranslate"><span class="pre">bourse</span></code> (resp. <code class="docutils literal notranslate"><span class="pre">entreprise</span></code>, <code class="docutils literal notranslate"><span class="pre">contrat</span></code>) n’apparait pas dans le document de l’étudiante en alternance (resp. étudiant boursier).</p>
 </div>
 <section id="demarrage">
 <h2><span class="section-number">2.1. </span>Démarrage<a class="headerlink" href="#demarrage" title="Link to this heading">#</a></h2>

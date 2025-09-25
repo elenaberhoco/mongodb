@@ -362,7 +362,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -378,6 +380,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plan-du-cours">Plan du cours</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mongodb">MongoDB</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -389,6 +400,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="mongodb-base-de-donnees-nosql-orientee-documents">
 <h1>MongoDB : Base de données NoSQL orientée documents<a class="headerlink" href="#mongodb-base-de-donnees-nosql-orientee-documents" title="Link to this heading">#</a></h1>
+<section id="plan-du-cours">
+<h2>Plan du cours<a class="headerlink" href="#plan-du-cours" title="Link to this heading">#</a></h2>
 <p>Ce cours est une introduction à MongoDB, une base de données NoSQL orientée documents.</p>
 <p>Il est organisé selon les quatre grandes catégories d’interaction que l’on peut avoir avec une base de données, résumées par l’acronyme <strong>CRUD</strong> :</p>
 <ul class="simple">
@@ -397,6 +410,68 @@ document.write(`
 <li><p><strong>U</strong>pdate (Mettre à jour) : Toute opération qui consiste à modifier des enregistrements de la base de données.</p></li>
 <li><p><strong>D</strong>elete (Supprimer) : Toute opération qui consiste à supprimer des enregistrements de la base de données, voire la base de données elle-même.</p></li>
 </ul>
+</section>
+<section id="mongodb">
+<h2>MongoDB<a class="headerlink" href="#mongodb" title="Link to this heading">#</a></h2>
+<p>MongoDB est une <strong>base de données NoSQL orientée documents</strong>.</p>
+<p>Les données sont stockées selon un système de paires clé-valeur dans des <strong>documents</strong> semi-structurés.
+Contrairement aux <strong>bases de données clé-valeur</strong>, la valeur est consultable : il est possible d’interroger le contenu d’un document et de le modifier—totalement ou partiellement—sans avoir besoin de récupérer
+l’intégralité du document à l’aide de sa clé. Dans MongoDB, les documents sont stockés au format BSON (Binary JSON).</p>
+<p>Une <strong>collection</strong> est constituée de documents qui présentent des similarités sur le plan structurel et / ou conceptuel.
+Une base de données peut contenir plusieurs collections.
+Les collections sont comparables aux tables dans les <strong>bases de données relationnelles</strong>,
+la différence étant que tous les documents d’une collection n’ont pas nécessairement les mêmes champs (le <strong>schéma</strong> est <strong>flexible</strong>).
+Les bases de données orientées documents peuvent également stocker une plus grande variété de données que les bases de données relationnelles.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>La base de données de l’université Prestige contient deux collections : une collection <code class="docutils literal notranslate"><span class="pre">Étudiants</span></code> pour les étudiants de l’université, et une collection <code class="docutils literal notranslate"><span class="pre">Employés</span></code> pour le personnel de l’université.
+Chaque document de la collection <code class="docutils literal notranslate"><span class="pre">Étudiants</span></code> contient des informations sur un étudiant de l’université : nom, prénom, âge, numéro étudiant, formation etc.
+Les documents de la collection <code class="docutils literal notranslate"><span class="pre">Étudiants</span></code> peuvent contenir des champs différents, par exemple :</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Étudiant boursier</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ObjectId</span><span class="p">(</span><span class="s2">&quot;56011920de43611b917d773d&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s2">&quot;nom&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Zola&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;prenom&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Émile&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;sexe&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;M&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;age&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">19</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;bourse&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;échelon 2&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Étudiante en alternance</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;_id&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ObjectId</span><span class="p">(</span><span class="s2">&quot;65511420al87311b100q246t&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s2">&quot;nom&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Christie&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;prenom&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Agatha&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;sexe&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;age&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">21</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;entreprise&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Éditions du Masque&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;contrat&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;alternance&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Notez qu’il n’y a pas d’attributs (ou <em>clés</em>) vides dans MongoDB : les <em>valeurs</em> nulles sont remplacées par l’absence des champs correspondant.
+Dans l’exemple ci-dessus : l’attribut <code class="docutils literal notranslate"><span class="pre">bourse</span></code> (resp. <code class="docutils literal notranslate"><span class="pre">entreprise</span></code>, <code class="docutils literal notranslate"><span class="pre">contrat</span></code>) n’apparait pas dans le document de l’étudiante en alternance (resp. étudiant boursier).</p>
+</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -446,6 +521,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plan-du-cours">Plan du cours</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mongodb">MongoDB</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
