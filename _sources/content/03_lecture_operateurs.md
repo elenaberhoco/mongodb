@@ -418,7 +418,7 @@ Que remarquez-vous ? Corrigez la commande.
 
 6. Quelle est la catégorie des athlètes qui se sont blessés 2 fois ou plus ? 
 
-7. Quels athlètes pratiquent au moins un sport autre que l'athlétisme ?  
+7. Quels athlètes pratiquent au moins un sport autre que le basketball ?  
 
 À partir du jeu de données `movies.json` :  
 
