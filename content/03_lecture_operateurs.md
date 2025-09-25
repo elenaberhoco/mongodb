@@ -428,7 +428,7 @@ Que remarquez-vous ? Corrigez la commande.
 
 3. Combien y a-t-il de films dans lesquels aucun acteur n'est né en 1955 (`birth_date`) ?
 
-4. Listez le titre des films dans lesquels l'un des acteurs est né entre 1955 et 1958. Proposez deux façons d'obtenir cette information.  
+4. Listez le titre des films dans lesquels l'un des acteurs est né entre 1955 et 1958.     
 
 **Bonus**:  
 5. Dans quel film Anthony Hopkins et Jodie Foster ont-ils joué tous les deux ?  
