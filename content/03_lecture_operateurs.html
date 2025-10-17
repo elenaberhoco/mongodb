@@ -622,10 +622,15 @@ Par conséquence, si vous souhaitez également exclure les documents qui <strong
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.&lt;</span><span class="n">collection</span><span class="o">&gt;.</span><span class="n">find</span><span class="p">({</span><span class="o">&lt;</span><span class="n">operator</span><span class="o">&gt;</span><span class="p">:[</span><span class="o">&lt;</span><span class="n">filter1</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">filter2</span><span class="o">&gt;</span><span class="p">,</span><span class="o">...</span><span class="p">]},</span> <span class="o">&lt;</span><span class="n">projection</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Comme vu dans le chapitre précédent, pour extraire les documents qui vérifient <strong>un ensemble de conditions</strong>, il suffit de séparer lesdites conditions par une virgule. Toutefois, vous pouvez également utiliser l’opérateur <code class="docutils literal notranslate"><span class="pre">$and</span></code>.</p>
+<p>Comme vu dans le chapitre précédent, pour extraire les documents qui vérifient <strong>un ensemble de conditions</strong>,
+il suffit de séparer lesdites conditions par une virgule. Vous pouvez également utiliser l’opérateur <code class="docutils literal notranslate"><span class="pre">$and</span></code>.</p>
+<p>Une <strong>différence</strong> majeure entre le <strong>ET logique implicite</strong> (la virgule) et le <strong>ET logique explicite</strong> (l’opérateur <code class="docutils literal notranslate"><span class="pre">$and</span></code>) concerne les cas où <strong>une même clé
+est répétée dans le document filtre</strong>.
+En JSON, une clé ne peut apparaître qu’une seule fois : si elle est dupliquée, seule la dernière occurrence est conservée.
+Pour appliquer plusieurs conditions à un même champ ou utiliser plusieurs fois le même opérateur il faut donc utiliser <strong><code class="docutils literal notranslate"><span class="pre">$and</span></code></strong>.</p>
 <div class="tip admonition">
 <p class="admonition-title">Example</p>
-<p>Pour retourner le nom des athlètes femmes de plus d’1m65 vous pouvez tapez au choix :</p>
+<p><strong>Exemple n°1.</strong> Pour retourner le nom des athlètes femmes de plus d’1m65 vous pouvez tapez au choix :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">athletes</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;genre&quot;</span><span class="p">:</span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="s2">&quot;taille&quot;</span><span class="p">:{</span><span class="s2">&quot;$gt&quot;</span><span class="p">:</span><span class="mi">165</span><span class="p">}},</span> <span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
 </pre></div>
 </div>
@@ -638,6 +643,20 @@ Par conséquence, si vous souhaitez également exclure les documents qui <strong
 <span class="w">                 </span><span class="p">},</span>
 <span class="w">                 </span><span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span><span class="mf">1</span><span class="p">}</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Exemple n°2.</strong> En revanche, si vous souhaitez récupérer le nom de tous les athlètes dont le prénom commence par une lettre entre B et D,
+vous ne pouvez pas utiliser la commande suivante :</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">athletes</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;$gte&quot;</span><span class="o">:</span><span class="s2">&quot;B&quot;</span><span class="p">},</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;$lt&quot;</span><span class="o">:</span><span class="s2">&quot;E&quot;</span><span class="p">}},{</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span><span class="mf">1</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Les deux conditions possédant la même clé (“nom”), la première condition est écrasée par la seconde,
+et seule la dernière condition, qui sélectionne les athlètes dont la première lettre du prénom est strictement inférieure à E, est évaluée. Par conséquent,
+les athlètes dont le prénom commence par un A sont aussi renvoyés. Pour remédier à cela, deux possibilités : soit vous utilisez <code class="docutils literal notranslate"><span class="pre">$and</span></code>,
+soit vous rassemblez les deux conditions en une seule :</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">athletes</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;$and&quot;</span><span class="o">:</span><span class="p">[{</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;$gte&quot;</span><span class="o">:</span><span class="s2">&quot;B&quot;</span><span class="p">}},{</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;$lte&quot;</span><span class="o">:</span><span class="s2">&quot;E&quot;</span><span class="p">}}]},{</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span><span class="mf">1</span><span class="p">})</span>
+<span class="c1">// ou</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">athletes</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;$gte&quot;</span><span class="o">:</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;$lt&quot;</span><span class="o">:</span><span class="s2">&quot;E&quot;</span><span class="p">}},{</span><span class="s2">&quot;nom&quot;</span><span class="o">:</span><span class="mf">1</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>

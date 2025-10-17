@@ -200,11 +200,18 @@ La syntaxe pour `$and`, `$or` et `$nor` est la suivante :
 db.<collection>.find({<operator>:[<filter1>,<filter2>,...]}, <projection>)
 ```
 
-Comme vu dans le chapitre précédent, pour extraire les documents qui vérifient **un ensemble de conditions**, il suffit de séparer lesdites conditions par une virgule. Toutefois, vous pouvez également utiliser l'opérateur `$and`.
+Comme vu dans le chapitre précédent, pour extraire les documents qui vérifient **un ensemble de conditions**, 
+il suffit de séparer lesdites conditions par une virgule. Vous pouvez également utiliser l'opérateur `$and`.    
+
+Une **différence** majeure entre le **ET logique implicite** (la virgule) et le **ET logique explicite** (l'opérateur `$and`) concerne les cas où **une même clé 
+est répétée dans le document filtre**. 
+En JSON, une clé ne peut apparaître qu’une seule fois : si elle est dupliquée, seule la dernière occurrence est conservée. 
+Pour appliquer plusieurs conditions à un même champ ou utiliser plusieurs fois le même opérateur il faut donc utiliser **`$and`**.  
+
 ````{admonition} Example
 :class: tip
 
-Pour retourner le nom des athlètes femmes de plus d'1m65 vous pouvez tapez au choix :
+**Exemple n°1.** Pour retourner le nom des athlètes femmes de plus d'1m65 vous pouvez tapez au choix :
 ```
 db.athletes.find({"genre":"F","taille":{"$gt":165}}, {"nom":1})
 ``` 
@@ -219,6 +226,21 @@ db.athletes.find({"$and":
                  {"nom":1}
 )
 ```
+**Exemple n°2.** En revanche, si vous souhaitez récupérer le nom de tous les athlètes dont le prénom commence par une lettre entre B et D, 
+vous ne pouvez pas utiliser la commande suivante :   
+```javascript
+db.athletes.find({"nom":{"$gte":"B"},"nom":{"$lt":"E"}},{"nom":1})
+``` 
+Les deux conditions possédant la même clé ("nom"), la première condition est écrasée par la seconde, 
+et seule la dernière condition, qui sélectionne les athlètes dont la première lettre du prénom est strictement inférieure à E, est évaluée. Par conséquent, 
+les athlètes dont le prénom commence par un A sont aussi renvoyés. Pour remédier à cela, deux possibilités : soit vous utilisez `$and`, 
+soit vous rassemblez les deux conditions en une seule : 
+```javascript
+db.athletes.find({"$and":[{"nom":{"$gte":"B"}},{"nom":{"$lte":"E"}}]},{"nom":1})
+// ou
+db.athletes.find({"nom":{"$gte":"B","$lt":"E"}},{"nom":1})
+``` 
+  
 ````
 
 L'opérateur `$or` permet d'extraire les documents qui vérifient **au moins l'une des conditions** spécifiées.
